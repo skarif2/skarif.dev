@@ -6,7 +6,6 @@ const Navigation = () => {
     <div>
       <h2>Sk Arif</h2>
       <ul>
-        <li><Link to='/'>Home</Link></li>
         <li><Link to='/about'>About me</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
         <li><Link to='/contact'>Contact</Link></li>
