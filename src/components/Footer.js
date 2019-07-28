@@ -1,10 +1,15 @@
 import React from 'react'
 
+import config from '../../data/SiteConfig'
+
 const Footer = () => {
   return (
-    <div>
-      <p>This is a footer.</p>
-    </div>
+    <footer>
+      <p>{config.siteTitle} © 2019</p>
+      <p>
+        ❤ for <a href="https://www.gatsbyjs.org/">Gatsby</a>
+      </p>
+    </footer>
   )
 }
 

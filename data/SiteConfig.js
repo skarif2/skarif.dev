@@ -1,7 +1,7 @@
 export default {
-  siteTitle: '',
-  siteTitleShort: '',
-  siteTitleAlt: '',
+  siteTitle: 'Sk Arif',
+  siteTitleShort: 'Sk Arif',
+  siteTitleAlt: 'Sk Arif',
   siteLogo: '',
   siteUrl: '',
   repo: '',
