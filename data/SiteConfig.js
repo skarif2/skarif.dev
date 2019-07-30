@@ -20,5 +20,23 @@ export default {
   userAvatar: '',
   userDescription: '',
   themeColor: '',
-  backgroundColor: ''
+  backgroundColor: '',
+  menuLinks: [
+    {
+      name: 'About',
+      link: '/about',
+    },
+    {
+      name: 'Blog',
+      link: '/blog',
+    },
+    {
+      name: 'Contact',
+      link: '/contact',
+    },
+    {
+      name: 'Resume',
+      link: '/resume',
+    },
+  ],
 }

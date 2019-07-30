@@ -3,18 +3,26 @@ import { Link } from 'gatsby'
 
 import config from '../../data/SiteConfig'
 
-const Navigation = () => {
+const Navigation = (props) => {
+  const { menuLinks } = { ...props }
   return (
-    <div>
-      <img alt={config.siteTitle} src='../../favicon.ico' />
-      <h2>Sk Arif</h2>
-      <ul>
-        <li><Link to='/about'>About</Link></li>
-        <li><Link to='/blog'>Blog</Link></li>
-        <li><Link to='/contact'>Contact</Link></li>
-        <li><Link to='/resume'>Resume</Link></li>
-      </ul>
-    </div>
+    <nav className='nav scroll'>
+      <div className='nav-container'>
+        <div className="brand">
+          <Link to='/'>
+            <img alt={config.siteTitle} src='../../favicon.ico' />
+            <h2 className="text">Sk Arif</h2>
+          </Link>
+        </div>
+        <div className="links">
+          {menuLinks.map(link => (
+            <Link key={link.name} to={link.link} activeClassName="active">
+              {link.name}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </nav>
   )
 }
 
