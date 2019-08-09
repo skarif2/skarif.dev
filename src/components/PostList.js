@@ -1,17 +1,33 @@
 import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 
 const PostList = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      allMarkdownRemark {
+        edges {
+          node {
+            frontmatter {
+              title
+              date
+            }
+          }
+        }
+      }
+    }
+  `)
+  const { edges } = data.allMarkdownRemark;
+
   return (
     <div>
       <ul>
-        <li><h4>I'm a web developer and writer specializing in modern </h4></li>
-        <li><h4>I'm a web developer and writer specializing in modern </h4></li>
-        <li><h4>I'm a web developer and writer specializing in modern </h4></li>
-        <li><h4>I'm a web developer and writer specializing in modern </h4></li>
-        <li><h4>I'm a web developer and writer specializing in modern </h4></li>
-        <li><h4>I'm a web developer and writer specializing in modern </h4></li>
-        <li><h4>I'm a web developer and writer specializing in modern </h4></li>
-        <li><h4>I'm a web developer and writer specializing in modern </h4></li>
+        {edges.map(edge => {
+          return (
+            <li>
+              <h4>{edge.node.frontmatter.title}</h4>
+            </li>
+          )
+        })}
       </ul>
     </div>
   )

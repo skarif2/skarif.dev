@@ -3,6 +3,7 @@
   "description": "Personal site usign Gatsby, React and Node.js",
   "version": "0.1.0",
   "author": "Sk Arif <skarif2@gmail.com>",
+  "repository": "git@github.com:skarif2/sight-gatsby.git",
   "private": false,
   "license": "MIT",
   "keywords": [
@@ -14,18 +15,12 @@
     "node": ">=10.15.0",
     "npm": ">=6.10.2"
   },
-  "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx}",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
-  },
   "dependencies": {
     "gatsby": "^2.13.39",
     "gatsby-plugin-react-helmet": "^3.1.2",
     "gatsby-plugin-sass": "^2.1.3",
+    "gatsby-source-filesystem": "^2.1.9",
+    "gatsby-transformer-remark": "^2.6.12",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -33,7 +28,16 @@
     "react-helmet": "^5.2.1"
   },
   "devDependencies": {
+    "env-cmd": "^9.0.3",
     "prettier": "^1.18.2"
   },
-  "repository": "git@github.com:skarif2/sight-gatsby.git"
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "env-cmd gatsby develop",
+    "dev": "npm run develop",
+    "format": "prettier --write src/**/*.{js,jsx}",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+  }
 }
