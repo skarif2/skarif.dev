@@ -4,13 +4,15 @@ import GitHubButton from 'react-github-btn'
 import { Link } from 'gatsby';
 
 import Layout from '../layout'
+import PostList from '../components/PostList'
+import PorjectList from '../components/ProjectList'
 import config from '../../data/SiteConfig'
 
 const HomePage = () => {
   return (
     <Layout>
       <Helmet title={`${config.siteTitle} - Software Developer`} />
-      <div className="container">
+      <header className="container">
         <div className="lead">
           <div className="header-home">
             <Link to='/about' className="link">
@@ -18,7 +20,7 @@ const HomePage = () => {
             </Link>
 
             <h1 className="title">{config.siteTitle}</h1>
-            <h2 className="description">Software Developer at Invariant Telecom <br /> working on <span>Payment System</span></h2>
+            <h2 className="description">Software Engineer at Invariant Telecom <br /> working on <span>Payment System</span></h2>
 
             <div className="social-buttons">
               <div>
@@ -44,6 +46,18 @@ const HomePage = () => {
           </div>
         </div>
         <br />
+      </header>
+
+      <div>
+        <section className="container">
+          <h2>Blogs</h2>
+          <PostList />
+        </section>
+
+        <section className="container">
+          <h2>Open Source</h2>
+          <PorjectList />
+        </section>
       </div>
     </Layout>
   )

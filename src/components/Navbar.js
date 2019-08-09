@@ -2,11 +2,12 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 import config from '../../data/SiteConfig'
+import navbarStyles from '../styles/modules/navbar.module.scss'
 
 const Navigation = (props) => {
   const { menuLinks } = { ...props }
   return (
-    <nav className='nav scroll'>
+    <nav className={navbarStyles.nav}>
       <div className='nav-container'>
         <div className="brand">
           <Link to='/'>

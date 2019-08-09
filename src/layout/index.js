@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Navigation from '../components/Navigation'
+import Navigation from '../components/Navbar'
 import Footer from '../components/Footer'
 import config from '../../data/SiteConfig'
 import '../styles/main.scss'
