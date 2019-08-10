@@ -72,15 +72,15 @@ exports.createPages = async ({ graphql, actions }) => {
         categorySet = new Set([ ...categorySet, ...frontmatter.categories ])
       }
 
-      // if (frontmatter.template === 'post') {
-      //   createPage({
-      //     path: edge.node.fields.slug,
-      //     component: postTemplate,
-      //     context: {
-      //       slug: edge.node.fields.slug,
-      //     },
-      //   })
-      // }
+      if (frontmatter.template === 'post') {
+        createPage({
+          path: edge.node.fields.slug,
+          component: postTemplate,
+          context: {
+            slug: edge.node.fields.slug,
+          },
+        })
+      }
 
       // if (frontmatter.template === 'page') {
       //   createPage({
@@ -104,16 +104,16 @@ exports.createPages = async ({ graphql, actions }) => {
       })
     })
 
-    // const categoryList = Array.from(categorySet)
-    // categoryList.forEach(category => {
-    //   createPage({
-    //     path: `/categories/${_.kebabCase(category)}/`,
-    //     component: categoryTemplate,
-    //     context: {
-    //       category,
-    //     },
-    //   })
-    // })
+    const categoryList = Array.from(categorySet)
+    categoryList.forEach(category => {
+      createPage({
+        path: `/categories/${_.kebabCase(category)}/`,
+        component: categoryTemplate,
+        context: {
+          category,
+        },
+      })
+    })
 
   } catch (e) {
     console.log(e)

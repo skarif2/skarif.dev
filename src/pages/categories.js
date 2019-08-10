@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import { Helmet } from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 
@@ -6,9 +7,9 @@ import Layout from '../layout'
 import config from '../../data/SiteConfig'
 
 export const pageQuery = graphql`
-  query TagsQuery {
+  query CategoriesQuery {
     allMarkdownRemark(limit: 2000) {
-      group(field: frontmatter___tags) {
+      group(field: frontmatter___categories) {
         fieldValue
         totalCount
       }
@@ -16,19 +17,18 @@ export const pageQuery = graphql`
   }
 `
 
-const TagsPage = props => {
+const CategoriesPage = props => {
   const { data } = props
   const { group } = data.allMarkdownRemark
-
   return (
     <Layout>
-      <Helmet title={`Tags | ${config.siteTitle}`} />
+      <Helmet title={`Categories | ${config.siteTitle}`} />
       <div>
         <h1>Tags</h1>
-        {group.map(tag => (
-          <Link key={tag.fieldValue} to={`/tags/${tag.fieldValue}`}>
-            <span key={tag.fieldValue}>
-              {tag.fieldValue} <strong>{tag.totalCount}</strong>
+        {group.map(category => (
+          <Link to={`/categories/${_.kebabCase(category.fieldValue)}`} key={category.fieldValue}>
+            <span key={category.fieldValue}>
+              {category.fieldValue} <strong className="count">{category.totalCount}</strong>
             </span>
           </Link>
         ))}
@@ -37,4 +37,4 @@ const TagsPage = props => {
   )
 }
 
-export default TagsPage
+export default CategoriesPage
