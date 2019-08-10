@@ -7,15 +7,15 @@ import navbarStyles from '../styles/modules/navbar.module.scss'
 const Navigation = (props) => {
   const { menuLinks } = { ...props }
   return (
-    <nav className={navbarStyles.nav}>
-      <div className='nav-container'>
-        <div className="brand">
+    <nav>
+      <div>
+        <div >
           <Link to='/'>
             <img alt={config.siteTitle} src='../../favicon.ico' />
-            <h2 className="text">Sk Arif</h2>
+            <h2>Sk Arif</h2>
           </Link>
         </div>
-        <div className="links">
+        <div>
           {menuLinks.map(link => (
             <Link key={link.name} to={link.link} activeClassName="active">
               {link.name}
