@@ -1,31 +1,36 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import { Link } from 'gatsby'
 
-const PostList = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      allMarkdownRemark {
-        edges {
-          node {
-            frontmatter {
-              title
-              date
-            }
-          }
-        }
+const PostList = props => {
+  const { simple, postEdges } = props
+  const postList = postEdges
+    .filter(postEdge => postEdge.node.frontmatter.template === 'post')
+    .map(postEdge => {
+      return {
+        path: postEdge.node.fields.slug,
+        tags: postEdge.node.frontmatter.tags,
+        thumbnail: postEdge.node.frontmatter.thumbnail,
+        title: postEdge.node.frontmatter.title,
+        date: postEdge.node.fields.date,
+        excerpt: postEdge.node.excerpt,
+        timeToRead: postEdge.node.timeToRead,
+        categories: postEdge.node.frontmatter.categories,
       }
-    }
-  `)
-  const { edges } = data.allMarkdownRemark;
+    })
 
   return (
     <div>
       <ul>
-        {edges.map(edge => {
+        {postList.map(post => {
           return (
-            <li>
-              <h4>{edge.node.frontmatter.title}</h4>
-            </li>
+            <Link to={post.path} key={post.title}>
+              <div>
+                <div>
+                  <h2>{post.title}</h2>
+                  {!simple ? <div className="excerpt">{post.date}</div> : null}
+                </div>
+              </div>
+            </Link>
           )
         })}
       </ul>

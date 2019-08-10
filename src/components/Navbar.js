@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 import config from '../../data/SiteConfig'
-import navbarStyles from '../styles/modules/navbar.module.scss'
+// import navbarStyles from '../styles/modules/navbar.module.scss'
 
 const Navigation = (props) => {
   const { menuLinks } = { ...props }
