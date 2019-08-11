@@ -3,34 +3,37 @@ const _ = require('lodash')
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
-
   if (node.internal.type === 'MarkdownRemark') {
     const fileNode = getNode(node.parent)
     const filePath = path.parse(fileNode.relativePath)
-    let slug, date
+    createNodeField({ node, name: 'slug', value: _getSlug(node, filePath) })
+    createNodeField({ node, name: 'date', value: _getDate(node) })
+  }
+}
 
-    if (_.hasIn(node, 'frontmatter.slug')) {
-      slug = filePath.dir === 'posts' 
-        ? `/blog/${_.kebabCase(node.frontmatter.slug)}`
-        : `/${_.kebabCase(node.frontmatter.slug)}`
-    } else if (_.hasIn(node, 'frontmatter.title')) {
-      slug = filePath.dir === 'posts' 
-        ? `/blog/${_.kebabCase(node.frontmatter.title)}`
-        : `/${_.kebabCase(node.frontmatter.title)}`
-    } else if (filePath.dir === 'posts') {
-      slug = `/blog/${_.kebabCase(filePath.name)}`
-    } else if (filePath.dir === '') {
-      slug = `/${_.kebabCase(filePath.name)}`
-    } else {
-      slug = `/${_.kebabCase(filePath.dir)}`
-    }
+const _getSlug = (node, filePath) => {
+  let slug
+  if (_.hasIn(node, 'frontmatter.slug')) {
+    slug = filePath.dir === 'posts' 
+      ? `/blog/${_.kebabCase(node.frontmatter.slug)}`
+      : `/${_.kebabCase(node.frontmatter.slug)}`
+  } else if (_.hasIn(node, 'frontmatter.title')) {
+    slug = filePath.dir === 'posts' 
+      ? `/blog/${_.kebabCase(node.frontmatter.title)}`
+      : `/${_.kebabCase(node.frontmatter.title)}`
+  } else if (filePath.dir === 'posts') {
+    slug = `/blog/${_.kebabCase(filePath.name)}`
+  } else if (filePath.dir === '') {
+    slug = `/${_.kebabCase(filePath.name)}`
+  } else {
+    slug = `/${_.kebabCase(filePath.dir)}`
+  }
+  return slug
+}
 
-    if (_.hasIn(node, 'frontmatter.date')) {
-      date = new Date(node.frontmatter.date)
-    }
-
-    createNodeField({ node, name: 'slug', value: slug })
-    createNodeField({ node, name: 'date', value: date })
+const _getDate = (node) => {
+  if (_.hasIn(node, 'frontmatter.date')) {
+    return new Date(node.frontmatter.date)
   }
 }
 
