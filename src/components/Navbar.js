@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 
+import ThemeContext from '../context/ThemeContext'
 import config from '../../data/SiteConfig'
 // import navbarStyles from '../styles/modules/navbar.module.scss'
 
 const Navigation = (props) => {
   const { menuLinks } = { ...props }
+  const { dark, toggleDark } = useContext(ThemeContext)
   return (
     <nav>
       <div>
@@ -22,6 +24,9 @@ const Navigation = (props) => {
             </Link>
           ))}
         </div>
+        <button className="dark-switcher" onClick={toggleDark}>
+          {dark ? <span>☀</span> : <span>☾</span>}
+        </button>
       </div>
     </nav>
   )

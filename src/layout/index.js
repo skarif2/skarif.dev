@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Navigation from '../components/Navbar'
+import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import config from '../../data/SiteConfig'
 import '../styles/main.scss'
@@ -8,7 +8,7 @@ import '../styles/main.scss'
 const Layout = props => {
   return (
     <div>
-      <Navigation menuLinks={config.menuLinks}/>
+      <Navbar menuLinks={config.menuLinks}/>
       <main id='main-content'>{props.children}</main>
       <Footer />
     </div>
