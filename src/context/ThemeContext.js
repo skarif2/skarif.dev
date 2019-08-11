@@ -1,6 +1,9 @@
 import React, { createContext, useState, useEffect } from 'react'
 
-const ThemeContext = createContext()
+const ThemeContext = createContext({
+  dark: false,
+  toggleDark: {}
+})
 
 const supportsDarkMode = () =>
   window.matchMedia("(prefers-color-scheme: dark)").matches === true
