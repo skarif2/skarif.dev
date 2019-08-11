@@ -1,7 +1,8 @@
-export default {
+const config = {
   siteTitle: 'Sk Arif',
   siteTitleShort: 'Sk Arif',
   siteTitleAlt: 'Sk Arif',
+  siteAuthor: 'Sk Arif',
   siteLogo: '',
   siteUrl: '',
   repo: '',
@@ -40,3 +41,5 @@ export default {
     },
   ],
 }
+
+module.exports = config

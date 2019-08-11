@@ -1,14 +1,10 @@
-/**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.org/docs/gatsby-config/
- */
+const config = require('./data/SiteConfig')
 
 module.exports = {
   siteMetadata: {
     siteUrl: `https://skarif.io`,
-    title: 'Sk Arif',
-    author: 'Sk Arif'
+    title: config.siteTitle,
+    author: config.siteAuthor
   },
   plugins: [
     `gatsby-plugin-sass`,
@@ -70,6 +66,19 @@ module.exports = {
     'gatsby-plugin-sharp',
     `gatsby-transformer-sharp`,
     `gatsby-plugin-catch-links`,
-    `gatsby-plugin-sitemap`
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: config.siteTitle,
+        short_name: config.siteTitleShort,
+        description: config.siteDescription,
+        start_url: config.pathPrefix,
+        background_color: config.backgroundColor,
+        theme_color: config.themeColor,
+        display: 'minimal-ui',
+        icon: `static/favicon.png`,
+      },
+    }
   ]
 }
