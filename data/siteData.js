@@ -1,4 +1,4 @@
-const projects = [
+export const projects = [
   {
     icon: '🌿',
     title: 'Node Rest Starter',
@@ -36,7 +36,7 @@ const projects = [
   }
 ]
 
-const quotes = [
+export const quotes = [
   {
     name: 'Zahidul Quader',
     quote: `“It's no exaggeration to say that I
@@ -57,5 +57,3 @@ const quotes = [
     quote: `“I keep coming back to your website and I appreciate it more and more every time. The way you explain things just make sense!”`,
   },
 ]
-
-export { projects, quotes }
