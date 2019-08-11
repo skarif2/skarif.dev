@@ -12,16 +12,17 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 }
 
 const _getSlug = (node, filePath) => {
+  console.log(filePath.dir)
   let slug
   if (_.hasIn(node, 'frontmatter.slug')) {
-    slug = filePath.dir === 'posts' 
+    slug = _.startsWith(filePath.dir, 'posts')
       ? `/blog/${_.kebabCase(node.frontmatter.slug)}`
       : `/${_.kebabCase(node.frontmatter.slug)}`
   } else if (_.hasIn(node, 'frontmatter.title')) {
-    slug = filePath.dir === 'posts' 
+    slug = _.startsWith(filePath.dir, 'posts')
       ? `/blog/${_.kebabCase(node.frontmatter.title)}`
       : `/${_.kebabCase(node.frontmatter.title)}`
-  } else if (filePath.dir === 'posts') {
+  } else if (_.startsWith(filePath.dir, 'posts')) {
     slug = `/blog/${_.kebabCase(filePath.name)}`
   } else if (filePath.dir === '') {
     slug = `/${_.kebabCase(filePath.name)}`
