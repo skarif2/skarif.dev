@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import Img from 'gatsby-image'
 
 const PostList = props => {
   const { simple, postEdges } = props
@@ -25,6 +26,7 @@ const PostList = props => {
           return (
             <Link to={post.path} key={post.title}>
               <div>
+                <Img fixed={post.thumbnail.childImageSharp.fixed} />
                 <div>
                   <h2>{post.title}</h2>
                   {!simple ? <div className="excerpt">{post.date}</div> : null}

@@ -14,6 +14,13 @@ module.exports = {
     `gatsby-plugin-sass`,
     'gatsby-plugin-react-helmet',
     {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'assets',
+        path: `${__dirname}/static/`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-netlify`,
       options: {
         headers: {

@@ -12,7 +12,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 }
 
 const _getSlug = (node, filePath) => {
-  console.log(filePath.dir)
   let slug
   if (_.hasIn(node, 'frontmatter.slug')) {
     slug = _.startsWith(filePath.dir, 'posts')
