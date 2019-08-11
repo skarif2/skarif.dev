@@ -8,7 +8,8 @@ import PostList from '../components/PostList'
 import PorjectList from '../components/ProjectList'
 import QuoteList from '../components/QuoteList'
 import config from '../../data/SiteConfig'
-import { projects, quotes } from '../../data/SiteData'
+import projects from '../../data/ProjectData'
+import quotes from '../../data/QuoteData'
 
 
 export const pageQuery = graphql`
