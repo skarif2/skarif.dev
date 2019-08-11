@@ -1,14 +1,70 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import GitHubButton from 'react-github-btn'
-import { Link } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 
 import Layout from '../layout'
 import PostList from '../components/PostList'
 import PorjectList from '../components/ProjectList'
 import config from '../../data/SiteConfig'
 
-const HomePage = () => {
+
+export const pageQuery = graphql`
+  query IndexQuery {
+    latest: allMarkdownRemark(
+      limit: 6
+      sort: { fields: [fields___date], order: DESC }
+      filter: { frontmatter: { template: { eq: "post" } } }
+    ) {
+      edges {
+        node {
+          fields {
+            slug
+            date
+          }
+          excerpt
+          timeToRead
+          frontmatter {
+            title
+            tags
+            categories
+            date
+            template
+          }
+        }
+      }
+    }
+    popular: allMarkdownRemark(
+      limit: 7
+      sort: { fields: [fields___date], order: DESC }
+      filter: { frontmatter: { categories: { eq: "Popular" } } }
+    ) {
+      edges {
+        node {
+          fields {
+            slug
+            date
+          }
+          excerpt
+          timeToRead
+          frontmatter {
+            title
+            tags
+            categories
+            date
+            template
+          }
+        }
+      }
+    }
+  }
+`
+
+const HomePage = props => {
+  const { data } = props
+  const latestPostEdges = data.latest.edges
+  const popularPostEdges = data.popular.edges
+
   return (
     <Layout>
       <Helmet title={`${config.siteTitle} - Software Developer`} />
@@ -50,8 +106,13 @@ const HomePage = () => {
 
       <div>
         <section className="container">
-          <h2>Blogs</h2>
-          <PostList />
+          <h2>Latest Blogs</h2>
+          <PostList simple postEdges={latestPostEdges} />
+        </section>
+
+        <section className="container">
+          <h2>Latest Blogs</h2>
+          <PostList simple postEdges={popularPostEdges} />
         </section>
 
         <section className="container">

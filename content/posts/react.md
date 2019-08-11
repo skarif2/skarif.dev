@@ -6,6 +6,7 @@ thumbnail: '../thumbnails/git.png'
 slug: getting-started-with-react
 categories:
   - Tools
+  - Popular
 tags:
   - git
   - setup
