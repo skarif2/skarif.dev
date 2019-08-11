@@ -6,7 +6,9 @@ import { Link, graphql } from 'gatsby';
 import Layout from '../layout'
 import PostList from '../components/PostList'
 import PorjectList from '../components/ProjectList'
+import QuoteList from '../components/QuoteList'
 import config from '../../data/SiteConfig'
+import { projects, quotes } from '../../data/SiteData'
 
 
 export const pageQuery = graphql`
@@ -117,7 +119,12 @@ const HomePage = props => {
 
         <section className="container">
           <h2>Open Source</h2>
-          <PorjectList />
+          <PorjectList projects={projects} />
+        </section>
+
+        <section className="container">
+          <h2>{`Other People's Opinions`}</h2>
+          <QuoteList quotes={quotes} />
         </section>
       </div>
     </Layout>
