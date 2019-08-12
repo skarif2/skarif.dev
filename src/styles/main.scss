@@ -1,23 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 
 // Abstracts
-@import 'abstracts/variables';
-@import 'abstracts/mixins';
+@import 'abstracts/variables',
+'abstracts/mixins';
 
 // Vendors
 
 // Base
-@import 'base/base';
-@import 'base/reset';
-@import 'base/typography';
+@import 'base/base',
+'base/reset',
+'base/typography';
 
 // Layout
-@import 'layout/navbar';
-@import 'layout/footer';
+@import 'layout/navbar',
+'layout/footer';
 
 // Components
-@import 'components/buttons';
-@import 'components/carousel';
+@import 'components/buttons',
+'components/carousel';
 
 // Pages
 @import 'pages/home';
