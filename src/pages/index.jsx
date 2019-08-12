@@ -130,23 +130,23 @@ const HomePage = props => {
         <br />
       </header>
 
-      <div>
-        <section className="container">
+      <div className="container">
+        <section className="section">
           <h2>Latest Blogs</h2>
           <PostList simple postEdges={latestPostEdges} />
         </section>
 
-        <section className="container">
+        <section className="section">
           <h2>Latest Blogs</h2>
           <PostList simple postEdges={popularPostEdges} />
         </section>
 
-        <section className="container">
+        <section className="section">
           <h2>Open Source</h2>
           <PorjectList projects={projects} />
         </section>
 
-        <section className="container">
+        <section className="section">
           <h2>`Other People&apos;s Opinions`</h2>
           <QuoteList quotes={quotes} />
         </section>

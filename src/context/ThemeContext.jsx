@@ -40,7 +40,7 @@ const ThemeProvider = props => {
 }
 
 ThemeProvider.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.shape({}).isRequired,
 }
 
 export default ThemeContext

@@ -1,0 +1,8 @@
+$background: #2d2d2d;
+$foreground: #b3b9c5;
+$dark-border: darken($background, 3%);
+
+.dark {
+  background: $background;
+  color: $foreground;
+}

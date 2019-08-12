@@ -3,7 +3,6 @@ import { Link } from "gatsby"
 
 import ThemeContext from "../context/ThemeContext"
 import config from "../../data/SiteConfig"
-// import navbarStyles from '../styles/modules/navbar.module.scss'
 
 const Navigation = props => {
   const { menuLinks } = { ...props }
@@ -13,7 +12,7 @@ const Navigation = props => {
       <div>
         <div>
           <Link to="/">
-            <img alt={config.siteTitle} src="../../favicon.ico" />
+            <img alt={config.siteTitle} src="../../favicon.png" />
             <h2>Sk Arif</h2>
           </Link>
         </div>
