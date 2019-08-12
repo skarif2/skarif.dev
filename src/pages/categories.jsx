@@ -1,11 +1,11 @@
-import _ from 'lodash'
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Helmet } from 'react-helmet'
-import { Link, graphql } from 'gatsby'
+import _ from "lodash"
+import React from "react"
+import PropTypes from "prop-types"
+import { Helmet } from "react-helmet"
+import { Link, graphql } from "gatsby"
 
-import Layout from '../layout'
-import config from '../../data/SiteConfig'
+import Layout from "../layout"
+import config from "../../data/SiteConfig"
 
 export const pageQuery = graphql`
   query CategoriesQuery {
@@ -27,7 +27,10 @@ const CategoriesPage = props => {
       <div>
         <h1>Tags</h1>
         {group.map(category => (
-          <Link to={`/categories/${_.kebabCase(category.fieldValue)}`} key={category.fieldValue}>
+          <Link
+            to={`/categories/${_.kebabCase(category.fieldValue)}`}
+            key={category.fieldValue}
+          >
             <span key={category.fieldValue}>
               {category.fieldValue}
               <strong className="count">{category.totalCount}</strong>
@@ -42,9 +45,9 @@ const CategoriesPage = props => {
 CategoriesPage.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
-      group: PropTypes.array
-    })
-  }).isRequired
+      group: PropTypes.array,
+    }),
+  }).isRequired,
 }
 
 export default CategoriesPage

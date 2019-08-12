@@ -22,8 +22,7 @@ const config = {
   userDescription: '',
   themeColor: '',
   backgroundColor: '',
-  menuLinks: [
-    {
+  menuLinks: [{
       name: 'About',
       link: '/about',
     },

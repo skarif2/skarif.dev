@@ -13,10 +13,11 @@ parserOptions:
   sourceType: module
 plugins:
   - react
-  - 'jsx-a11y'
+  - "jsx-a11y"
   - import
 settings:
-  'import/core-modules': []
-parser: 'babel-eslint'
+  "import/core-modules": []
+parser: "babel-eslint"
 rules:
-  'react/no-danger': off
+  "react/no-danger": off
+  "react/jsx-one-expression-per-line": off

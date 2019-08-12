@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Helmet } from 'react-helmet'
-import { Link, graphql } from 'gatsby'
+import React from "react"
+import PropTypes from "prop-types"
+import { Helmet } from "react-helmet"
+import { Link, graphql } from "gatsby"
 
-import Layout from '../layout'
-import config from '../../data/SiteConfig'
+import Layout from "../layout"
+import config from "../../data/SiteConfig"
 
 export const pageQuery = graphql`
   query TagsQuery {
@@ -42,9 +42,9 @@ const TagsPage = props => {
 TagsPage.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
-      group: PropTypes.array
-    })
-  }).isRequired
+      group: PropTypes.array,
+    }),
+  }).isRequired,
 }
 
 export default TagsPage

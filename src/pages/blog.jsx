@@ -1,15 +1,18 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
-import { graphql } from 'gatsby'
+import React from "react"
+import PropTypes from "prop-types"
+import Helmet from "react-helmet"
+import { graphql } from "gatsby"
 
-import Layout from '../layout'
-import PostList from '../components/PostList'
-import config from '../../data/SiteConfig'
+import Layout from "../layout"
+import PostList from "../components/PostList"
+import config from "../../data/SiteConfig"
 
 export const pageQuery = graphql`
   query BlogQuery {
-    posts: allMarkdownRemark(limit: 2000, sort: { fields: [fields___date], order: DESC }) {
+    posts: allMarkdownRemark(
+      limit: 2000
+      sort: { fields: [fields___date], order: DESC }
+    ) {
       edges {
         node {
           fields {
@@ -47,7 +50,7 @@ export const pageQuery = graphql`
 const BlogPage = props => {
   const { data } = props
   const categories = data.categories.group
-  const posts= data.posts.edges
+  const posts = data.posts.edges
   return (
     <Layout>
       <Helmet title={`Blogs | ${config.siteTitle}`} />
@@ -55,11 +58,7 @@ const BlogPage = props => {
         <h1>Blogs</h1>
         <div>
           {categories.map(category => {
-            return (
-              <div key={category.fieldValue}>
-                {category.fieldValue}
-              </div>
-            )
+            return <div key={category.fieldValue}>{category.fieldValue}</div>
           })}
         </div>
         <PostList postEdges={posts} />
@@ -71,12 +70,12 @@ const BlogPage = props => {
 BlogPage.propTypes = {
   data: PropTypes.shape({
     categories: PropTypes.shape({
-      group: PropTypes.array
+      group: PropTypes.array,
     }),
     posts: PropTypes.shape({
-      edges: PropTypes.array
-    })
-  }).isRequired
+      edges: PropTypes.array,
+    }),
+  }).isRequired,
 }
 
 export default BlogPage

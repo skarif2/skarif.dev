@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
 const QuoteList = props => {
   const { quotes } = props
@@ -9,10 +9,7 @@ const QuoteList = props => {
         {quotes.map(quote => (
           <blockquote key={quote.name} className="quotation">
             <p>{quote.quote}</p>
-            <cite>
-              — 
-              {quote.name}
-            </cite>
+            <cite>—{quote.name}</cite>
           </blockquote>
         ))}
       </div>
@@ -21,7 +18,7 @@ const QuoteList = props => {
 }
 
 QuoteList.propTypes = {
-  quotes: PropTypes.arrayOf(PropTypes.object).isRequired
+  quotes: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default QuoteList

@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
-import { graphql } from 'gatsby'
+import React from "react"
+import PropTypes from "prop-types"
+import Helmet from "react-helmet"
+import { graphql } from "gatsby"
 
-import Layout from '../layout'
-import PostList from '../components/PostList'
-import config from '../../data/SiteConfig'
+import Layout from "../layout"
+import PostList from "../components/PostList"
+import config from "../../data/SiteConfig"
 
 export const pageQuery = graphql`
   query CategoryPage($category: String!) {
@@ -61,13 +61,13 @@ const CategoryTemplate = props => {
 
 CategoryTemplate.propTypes = {
   pageContext: PropTypes.shape({
-    category: PropTypes.string
+    category: PropTypes.string,
   }).isRequired,
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.array
-    })
-  }).isRequired
+      edges: PropTypes.array,
+    }),
+  }).isRequired,
 }
 
 export default CategoryTemplate

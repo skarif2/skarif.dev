@@ -1,9 +1,9 @@
-import React, { createContext, useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import React, { createContext, useState, useEffect } from "react"
+import PropTypes from "prop-types"
 
 const ThemeContext = createContext({
   dark: false,
-  toggleDark: {}
+  toggleDark: {},
 })
 
 const supportsDarkMode = () =>
@@ -11,7 +11,7 @@ const supportsDarkMode = () =>
 
 const ThemeProvider = props => {
   const { children } = props
-  const [ dark, setDark ] = useState(false)
+  const [dark, setDark] = useState(false)
 
   const toggleDark = () => {
     localStorage.setItem("dark", JSON.stringify(!dark))
@@ -40,7 +40,7 @@ const ThemeProvider = props => {
 }
 
 ThemeProvider.propTypes = {
-  children: PropTypes.string.isRequired
+  children: PropTypes.string.isRequired,
 }
 
 export default ThemeContext

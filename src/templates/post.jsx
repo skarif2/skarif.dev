@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
-import { graphql } from 'gatsby'
+import React from "react"
+import PropTypes from "prop-types"
+import Helmet from "react-helmet"
+import { graphql } from "gatsby"
 
-import Layout from '../layout'
+import Layout from "../layout"
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -43,7 +43,6 @@ const PostTemplate = props => {
         <title>Blog</title>
       </Helmet>
       <article>
-
         <div className="post" dangerouslySetInnerHTML={{ __html: post.html }} />
       </article>
     </Layout>
@@ -52,8 +51,8 @@ const PostTemplate = props => {
 
 PostTemplate.propTypes = {
   data: PropTypes.shape({
-    markdownRemark: PropTypes.object
-  }).isRequired
+    markdownRemark: PropTypes.object,
+  }).isRequired,
 }
 
 export default PostTemplate

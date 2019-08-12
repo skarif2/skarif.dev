@@ -1,12 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
-import Img from 'gatsby-image'
+import React from "react"
+import PropTypes from "prop-types"
+import { Link } from "gatsby"
+import Img from "gatsby-image"
 
 const PostList = props => {
   const { simple, postEdges } = props
   const postList = postEdges
-    .filter(postEdge => postEdge.node.frontmatter.template === 'post')
+    .filter(postEdge => postEdge.node.frontmatter.template === "post")
     .map(postEdge => {
       return {
         path: postEdge.node.fields.slug,
@@ -43,7 +43,7 @@ const PostList = props => {
 
 PostList.propTypes = {
   simple: PropTypes.bool.isRequired,
-  postEdges: PropTypes.arrayOf(PropTypes.object).isRequired
+  postEdges: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default PostList

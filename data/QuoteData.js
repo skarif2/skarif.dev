@@ -1,5 +1,4 @@
-export default [
-  {
+export default [{
     name: 'Zahidul Quader',
     quote: `“It's no exaggeration to say that I
   wouldn't currently have a job in development without this site. So thanks for

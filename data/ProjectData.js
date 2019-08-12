@@ -1,5 +1,4 @@
-export default [
-  {
+export default [{
     icon: '🌿',
     title: 'Node Rest Starter',
     path: 'https://github.com/skarif2/node-rest-starter/blob/master/README.md',

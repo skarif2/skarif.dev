@@ -1,17 +1,16 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
-import GitHubButton from 'react-github-btn'
-import { Link, graphql } from 'gatsby';
+import React from "react"
+import PropTypes from "prop-types"
+import Helmet from "react-helmet"
+import GitHubButton from "react-github-btn"
+import { Link, graphql } from "gatsby"
 
-import Layout from '../layout'
-import PostList from '../components/PostList'
-import PorjectList from '../components/ProjectList'
-import QuoteList from '../components/QuoteList'
-import config from '../../data/SiteConfig'
-import projects from '../../data/ProjectData'
-import quotes from '../../data/QuoteData'
-
+import Layout from "../layout"
+import PostList from "../components/PostList"
+import PorjectList from "../components/ProjectList"
+import QuoteList from "../components/QuoteList"
+import config from "../../data/SiteConfig"
+import projects from "../../data/ProjectData"
+import quotes from "../../data/QuoteData"
 
 export const pageQuery = graphql`
   query IndexQuery {
@@ -89,8 +88,12 @@ const HomePage = props => {
       <header className="container">
         <div className="lead">
           <div className="header-home">
-            <Link to='/about' className="link">
-              <img alt={config.siteTitle} src='../../images/profile.jpeg' className="selfie" />
+            <Link to="/about" className="link">
+              <img
+                alt={config.siteTitle}
+                src="../../images/profile.jpeg"
+                className="selfie"
+              />
             </Link>
 
             <h1 className="title">{config.siteTitle}</h1>
@@ -155,12 +158,12 @@ const HomePage = props => {
 HomePage.propTypes = {
   data: PropTypes.shape({
     latest: PropTypes.shape({
-      edges: PropTypes.array
+      edges: PropTypes.array,
     }),
     popular: PropTypes.shape({
-      edges: PropTypes.array
-    })
-  }).isRequired
+      edges: PropTypes.array,
+    }),
+  }).isRequired,
 }
 
 export default HomePage

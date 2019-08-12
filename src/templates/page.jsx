@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
-import { graphql } from 'gatsby'
+import React from "react"
+import PropTypes from "prop-types"
+import Helmet from "react-helmet"
+import { graphql } from "gatsby"
 
-import Layout from '../layout'
-import config from '../../data/SiteConfig'
+import Layout from "../layout"
+import config from "../../data/SiteConfig"
 
 export const pageQuery = graphql`
   query PageBySlug($slug: String!) {
@@ -53,11 +53,11 @@ const PageTemplate = props => {
 
 PageTemplate.propTypes = {
   pageContext: PropTypes.shape({
-    slug: PropTypes.string
+    slug: PropTypes.string,
   }).isRequired,
   data: PropTypes.shape({
-    markdownRemark: PropTypes.object
-  }).isRequired
+    markdownRemark: PropTypes.object,
+  }).isRequired,
 }
 
 export default PageTemplate

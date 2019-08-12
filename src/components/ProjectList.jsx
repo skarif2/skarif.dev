@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import GitHubButton from 'react-github-btn'
+import React from "react"
+import PropTypes from "prop-types"
+import GitHubButton from "react-github-btn"
 
 const ProjectList = props => {
   const { projects } = props
@@ -9,11 +9,7 @@ const ProjectList = props => {
       {projects.map(project => (
         <div key={project.title}>
           <h2>
-            <a
-              href={project.source}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={project.source} target="_blank" rel="noopener noreferrer">
               <div>{project.icon}</div>
               <div>{project.title}</div>
             </a>
@@ -25,7 +21,11 @@ const ProjectList = props => {
                 Site
               </a>
             )}
-            <GitHubButton href={project.source} data-size="large" data-show-count="true">
+            <GitHubButton
+              href={project.source}
+              data-size="large"
+              data-show-count="true"
+            >
               Source
             </GitHubButton>
           </div>
@@ -36,7 +36,7 @@ const ProjectList = props => {
 }
 
 ProjectList.propTypes = {
-  projects: PropTypes.arrayOf(PropTypes.object).isRequired
+  projects: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default ProjectList
