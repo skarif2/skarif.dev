@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
 
@@ -34,7 +35,8 @@ export const pageQuery = graphql`
 `
 
 const PostTemplate = props => {
-  const post = props.data.markdownRemark
+  const { data } = props
+  const post = data.markdownRemark
   return (
     <Layout>
       <Helmet>
@@ -46,6 +48,12 @@ const PostTemplate = props => {
       </article>
     </Layout>
   )
+}
+
+PostTemplate.propTypes = {
+  data: PropTypes.shape({
+    markdownRemark: PropTypes.object
+  }).isRequired
 }
 
 export default PostTemplate

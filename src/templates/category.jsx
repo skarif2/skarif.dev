@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
 
@@ -7,11 +8,11 @@ import PostList from '../components/PostList'
 import config from '../../data/SiteConfig'
 
 export const pageQuery = graphql`
-  query TagPage($tag: String!) {
+  query CategoryPage($category: String!) {
     allMarkdownRemark(
       limit: 1000
       sort: { fields: [fields___date], order: DESC }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: { frontmatter: { categories: { in: [$category] } } }
     ) {
       totalCount
       edges {
@@ -21,6 +22,7 @@ export const pageQuery = graphql`
             date
           }
           excerpt
+          timeToRead
           frontmatter {
             title
             tags
@@ -41,21 +43,31 @@ export const pageQuery = graphql`
   }
 `
 
-const TagTemplate = props => {
-  const { tag } = props.pageContext
-  const postEdges = props.data.allMarkdownRemark.edges
+const CategoryTemplate = props => {
+  const { data, pageContext } = props
+  const { category } = pageContext
+  const postEdges = data.allMarkdownRemark.edges
 
   return (
     <Layout>
-      <Helmet title={`Tag: ${tag} | ${config.siteTitle}`} />
-      <div>
-        <h1>
-          Tag: <u>{tag}</u>
-        </h1>
+      <Helmet title={`Posts in category "${category}" – ${config.siteTitle}`} />
+      <div className="container">
+        <h1>{category}</h1>
         <PostList postEdges={postEdges} />
       </div>
     </Layout>
   )
 }
 
-export default TagTemplate
+CategoryTemplate.propTypes = {
+  pageContext: PropTypes.shape({
+    category: PropTypes.string
+  }).isRequired,
+  data: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
+      edges: PropTypes.array
+    })
+  }).isRequired
+}
+
+export default CategoryTemplate

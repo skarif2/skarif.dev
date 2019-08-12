@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
 
@@ -24,8 +25,9 @@ export const pageQuery = graphql`
 `
 
 const PageTemplate = props => {
-  const { slug } = props.pageContext
-  const postNode = props.data.markdownRemark
+  const { data, pageContext } = props
+  const { slug } = pageContext
+  const postNode = data.markdownRemark
   const page = postNode.frontmatter
 
   if (!page.id) {
@@ -47,6 +49,15 @@ const PageTemplate = props => {
       </div>
     </Layout>
   )
+}
+
+PageTemplate.propTypes = {
+  pageContext: PropTypes.shape({
+    slug: PropTypes.string
+  }).isRequired,
+  data: PropTypes.shape({
+    markdownRemark: PropTypes.object
+  }).isRequired
 }
 
 export default PageTemplate

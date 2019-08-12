@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 
 const ThemeContext = createContext({
   dark: false,
@@ -9,6 +10,7 @@ const supportsDarkMode = () =>
   window.matchMedia("(prefers-color-scheme: dark)").matches === true
 
 const ThemeProvider = props => {
+  const { children } = props
   const [ dark, setDark ] = useState(false)
 
   const toggleDark = () => {
@@ -32,9 +34,13 @@ const ThemeProvider = props => {
         toggleDark,
       }}
     >
-      {props.children}
+      {children}
     </ThemeContext.Provider>
   )
+}
+
+ThemeProvider.propTypes = {
+  children: PropTypes.string.isRequired
 }
 
 export default ThemeContext

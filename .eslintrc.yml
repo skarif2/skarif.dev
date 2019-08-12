@@ -1,0 +1,22 @@
+env:
+  browser: true
+extends:
+  - airbnb
+  - prettier
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 2018
+  sourceType: module
+plugins:
+  - react
+  - 'jsx-a11y'
+  - import
+settings:
+  'import/core-modules': []
+parser: 'babel-eslint'
+rules:
+  'react/no-danger': off

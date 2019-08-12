@@ -11,7 +11,7 @@ const Navigation = (props) => {
   return (
     <nav>
       <div>
-        <div >
+        <div>
           <Link to='/'>
             <img alt={config.siteTitle} src='../../favicon.ico' />
             <h2>Sk Arif</h2>
@@ -24,7 +24,11 @@ const Navigation = (props) => {
             </Link>
           ))}
         </div>
-        <button className="dark-switcher" onClick={toggleDark}>
+        <button
+          type='button'
+          className="dark-switcher"
+          onClick={toggleDark}
+        >
           {dark ? <span>☀</span> : <span>☾</span>}
         </button>
       </div>

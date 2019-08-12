@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import GitHubButton from 'react-github-btn'
 import { Link, graphql } from 'gatsby';
@@ -89,11 +90,16 @@ const HomePage = props => {
         <div className="lead">
           <div className="header-home">
             <Link to='/about' className="link">
-              <img alt={config.siteTitle} src='../../images/profile.jpeg' className="selfie"/>
+              <img alt={config.siteTitle} src='../../images/profile.jpeg' className="selfie" />
             </Link>
 
             <h1 className="title">{config.siteTitle}</h1>
-            <h2 className="description">Software Engineer at Invariant Telecom <br /> working on <span>Payment System</span></h2>
+            <h2 className="description">
+              Software Engineer at Invariant Telecom
+              <br />
+              working on
+              <span>Payment System</span>
+            </h2>
 
             <div className="social-buttons">
               <div>
@@ -138,12 +144,23 @@ const HomePage = props => {
         </section>
 
         <section className="container">
-          <h2>{`Other People's Opinions`}</h2>
+          <h2>`Other People&apos;s Opinions`</h2>
           <QuoteList quotes={quotes} />
         </section>
       </div>
     </Layout>
   )
+}
+
+HomePage.propTypes = {
+  data: PropTypes.shape({
+    latest: PropTypes.shape({
+      edges: PropTypes.array
+    }),
+    popular: PropTypes.shape({
+      edges: PropTypes.array
+    })
+  }).isRequired
 }
 
 export default HomePage

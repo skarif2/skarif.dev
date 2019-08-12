@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 
@@ -38,6 +39,11 @@ const PostList = props => {
       </ul>
     </div>
   )
+}
+
+PostList.propTypes = {
+  simple: PropTypes.bool.isRequired,
+  postEdges: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default PostList

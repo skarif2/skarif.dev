@@ -1,5 +1,6 @@
-import React from 'react'
 import _ from 'lodash'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 
@@ -28,13 +29,22 @@ const CategoriesPage = props => {
         {group.map(category => (
           <Link to={`/categories/${_.kebabCase(category.fieldValue)}`} key={category.fieldValue}>
             <span key={category.fieldValue}>
-              {category.fieldValue} <strong className="count">{category.totalCount}</strong>
+              {category.fieldValue}
+              <strong className="count">{category.totalCount}</strong>
             </span>
           </Link>
         ))}
       </div>
     </Layout>
   )
+}
+
+CategoriesPage.propTypes = {
+  data: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
+      group: PropTypes.array
+    })
+  }).isRequired
 }
 
 export default CategoriesPage

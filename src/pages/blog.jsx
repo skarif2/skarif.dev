@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
 
@@ -44,8 +45,9 @@ export const pageQuery = graphql`
 `
 
 const BlogPage = props => {
-  const categories = props.data.categories.group
-  const posts= props.data.posts.edges
+  const { data } = props
+  const categories = data.categories.group
+  const posts= data.posts.edges
   return (
     <Layout>
       <Helmet title={`Blogs | ${config.siteTitle}`} />
@@ -64,6 +66,17 @@ const BlogPage = props => {
       </div>
     </Layout>
   )
+}
+
+BlogPage.propTypes = {
+  data: PropTypes.shape({
+    categories: PropTypes.shape({
+      group: PropTypes.array
+    }),
+    posts: PropTypes.shape({
+      edges: PropTypes.array
+    })
+  }).isRequired
 }
 
 export default BlogPage

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 
@@ -28,13 +29,22 @@ const TagsPage = props => {
         {group.map(tag => (
           <Link key={tag.fieldValue} to={`/tags/${tag.fieldValue}`}>
             <span key={tag.fieldValue}>
-              {tag.fieldValue} <strong>{tag.totalCount}</strong>
+              {tag.fieldValue}
+              <strong>{tag.totalCount}</strong>
             </span>
           </Link>
         ))}
       </div>
     </Layout>
   )
+}
+
+TagsPage.propTypes = {
+  data: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
+      group: PropTypes.array
+    })
+  }).isRequired
 }
 
 export default TagsPage

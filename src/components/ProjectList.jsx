@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import GitHubButton from 'react-github-btn'
 
 const ProjectList = props => {
@@ -32,6 +33,10 @@ const ProjectList = props => {
       ))}
     </div>
   )
+}
+
+ProjectList.propTypes = {
+  projects: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default ProjectList
