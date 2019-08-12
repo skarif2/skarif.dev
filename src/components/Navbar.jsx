@@ -1,16 +1,33 @@
-import React, { useContext } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Link } from "gatsby"
 
 import ThemeContext from "../context/ThemeContext"
 import config from "../../data/SiteConfig"
 
 const Navigation = props => {
+  const [scrolled, setScrolled] = useState(false)
   const { menuLinks } = { ...props }
   const { dark, toggleDark } = useContext(ThemeContext)
+
+  const onScroll = () => {
+    if (window.scrollY > 20) {
+      setScrolled(true)
+    } else {
+      setScrolled(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll)
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+    }
+  })
+
   return (
-    <nav>
-      <div>
-        <div>
+    <nav className={scrolled ? "navbar scroll" : "navbar"}>
+      <div className="nav-container">
+        <div className="brand">
           <Link to="/">
             <img alt={config.siteTitle} src="../../favicon.png" />
             <h2>Sk Arif</h2>
@@ -23,9 +40,28 @@ const Navigation = props => {
             </Link>
           ))}
         </div>
-        <button type="button" className="dark-switcher" onClick={toggleDark}>
-          {dark ? <span>☀</span> : <span>☾</span>}
-        </button>
+
+        <div className="toggleTheme">
+          <input
+            defaultChecked={dark}
+            type="checkbox"
+            id="dn"
+            onClick={toggleDark}
+          />
+          <label htmlFor="dn" className="toggle">
+            <span className="toggle__handler">
+              <span className="crater crater--1" />
+              <span className="crater crater--2" />
+              <span className="crater crater--3" />
+            </span>
+            <span className="star star--1" />
+            <span className="star star--2" />
+            <span className="star star--3" />
+            <span className="star star--4" />
+            <span className="star star--5" />
+            <span className="star star--6" />
+          </label>
+        </div>
       </div>
     </nav>
   )

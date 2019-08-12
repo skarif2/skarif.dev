@@ -21,3 +21,5 @@ parser: "babel-eslint"
 rules:
   "react/no-danger": off
   "react/jsx-one-expression-per-line": off
+  "jsx-a11y/label-has-associated-control": off
+  "jsx-a11y/label-has-for": off
