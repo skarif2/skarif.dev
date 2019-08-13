@@ -1,0 +1,127 @@
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font: normal normal normal #{1rem}/#{1.6} -apple-system,
+  BlinkMacSystemFont,
+  'Roboto',
+  Helvetica Neue,
+  Helvetica,
+  Arial,
+  sans-serif;
+  font-size: 84% !important;
+}
+
+body {
+  font-size: 1rem;
+}
+
+p,
+ol,
+ul,
+dl,
+table {
+  font-size: 1.15rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 600;
+  font-family: -apple-system,
+    BlinkMacSystemFont,
+    'Roboto',
+    Helvetica Neue,
+    Helvetica,
+    Arial,
+    sans-serif;
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+ul {
+  li {
+    &:before {
+      font-size: 22px;
+      line-height: 1.1;
+    }
+  }
+}
+
+a {
+  font-weight: 600;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+kbd {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+dt {
+  font-weight: 600;
+}
+
+@include breakpoint(sm) {
+  body {
+    font-size: 1.2rem;
+  }
+
+  p,
+  ol,
+  ul,
+  dl,
+  table {
+    font-size: 1.15rem;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  h4 {
+    font-size: 1.6rem;
+  }
+
+  h5 {
+    font-size: 1.3rem;
+  }
+}

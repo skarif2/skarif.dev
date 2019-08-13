@@ -1,16 +1,21 @@
 /*--- Colors ---*/
+
+// light theme
 $background-light: #FAFAFA;
-$background-dark: #282A36;
 $foreground-light: #404040;
-$foreground-dark: #F8F8F2;
-$accent-color: #03A9F4;
+$accent-color-light: #03a9f4;
 $font-primary-light: #101010;
 $font-secondary-light: #404040;
 $font-tertiary-light: #707070;
+$selection-light:#B3E5FC;
+
+// dark theme
+$background-dark: #282A36;
+$foreground-dark: #F8F8F2;
+$accent-color-dark: #03a9f4;
 $font-primary-dark: #F8F8F2;
 $font-secondary-dark: #DFDFD9;
 $font-tertiary-dark: #ACACA6;
-$selection-light:#B3E5FC;
 $selection-dark: #44475a;
 
 /*--- Sizing ---*/

@@ -42,8 +42,11 @@ const PostList = props => {
 }
 
 PostList.propTypes = {
-  simple: PropTypes.bool.isRequired,
+  simple: PropTypes.bool,
   postEdges: PropTypes.arrayOf(PropTypes.object).isRequired,
+}
+PostList.defaultProps = {
+  simple: false,
 }
 
 export default PostList

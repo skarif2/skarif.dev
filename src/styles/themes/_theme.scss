@@ -7,6 +7,8 @@
   ::selection {
     background: $selection-light;
   }
+
+  @include set-theme-color($background-light, $foreground-light, $font-primary-light, $font-secondary-light, $font-tertiary-light, $accent-color-light, $selection-light);
 }
 
 /*--- Dark Theme ---*/
@@ -18,4 +20,6 @@
   ::selection {
     background: $selection-dark;
   }
+
+  @include set-theme-color($background-dark, $foreground-dark, $font-primary-dark, $font-secondary-dark, $font-tertiary-dark, $accent-color-dark, $selection-dark);
 }

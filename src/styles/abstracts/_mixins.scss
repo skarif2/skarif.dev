@@ -27,3 +27,60 @@
     @warn "Breakpoint mixin supports: xs, sm, md, lg";
   }
 }
+
+@mixin set-theme-color($bg, $fg, $f1, $f2, $f3, $accent, $selection) {
+
+  body {
+    color: $fg;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: $f1;
+  }
+
+  ul {
+    li {
+      &:before {
+        color: $f3;
+      }
+    }
+  }
+
+  a {
+    color: $accent;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: darken($accent, 10%);
+    }
+  }
+
+  .post,
+  .page {
+    a:not(.button):not(.anchor):not(.gatsby-resp-image-link) {
+      border-bottom: 2px solid lighten($accent, 30%);
+
+      &:hover {
+        color: darken($accent, 10%);
+        background: lighten($accent, 33%);
+        border-bottom: 2px solid darken($accent, 10%);
+      }
+
+      &:active,
+      &:focus {
+        color: darken($accent, 10%);
+        background: lighten($accent, 33%);
+        border-bottom: 2px dashed darken($accent, 10%);
+      }
+    }
+  }
+
+  mark {
+    background: $selection;
+  }
+}
