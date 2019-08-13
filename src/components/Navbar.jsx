@@ -34,7 +34,7 @@ const Navigation = props => {
               className="icon"
               src="../../favicon.png"
             />
-            <h2 className="title">Sk Arif</h2>
+            <span className="title">Sk Arif</span>
           </Link>
         </div>
         <div>
