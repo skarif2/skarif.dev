@@ -1,19 +1,18 @@
 .navbar {
+  background: $background-light;
   position: fixed;
   width: 100%;
-  top: 0;
-  left: 0;
   z-index: 3;
-  width: 100%;
-  background: white;
+  left: 0;
+  top: 0;
 
   &.scroll {
     box-shadow: 1px 2px 18px rgba(0, 0, 0, 0.1);
   }
 
-  .nav-container {
+  .navbar-container {
     padding: 0 1.5rem;
-    height: 55px;
+    height: 90px;
     max-width: $width;
     margin: auto;
     display: flex;
@@ -26,10 +25,11 @@
     a {
       display: flex;
       align-items: center;
-      color: #333;
+      color: $font-primary-light;
       margin-right: 0;
       font-weight: 600;
       font-size: 1.1rem;
+      text-decoration: none;
 
       &:hover,
       &:focus {
@@ -37,17 +37,25 @@
       }
     }
 
-    .text {
-      display: none;
+    .icon {
+      height: 25px;
+      width: 25px;
+      margin-bottom: 0;
+    }
+
+    .title {
+      display: block;
     }
   }
 
   .toggleTheme {
-    position: relative;
+    display: flex;
+    align-items: center;
 
     input {
       position: absolute;
-      left: -99em;
+      left: 2em;
+      visibility: hidden;
     }
 
     .toggle {
@@ -235,21 +243,18 @@
 
 .dark {
   .navbar {
-    background: #2d2d2d;
-    border-color: #2d2d2d;
+    background: $background-dark;
     transition: all 0.6s ease;
 
     &.scroll {
-      background: darken(#2d2d2d, 5%);
-      border-color: darken(#2d2d2d, 5%);
       box-shadow: 1px 2px 18px rgba(0, 0, 0, 0.3);
     }
 
     .brand a {
-      color: lighten(#b3b9c5, 5%);
+      color: $font-primary-dark;
 
       &:hover {
-        color: #eee;
+        color: $font-secondary-dark;
       }
     }
 

@@ -1,11 +1,21 @@
-$background: #2d2d2d;
-$foreground: #b3b9c5;
-$dark-border: darken($background, 3%);
-
-.dark {
-  background: $background;
-  color: $foreground;
+/*--- Light Theme ---*/
+.light {
+  background: $background-light;
+  color: $foreground-light;
   transition: all 0.6s ease;
+
+  ::selection {
+    background: $selection-light;
+  }
 }
 
-.lite {}
+/*--- Dark Theme ---*/
+.dark {
+  background: $background-dark;
+  color: $foreground-dark;
+  transition: all 0.6s ease;
+
+  ::selection {
+    background: $selection-dark;
+  }
+}

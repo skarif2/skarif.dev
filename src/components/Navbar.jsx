@@ -26,11 +26,15 @@ const Navigation = props => {
 
   return (
     <nav className={scrolled ? "navbar scroll" : "navbar"}>
-      <div className="nav-container">
+      <div className="navbar-container">
         <div className="brand">
           <Link to="/">
-            <img alt={config.siteTitle} src="../../favicon.png" />
-            <h2>Sk Arif</h2>
+            <img
+              alt={config.siteTitle}
+              className="icon"
+              src="../../favicon.png"
+            />
+            <h2 className="title">Sk Arif</h2>
           </Link>
         </div>
         <div>

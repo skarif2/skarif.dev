@@ -15,7 +15,7 @@ const Layout = props => {
     <div>
       <Helmet
         bodyAttributes={{
-          class: `${dark ? "theme dark" : "theme"}`,
+          class: `${dark ? "dark" : "light"}`,
         }}
       >
         <meta name="description" content={config.siteDescription} />
