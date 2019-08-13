@@ -6,7 +6,7 @@ import config from "../../data/SiteConfig"
 
 const Navigation = props => {
   const [scrolled, setScrolled] = useState(false)
-  const { menuLinks } = { ...props }
+  const { navItems } = { ...props }
   const { dark, toggleDark } = useContext(ThemeContext)
 
   const onScroll = () => {
@@ -37,34 +37,34 @@ const Navigation = props => {
             <span className="title">Sk Arif</span>
           </Link>
         </div>
-        <div>
-          {menuLinks.map(link => (
+        <div className="navbar-items">
+          {navItems.map(link => (
             <Link key={link.name} to={link.link} activeClassName="active">
               {link.name}
             </Link>
           ))}
-        </div>
 
-        <div className="toggleTheme">
-          <input
-            defaultChecked={dark}
-            type="checkbox"
-            id="dn"
-            onClick={toggleDark}
-          />
-          <label htmlFor="dn" className="toggle">
-            <span className="toggle__handler">
-              <span className="crater crater--1" />
-              <span className="crater crater--2" />
-              <span className="crater crater--3" />
-            </span>
-            <span className="star star--1" />
-            <span className="star star--2" />
-            <span className="star star--3" />
-            <span className="star star--4" />
-            <span className="star star--5" />
-            <span className="star star--6" />
-          </label>
+          <div className="toggleTheme">
+            <input
+              defaultChecked={dark}
+              type="checkbox"
+              id="dn"
+              onClick={toggleDark}
+            />
+            <label htmlFor="dn" className="toggle">
+              <span className="toggle__handler">
+                <span className="crater crater--1" />
+                <span className="crater crater--2" />
+                <span className="crater crater--3" />
+              </span>
+              <span className="star star--1" />
+              <span className="star star--2" />
+              <span className="star star--3" />
+              <span className="star star--4" />
+              <span className="star star--5" />
+              <span className="star star--6" />
+            </label>
+          </div>
         </div>
       </div>
     </nav>

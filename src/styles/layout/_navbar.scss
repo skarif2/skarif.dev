@@ -48,6 +48,31 @@
     }
   }
 
+  .navbar-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex: 1;
+    margin: 0;
+
+    a {
+      display: flex;
+      align-items: center;
+      font-size: 1.15rem;
+      font-weight: 500;
+      padding: 1rem 0.75rem;
+      margin: 0;
+      color: rgba(0, 0, 0, 0.45);
+      line-height: 1.2;
+      text-align: center;
+
+      &:hover,
+      &:active {
+        color: #111;
+      }
+    }
+  }
+
   .toggleTheme {
     display: flex;
     align-items: center;
@@ -247,6 +272,20 @@
       .navbar-container {
         height: 60px;
       }
+
+      .navbar-items a {
+
+        &:hover,
+        &.active {
+          color: #111;
+          border-bottom: 2px solid $accent-color-light;
+        }
+
+        &:active {
+          color: #111;
+          border-bottom: 2px dashed $accent-color-light;
+        }
+      }
     }
 
     .navbar-container {
@@ -264,6 +303,25 @@
 
         .title {
           display: block;
+        }
+      }
+
+      .navbar-items {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex: unset;
+        height: 100%;
+
+        a {
+          font-size: 1.2rem;
+          margin: 0 1rem;
+          padding: 1rem 0.5rem;
+          border-bottom: 2px solid transparent;
+
+          &.active {
+            color: #111;
+          }
         }
       }
     }
@@ -287,7 +345,7 @@
       }
     }
 
-    .links a {
+    .navbar-items a {
       color: darken(#b3b9c5, 20%);
 
       &:hover,

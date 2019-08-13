@@ -20,7 +20,7 @@ const Layout = props => {
       >
         <meta name="description" content={config.siteDescription} />
       </Helmet>
-      <Navbar menuLinks={config.menuLinks} />
+      <Navbar navItems={config.navItems} />
       <main id="main-content">{children}</main>
       <Footer />
     </div>

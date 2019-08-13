@@ -22,7 +22,7 @@ const config = {
   userDescription: '',
   themeColor: '',
   backgroundColor: '',
-  menuLinks: [{
+  navItems: [{
       name: 'About',
       link: '/about',
     },
