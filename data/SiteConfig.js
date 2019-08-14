@@ -33,11 +33,7 @@ const config = {
     {
       name: 'Contact',
       link: '/contact',
-    },
-    {
-      name: 'Resume',
-      link: '/resume',
-    },
+    }
   ],
 }
 
