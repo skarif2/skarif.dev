@@ -110,11 +110,41 @@ const HomePage = props => {
 
             <div className="social-buttons">
               <div className="sb_1">
-                <FontAwesomeIcon className="sb_2" icon={faFacebookF} />
-                <FontAwesomeIcon className="sb_2" icon={faTwitter} />
-                <FontAwesomeIcon className="sb_2" icon={faGithub} />
-                <FontAwesomeIcon className="sb_2" icon={faLinkedin} />
-                <FontAwesomeIcon className="sb_2" icon={faStackOverflow} />
+                <a
+                  href="https://www.facebook.com/skarif2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon className="sb_2" icon={faFacebookF} />
+                </a>
+                <a
+                  href="https://twitter.com//skarif2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon className="sb_2" icon={faTwitter} />
+                </a>
+                <a
+                  href="https://twitter.com/sk_arif2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon className="sb_2" icon={faGithub} />
+                </a>
+                <a
+                  href="https://linkedin.com/in//skarif2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon className="sb_2" icon={faLinkedin} />
+                </a>
+                <a
+                  href="https://stackoverflow.com/users/5786171/sk-arif"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon className="sb_2" icon={faStackOverflow} />
+                </a>
               </div>
             </div>
           </div>
