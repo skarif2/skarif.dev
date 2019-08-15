@@ -1,8 +1,8 @@
 ---
 date: 2015-09-24
-title: 'Getting Started with Gatsby'
+title: "Create and Deploy a Node.js, Express, & PostgreSQL REST API to Heroku"
 template: post
-thumbnail: './gatsby.png'
+thumbnail: "./gatsby.png"
 slug: getting-started-with-gatsby
 categories:
   - Tools

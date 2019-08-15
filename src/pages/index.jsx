@@ -152,7 +152,7 @@ const HomePage = props => {
 
         <hr className="hr-text" data-content="⋯" />
 
-        <div>
+        <div className="content-section">
           <section className="section">
             <h2>Latest Blogs</h2>
             <PostList simple postEdges={latestPostEdges} />

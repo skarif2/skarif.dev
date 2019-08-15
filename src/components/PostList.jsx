@@ -21,22 +21,27 @@ const PostList = props => {
     })
 
   return (
-    <div>
-      <ul>
-        {postList.map(post => {
-          return (
-            <Link to={post.path} key={post.title}>
-              <div>
+    <div className={`${simple ? "simple" : ""} postlist`}>
+      {postList.map(post => {
+        const thumbnail = post.thumbnail
+          ? post.thumbnail.childImageSharp.fixed
+          : false
+        return (
+          <Link to={post.path} key={post.title}>
+            <div className="postlist-item">
+              {thumbnail ? (
                 <Img fixed={post.thumbnail.childImageSharp.fixed} />
-                <div>
-                  <h2>{post.title}</h2>
-                  {!simple ? <div className="excerpt">{post.date}</div> : null}
-                </div>
+              ) : (
+                <div />
+              )}
+              <div>
+                <h2>{post.title}</h2>
+                {!simple ? <div className="excerpt">{post.date}</div> : null}
               </div>
-            </Link>
-          )
-        })}
-      </ul>
+            </div>
+          </Link>
+        )
+      })}
     </div>
   )
 }

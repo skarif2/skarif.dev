@@ -9,7 +9,7 @@
     .link {
       .selfie {
         border-radius: 100%;
-        transition: all .2s;
+        transition: all 0.2s;
         box-shadow: 0;
         opacity: 1;
         width: 85px;
@@ -42,7 +42,6 @@
       margin-bottom: 10px;
 
       .sb_1 {
-
         .sb_2 {
           margin: 0 10px;
           font-size: 1.4rem;
@@ -57,6 +56,14 @@
         }
       }
     }
+  }
+}
+
+.section {
+  margin: 40px 0;
+
+  &:first-of-type {
+    margin-bottom: 0;
   }
 }
 
@@ -95,6 +102,19 @@
         }
       }
     }
+  }
+
+  .content-section {
+    margin-top: 2rem;
+
+    h2 {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .section {
+    margin: 4rem 0;
   }
 }
 
