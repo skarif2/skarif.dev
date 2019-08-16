@@ -162,12 +162,12 @@ const HomePage = props => {
 
         <div className="content-section">
           <section className="section">
-            <h2>Latest Blogs</h2>
+            <h2>Latest Articles</h2>
             <PostList simple postEdges={latestPostEdges} />
           </section>
 
           <section className="section">
-            <h2>Latest Blogs</h2>
+            <h2>Featured Articles</h2>
             <PostList simple postEdges={popularPostEdges} />
           </section>
 

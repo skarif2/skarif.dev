@@ -17,7 +17,7 @@ export default [{
     title: 'Gmail Signature',
     path: 'https://github.com/skarif2/gmail-signature/blob/master/README.md',
     source: 'https://github.com/skarif2/gmail-signature',
-    description: 'Having a nice looking signature in your email will always make it more professional and put an impression that you care about things 👍',
+    description: 'Having a nice looking signature in your email will always make it more professional and put an impression that you care about things.',
   },
   {
     icon: '🏡',
@@ -31,6 +31,6 @@ export default [{
     title: 'Fawn',
     path: 'https://www.npmjs.com/package/fawn',
     source: 'https://github.com/e-oj/Fawn',
-    description: 'Promise based Library for transactions in MongoDB',
+    description: 'Promise based Library for transactions in MongoDB.',
   }
 ]
