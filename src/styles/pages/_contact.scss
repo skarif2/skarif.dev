@@ -20,12 +20,12 @@
           font-size: 1.15rem;
           line-break: 1.6;
           padding: 0.7rem;
-          border: 2px solid lighten($font-tertiary-light, 20%);
+          border: 1px solid lighten($font-tertiary-light, 20%);
           border-radius: 0.25rem;
 
           &:focus {
             outline: none;
-            border: 2px solid $accent-color-light;
+            border: 1px solid $accent-color-light;
           }
         }
       }
@@ -37,7 +37,7 @@
       transition: all 0.6s ease;
       font-size: 1.15rem;
       line-break: 1.6;
-      border: 2px solid lighten($font-tertiary-light, 20%);
+      border: 1px solid lighten($font-tertiary-light, 20%);
       border-radius: 0.25rem;
       padding: 6px 10px;
       width: 100%;
@@ -45,7 +45,7 @@
 
       &:focus {
         outline: none;
-        border: 2px solid $accent-color-light;
+        border: 1px solid $accent-color-light;
       }
     }
   }
@@ -96,7 +96,7 @@
           color: $font-tertiary-dark;
           background: $background-dark;
           transition: all 0.6s ease;
-          border: 2px solid $font-tertiary-dark;
+          border: 1px solid $font-tertiary-dark;
         }
       }
     }
@@ -104,7 +104,7 @@
     textarea {
       background: $background-dark;
       transition: all 0.6s ease;
-      border: 2px solid $font-tertiary-dark;
+      border: 1px solid $font-tertiary-dark;
       color: $font-tertiary-dark;
     }
   }

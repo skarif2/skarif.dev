@@ -9,7 +9,7 @@ const AboutPage = () => {
     <Layout>
       <Helmet title={`About | ${config.siteTitle}`} />
       <div className="container">
-        <h1>About Me!</h1>
+        <h1>Get to know me!</h1>
         <p>Let me tell you something about me</p>
       </div>
     </Layout>
