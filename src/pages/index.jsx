@@ -31,6 +31,9 @@ export const pageQuery = graphql`
           fields {
             slug
             date
+            readingTime {
+              text
+            }
           }
           excerpt
           timeToRead
@@ -61,6 +64,9 @@ export const pageQuery = graphql`
           fields {
             slug
             date
+            readingTime {
+              text
+            }
           }
           excerpt
           timeToRead
@@ -88,6 +94,8 @@ const HomePage = props => {
   const { data } = props
   const latestPostEdges = data.latest.edges
   const popularPostEdges = data.popular.edges
+
+  // console.log(data.latest.edges[0].node.fields.readingTime.text)
 
   return (
     <Layout>
@@ -164,7 +172,7 @@ const HomePage = props => {
           </section>
 
           <section className="section">
-            <h2>Open Source</h2>
+            <h2>Open Source Contributions</h2>
             <PorjectList projects={projects} />
           </section>
 

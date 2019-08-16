@@ -50,7 +50,7 @@ const TagTemplate = props => {
   return (
     <Layout>
       <Helmet title={`Tag: ${tag} | ${config.siteTitle}`} />
-      <div>
+      <div className="container">
         <h1>
           Tag:
           <u>{tag}</u>

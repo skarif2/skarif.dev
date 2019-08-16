@@ -42,7 +42,7 @@ const PostTemplate = props => {
       <Helmet>
         <title>Blog</title>
       </Helmet>
-      <article>
+      <article className="container">
         <div className="post" dangerouslySetInnerHTML={{ __html: post.html }} />
       </article>
     </Layout>

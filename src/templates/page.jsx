@@ -39,7 +39,7 @@ const PageTemplate = props => {
       <Helmet>
         <title>{`${page.title} – ${config.siteTitle}`}</title>
       </Helmet>
-      <div>
+      <div className="container">
         <article>
           <header>
             <h1>{page.title}</h1>

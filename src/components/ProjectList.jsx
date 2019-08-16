@@ -5,19 +5,22 @@ import GitHubButton from "react-github-btn"
 const ProjectList = props => {
   const { projects } = props
   return (
-    <div>
+    <div className="projectlist">
       {projects.map(project => (
-        <div key={project.title}>
-          <h2>
-            <a href={project.source} target="_blank" rel="noopener noreferrer">
-              <div>{project.icon}</div>
-              <div>{project.title}</div>
-            </a>
-          </h2>
-          <p>{project.description}</p>
-          <div>
+        <div className="project" key={project.title}>
+          <div className="project-icon">{project.icon}</div>
+          <div className="project-details">
+            <h2 className="project-title">{project.title}</h2>
+            <p className="project-description">{project.description}</p>
+          </div>
+          <div className="project-buttons">
             {project.path && (
-              <a href={project.path} target="_blank" rel="noopener noreferrer">
+              <a
+                className="button"
+                href={project.path}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Site
               </a>
             )}

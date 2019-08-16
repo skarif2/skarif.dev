@@ -24,7 +24,7 @@ const CategoriesPage = props => {
   return (
     <Layout>
       <Helmet title={`Categories | ${config.siteTitle}`} />
-      <div>
+      <div className="container">
         <h1>Tags</h1>
         {group.map(category => (
           <Link
