@@ -1,0 +1,57 @@
+.footer {
+  .links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 55px;
+    color: $font-tertiary-light;
+
+    a {
+      font-weight: 400;
+      color: $font-tertiary-light;
+      margin: 0 0.5rem;
+
+      &:hover {
+        color: $font-primary-light;
+      }
+    }
+  }
+
+  .copyright {
+    text-align: center;
+    font-size: 1rem;
+    color: lighten($font-tertiary-light, 20%);
+  }
+}
+
+@include breakpoint(sm) {
+  .footer {
+    height: 100px;
+
+    .links {
+      a {
+        margin: 0 1rem;
+      }
+    }
+  }
+}
+
+.dark {
+  .footer {
+    .links {
+      color: $font-tertiary-dark;
+
+      a {
+        color: $font-tertiary-dark;
+
+        &:hover {
+          color: $font-primary-dark;
+        }
+      }
+    }
+
+    .copyright {
+      color: darken($font-tertiary-dark, 20%);
+    }
+  }
+}

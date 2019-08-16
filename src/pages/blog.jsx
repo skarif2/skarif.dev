@@ -54,7 +54,7 @@ const BlogPage = props => {
   return (
     <Layout>
       <Helmet title={`Blogs | ${config.siteTitle}`} />
-      <div>
+      <div className="container">
         <h1>Blogs</h1>
         <div>
           {categories.map(category => {
