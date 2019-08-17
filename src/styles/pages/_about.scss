@@ -1,0 +1,18 @@
+.about {
+  .about-title {
+    padding-bottom: 10px;
+    border-bottom: 2px solid darken($background-light, 7%);
+    transition: all 0.6s ease;
+  }
+
+  .about-image {
+    max-width: 100%;
+  }
+}
+
+.dark {
+  .about-title {
+    border-bottom: 2px solid lighten($background-dark, 7%);
+    transition: all 0.6s ease;
+  }
+}

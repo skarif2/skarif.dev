@@ -173,7 +173,7 @@ const HomePage = props => {
 
           <section className="section">
             <h2>Open Source Contributions</h2>
-            <PorjectList projects={projects} />
+            <PorjectList projects={projects.open} />
           </section>
 
           <section className="section">
