@@ -14,10 +14,9 @@ import {
 import Layout from "../layout"
 import PostList from "../components/PostList"
 import PorjectList from "../components/ProjectList"
-import QuoteList from "../components/QuoteList"
+import Newsletter from "../components/Newsletter"
 import config from "../../data/SiteConfig"
 import projects from "../../data/ProjectData"
-import quotes from "../../data/QuoteData"
 
 export const pageQuery = graphql`
   query IndexQuery {
@@ -172,13 +171,12 @@ const HomePage = props => {
           </section>
 
           <section className="section">
-            <h2>Open Source Contributions</h2>
+            <h2>Open Source</h2>
             <PorjectList projects={projects.open} />
           </section>
 
           <section className="section">
-            <h2>`Other People&apos;s Opinions`</h2>
-            <QuoteList quotes={quotes} />
+            <Newsletter />
           </section>
         </div>
       </div>

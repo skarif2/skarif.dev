@@ -22,7 +22,7 @@ export default {
     },
     {
       icon: '🏡',
-      title: 'Sk Arif',
+      title: 'skarif.io',
       path: 'https://skarif.io',
       source: 'https://github.com/skarif2/sight-gatsby',
       description: 'A personal website built in Gatsby and hosted on Netlify. The website contains my personal details, blog thet I have written as well as a copy of my resume.',

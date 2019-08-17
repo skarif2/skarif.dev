@@ -2,6 +2,7 @@
   .project {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1.2rem 0;
     border-bottom: 1px solid darken($background-light, 7%);
     transition: all 0.6s ease;

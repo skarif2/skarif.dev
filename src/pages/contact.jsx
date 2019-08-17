@@ -13,10 +13,12 @@ const ContactPage = () => {
         <p>
           Being in Software Development for quite some time, I find Javascript,
           Designing Back-ends and a few DevOps stuff to be in my comfort zone.
+          And I like meeting new people and talk to them about technology.
         </p>
         <div className="form">
           <div className="full-form">
             <div className="column first">
+              <h3>Contact me</h3>
               <p>
                 If you&rsquo;d like to make an enquiry, please feel free to send
                 me a message and I&rsquo;ll get back to you as soon as possible.
