@@ -14,26 +14,34 @@ const ContactPage = () => {
           Being in Software Development for quite some time, I find Javascript,
           Designing Back-ends and a few DevOps stuff to be in my comfort zone.
         </p>
-        <p>
-          If you&rsquo;d like to make an enquiry, please feel free to send me a
-          message and I&rsquo;ll get back to you as soon as possible.
-        </p>
         <div className="form">
-          <form>
-            <div className="input">
-              <input placeholder="Name" />
-              <input placeholder="Email" />
+          <div className="full-form">
+            <div className="column first">
+              <p>
+                If you&rsquo;d like to make an enquiry, please feel free to send
+                me a message and I&rsquo;ll get back to you as soon as possible.
+              </p>
+              <p>
+                If you prefer to contact directly, send me an email on{" "}
+                <a href="mailto:skarif2@gmail.com">skarif2@gmail.com</a>
+              </p>
             </div>
-            <textarea className="textarea" placeholder="Message" />
-            <button className="button" type="submit">
-              Submit
-            </button>
-          </form>
+            <form className="column last">
+              <div className="field">
+                <input className="input" placeholder="Name" />
+              </div>
+              <div className="field">
+                <input className="input" placeholder="Email" />
+              </div>
+              <div className="field">
+                <textarea className="input" placeholder="Message" />
+              </div>
+              <button className="button" type="submit">
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
-        <p className="email-link">
-          If you prefer to contact directly, send me an email on{" "}
-          <a href="mailto:skarif2@gmail.com">skarif2@gmail.com</a>
-        </p>
         <p>You can also find me on:</p>
         <div className="web-link">
           <p>

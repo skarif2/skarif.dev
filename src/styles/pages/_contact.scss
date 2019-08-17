@@ -1,117 +1,150 @@
 .contact {
   .form {
-    max-width: 600px;
-    display: block;
-    margin-bottom: 60px;
+    background: $background-light;
+    transition: all 0.6s ease;
+    border-radius: 6px;
+    box-shadow: 0 2px 15px 0 rgba(1, 1, 1, .1);
+    max-width: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0 0 2rem 0;
 
-    form {
-      // padding: 5px;
+    .full-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      width: 100%;
 
-      .input {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
+      .column {
+        padding: 40px;
+      }
 
-        input {
-          color: $font-tertiary-light;
-          background: $background-light;
-          transition: all 0.6s ease;
-          width: 49%;
-          font-size: 1.15rem;
-          line-break: 1.6;
-          padding: 0.7rem;
-          border: 1px solid lighten($font-tertiary-light, 20%);
+      .first {
+        background: darken($background-light, 3%);
+        transition: all 0.6s ease;
+
+        p {
+          color: $font-secondary-light;
+          font-size: 1.2rem;
+        }
+      }
+
+      .last {
+        .field {
+          margin: 0 0 15px;
+
+          .input {
+            color: $font-tertiary-light;
+            background: $background-light;
+            transition: all 0.6s ease;
+            font-size: 1.1rem;
+            padding: 0.7rem;
+            border: 1px solid lighten($font-tertiary-light, 30%);
+            border-radius: 0.25rem;
+            font-weight: 400;
+            width: 100%;
+            flex: 1 0 auto;
+            line-height: 1.4;
+            cursor: text;
+
+            &:focus {
+              outline: none;
+              border: 1px solid $accent-color-light;
+            }
+
+            ::placeholder {
+              color: $font-tertiary-light;
+            }
+          }
+
+          textarea {
+            height: 100px;
+          }
+        }
+
+        .button {
+          padding: 4px 10px;
+          border: 2px solid $secondary-accent-color-light;
+          text-align: center;
+          width: 100px;
           border-radius: 0.25rem;
+          background: $secondary-accent-color-light;
+          transition: all 0.6s ease;
+          color: $background-light;
+          letter-spacing: 0.05rem;
+          font-size: 1.15rem;
+          font-weight: 400;
+          line-height: 20px;
+          cursor: pointer;
+          transition: all 0.25s ease;
 
-          &:focus {
-            outline: none;
-            border: 1px solid $accent-color-light;
+          &:hover {
+            color: $secondary-accent-color-light;
+            background: $background-light;
+            transition: all 0.6s ease;
           }
         }
       }
-    }
-
-    textarea {
-      color: $font-tertiary-light;
-      background: $background-light;
-      transition: all 0.6s ease;
-      font-size: 1.15rem;
-      line-break: 1.6;
-      border: 1px solid lighten($font-tertiary-light, 20%);
-      border-radius: 0.25rem;
-      padding: 6px 10px;
-      width: 100%;
-      height: 100px;
-
-      &:focus {
-        outline: none;
-        border: 1px solid $accent-color-light;
-      }
-    }
-  }
-
-  .email-link {
-    span {
-      color: $accent-color-light;
     }
   }
 
   .web-link {
     margin-left: 20px;
-    margin-bottom: 40px;
 
     p {
       margin: 0 0 0.5rem 0;
     }
   }
-
-  .button {
-    float: right;
-    padding: 4px 10px;
-    border: 2px solid $secondary-accent-color-light;
-    text-align: center;
-    width: 100px;
-    border-radius: 0.25rem;
-    background: $secondary-accent-color-light;
-    color: $background-light;
-    letter-spacing: 0.05rem;
-    font-size: 1.15rem;
-    font-weight: 400;
-    line-height: 20px;
-    cursor: pointer;
-    transition: all 0.25s ease;
-
-    &:hover {
-      color: $secondary-accent-color-light;
-      background: $background-light;
-    }
-  }
 }
 
 .dark {
-  .form {
-    form {
-      .input {
-        input {
-          color: $font-tertiary-dark;
-          background: $background-dark;
-          transition: all 0.6s ease;
-          border: 1px solid $font-tertiary-dark;
-        }
-      }
-    }
-
-    textarea {
+  .contact {
+    .form {
       background: $background-dark;
       transition: all 0.6s ease;
-      border: 1px solid $font-tertiary-dark;
-      color: $font-tertiary-dark;
-    }
-  }
+      box-shadow: 0 2px 15px 0 rgba(1, 1, 1, .3);
 
-  .email-link {
-    a {
-      color: $accent-color-dark;
+      .full-form {
+        .first {
+          background: lighten($background-dark, 3%);
+          transition: all 0.6s ease;
+
+          p {
+            color: $font-secondary-dark;
+          }
+        }
+
+        .last {
+          .field {
+            .input {
+              color: $font-tertiary-dark;
+              background: $background-dark;
+              transition: all 0.6s ease;
+              border: 1px solid darken($font-tertiary-dark, 35%);
+
+              &:focus {
+                border: 1px solid $accent-color-dark;
+              }
+
+              ::placeholder {
+                color: $font-tertiary-dark;
+              }
+            }
+          }
+
+          .button {
+            border: 2px solid $secondary-accent-color-dark;
+            background: $secondary-accent-color-dark;
+            transition: all 0.6s ease;
+            color: $background-dark;
+
+            &:hover {
+              color: $secondary-accent-color-dark;
+              background: $background-dark;
+              transition: all 0.6s ease;
+            }
+          }
+        }
+      }
     }
   }
 }

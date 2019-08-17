@@ -65,7 +65,7 @@ export default {
   ],
   peoples: [{
       name: 'Hasan Nayan',
-      description: 'My childhood friend.',
+      description: 'My childhood friend',
       link: 'https://www.facebook.com/engr.hasannayan'
     },
     {

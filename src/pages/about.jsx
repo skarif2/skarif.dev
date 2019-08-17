@@ -44,7 +44,9 @@ const AboutPage = () => {
           {stack.map(item => {
             return (
               <li key={item.type}>
-                <strong>{item.type}</strong> : {item.value}
+                <strong>{item.type}</strong>
+                {" : "}
+                {item.value}
               </li>
             )
           })}
@@ -61,8 +63,9 @@ const AboutPage = () => {
                   target="_blank"
                 >
                   {project.title}
-                </a>{" "}
-                – {project.description}
+                </a>
+                {" – "}
+                {project.description}
               </li>
             )
           })}
@@ -79,8 +82,9 @@ const AboutPage = () => {
                   target="_blank"
                 >
                   {project.title}
-                </a>{" "}
-                – {project.description}
+                </a>
+                {" – "}
+                {project.description}
               </li>
             )
           })}
@@ -113,7 +117,8 @@ const AboutPage = () => {
           {drivers.map(driver => {
             return (
               <li key={driver.type}>
-                <strong>{driver.type} : </strong>
+                <strong>{driver.type}</strong>
+                {" : "}
                 {driver.link !== "" ? (
                   <a
                     href={driver.link}
