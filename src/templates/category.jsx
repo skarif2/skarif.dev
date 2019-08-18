@@ -20,6 +20,9 @@ export const pageQuery = graphql`
           fields {
             slug
             date
+            readingTime {
+              text
+            }
           }
           excerpt
           timeToRead

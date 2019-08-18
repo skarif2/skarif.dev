@@ -20,6 +20,9 @@ export const pageQuery = graphql`
           fields {
             slug
             date
+            readingTime {
+              text
+            }
           }
           excerpt
           frontmatter {
@@ -52,8 +55,7 @@ const TagTemplate = props => {
       <Helmet title={`Tag: ${tag} | ${config.siteTitle}`} />
       <div className="container">
         <h1>
-          Tag:
-          <u>{tag}</u>
+          Tag: <u>{tag}</u>
         </h1>
         <PostList postEdges={postEdges} />
       </div>
