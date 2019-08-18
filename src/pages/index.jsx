@@ -126,14 +126,14 @@ const HomePage = props => {
                   <FontAwesomeIcon className="sb_2" icon={faFacebookF} />
                 </a>
                 <a
-                  href="https://twitter.com//skarif2"
+                  href="https://twitter.com/skarif2"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <FontAwesomeIcon className="sb_2" icon={faTwitter} />
                 </a>
                 <a
-                  href="https://twitter.com/sk_arif2"
+                  href="https://github.com/sk_arif2"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
