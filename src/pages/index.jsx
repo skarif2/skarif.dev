@@ -22,7 +22,7 @@ import projects from "../../data/ProjectData"
 export const pageQuery = graphql`
   query IndexQuery {
     latest: allMarkdownRemark(
-      limit: 6
+      limit: 5
       sort: { fields: [fields___date], order: DESC }
       filter: { frontmatter: { template: { eq: "post" } } }
     ) {
@@ -31,14 +31,12 @@ export const pageQuery = graphql`
           fields {
             slug
             date
-            readingTime {
-              text
-            }
           }
           excerpt
           timeToRead
           frontmatter {
             title
+            subtitle
             tags
             categories
             thumbnail {
@@ -55,7 +53,7 @@ export const pageQuery = graphql`
       }
     }
     popular: allMarkdownRemark(
-      limit: 7
+      limit: 5
       sort: { fields: [fields___date], order: DESC }
       filter: { frontmatter: { categories: { eq: "Popular" } } }
     ) {
@@ -64,14 +62,12 @@ export const pageQuery = graphql`
           fields {
             slug
             date
-            readingTime {
-              text
-            }
           }
           excerpt
           timeToRead
           frontmatter {
             title
+            subtitle
             tags
             categories
             thumbnail {

@@ -13,6 +13,7 @@ const PostList = props => {
         tags: postEdge.node.frontmatter.tags,
         thumbnail: postEdge.node.frontmatter.thumbnail,
         title: postEdge.node.frontmatter.title,
+        subtitle: postEdge.node.frontmatter.subtitle,
         date: postEdge.node.fields.date,
         excerpt: postEdge.node.excerpt,
         timeToRead: postEdge.node.timeToRead,
@@ -36,6 +37,7 @@ const PostList = props => {
               )}
               <div>
                 <h2>{post.title}</h2>
+                <p>{post.subtitle}</p>
                 {!simple ? <div className="excerpt">{post.date}</div> : null}
               </div>
             </div>
