@@ -140,7 +140,7 @@ const HomePage = props => {
                   <FontAwesomeIcon className="sb_2" icon={faGithub} />
                 </a>
                 <a
-                  href="https://linkedin.com/in//skarif2"
+                  href="https://linkedin.com/in/skarif2"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
