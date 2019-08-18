@@ -17,7 +17,7 @@
     .project-details {
       align-self: center;
       border-bottom: none;
-      width: 65%;
+      width: 75%;
       margin-right: .5rem;
 
       .project-title {
@@ -57,8 +57,14 @@
         }
       }
     }
+
+    &:last-of-type {
+      border-bottom-color: transparent;
+    }
   }
 }
+
+
 
 @include breakpoint(sm) {
   .projectlist {

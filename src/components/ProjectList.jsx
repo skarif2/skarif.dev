@@ -27,7 +27,7 @@ const ProjectList = props => {
             <GitHubButton
               href={project.source}
               data-size="large"
-              data-show-count="true"
+              data-show-count="false"
             >
               Source
             </GitHubButton>

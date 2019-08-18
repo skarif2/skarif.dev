@@ -1,3 +1,4 @@
+import _ from "lodash"
 import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
@@ -93,8 +94,8 @@ const HomePage = props => {
   const { data } = props
   const latestPostEdges = data.latest.edges
   const popularPostEdges = data.popular.edges
-
-  // console.log(data.latest.edges[0].node.fields.readingTime.text)
+  const allEdges = [...latestPostEdges, ...popularPostEdges]
+  const featuredEdges = _.uniqBy(allEdges, "node.fields.slug")
 
   return (
     <Layout>
@@ -161,13 +162,8 @@ const HomePage = props => {
 
         <div className="content-section">
           <section className="section">
-            <h2>Latest Articles</h2>
-            <PostList simple postEdges={latestPostEdges} />
-          </section>
-
-          <section className="section">
-            <h2>Featured Articles</h2>
-            <PostList simple postEdges={popularPostEdges} />
+            <h2>Featured Blogs</h2>
+            <PostList simple postEdges={featuredEdges} />
           </section>
 
           <section className="section">
