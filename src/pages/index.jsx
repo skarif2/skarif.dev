@@ -31,9 +31,11 @@ export const pageQuery = graphql`
           fields {
             slug
             date
+            readingTime {
+              text
+            }
           }
           excerpt
-          timeToRead
           frontmatter {
             title
             subtitle
@@ -62,9 +64,11 @@ export const pageQuery = graphql`
           fields {
             slug
             date
+            readingTime {
+              text
+            }
           }
           excerpt
-          timeToRead
           frontmatter {
             title
             subtitle

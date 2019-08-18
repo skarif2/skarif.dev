@@ -1,0 +1,164 @@
+.postlist {
+  a {
+    display: block;
+
+    .postlist-item {
+      display: grid;
+      align-items: center;
+      grid-template-columns: 60px 1fr 0;
+      padding: 1rem 0;
+      margin: 0;
+      border: 2px solid transparent;
+      border-bottom: 2px solid white;
+
+      .date {
+        margin: 0;
+        font-size: 0.9rem;
+        color: $font-secondary-light;
+        font-weight: 400;
+      }
+    }
+
+    &:last-of-type {
+      .postlist-item {
+        border-bottom-color: transparent;
+      }
+    }
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gatsby-image-wrapper {
+    margin-top: 0;
+    height: 40px !important;
+    width: 40px !important;
+  }
+
+  .excerpt {
+    display: none;
+  }
+
+  &.simple {
+    a {
+      .postlist-item {
+        grid-template-columns: 50px 2fr auto;
+        align-items: center;
+        padding: 0.5rem 0;
+        margin: 0;
+        border: 2px solid transparent;
+
+        &:hover {
+          background: $background-light;
+        }
+      }
+    }
+
+    .gatsby-image-wrapper {
+      margin-top: 0;
+      height: 30px !important;
+      width: 30px !important;
+    }
+
+    h2 {
+      font-weight: 500;
+      padding: 0;
+      margin: 0;
+      color: $font-primary-light;
+
+      &:hover {
+        color: $font-tertiary-light;
+      }
+    }
+  }
+}
+
+@include breakpoint(sm) {
+  .postlist {
+    margin: 3rem 0;
+
+    a {
+      .postlist-item {
+        grid-template-columns: 80px 1fr 90px;
+        align-items: start;
+        padding: 1rem 2rem;
+        margin: 0 -2rem;
+
+        &:hover {
+          border-radius: 4px;
+          background: $background-light;
+
+          &last-of-type {
+            &:hover {
+              border-bottom-color: $accent-color-light;
+            }
+          }
+
+          h2 {
+            color: $font-tertiary-light;
+          }
+        }
+
+        &:active,
+        &:focus {
+          border: 2px dashed $accent-color-light;
+          background: $accent-color-light;
+        }
+
+        h2 {
+          font-size: 1.3rem;
+          line-height: 1.3;
+          margin: 0 0 0.25rem 0;
+        }
+
+        .gatsby-image-wrapper {
+          margin-top: 0;
+          height: 50px !important;
+          width: 50px !important;
+        }
+      }
+
+      .excerpt {
+        font-size: 1rem;
+        display: block;
+        color: $font-secondary-light;
+        font-weight: 500;
+      }
+    }
+
+    &.simple {
+      a {
+        .postlist-item {
+          padding: 0.5rem 1rem;
+          margin: 0 -1rem;
+
+          &:hover {
+            border: 2px solid $background-light;
+            background: $background-light;
+          }
+
+          &:active,
+          &:focus {
+            border: 2px dashed $accent-color-light;
+            background: $accent-color-light;
+          }
+
+          h2 {
+            margin: 0;
+          }
+
+          .gatsby-image-wrapper {
+            height: 35px !important;
+            width: 35px !important;
+          }
+        }
+      }
+    }
+  }
+}

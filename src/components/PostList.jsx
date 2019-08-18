@@ -5,6 +5,7 @@ import Img from "gatsby-image"
 
 const PostList = props => {
   const { simple, postEdges } = props
+  console.log(simple)
   const postList = postEdges
     .filter(postEdge => postEdge.node.frontmatter.template === "post")
     .map(postEdge => {
@@ -16,7 +17,7 @@ const PostList = props => {
         subtitle: postEdge.node.frontmatter.subtitle,
         date: postEdge.node.fields.date,
         excerpt: postEdge.node.excerpt,
-        timeToRead: postEdge.node.timeToRead,
+        timeToRead: postEdge.node.fields.readingTime.text,
         categories: postEdge.node.frontmatter.categories,
       }
     })
@@ -31,15 +32,27 @@ const PostList = props => {
           <Link to={post.path} key={post.title}>
             <div className="postlist-item">
               {thumbnail ? (
-                <Img fixed={post.thumbnail.childImageSharp.fixed} />
+                <Img
+                  className="post-thumbnail"
+                  fixed={post.thumbnail.childImageSharp.fixed}
+                />
               ) : (
                 <div />
               )}
               <div>
-                <h2>{post.title}</h2>
-                <p>{post.subtitle}</p>
-                {!simple ? <div className="excerpt">{post.date}</div> : null}
+                <h2 className="post-title">{post.title}</h2>
+                {!simple ? (
+                  <p className="post-subtitle">{post.subtitle}</p>
+                ) : null}
+                <div className="time-to-read">
+                  <p>
+                    {post.timeToRead}
+                    {" / "}
+                    {"5 comments"}
+                  </p>
+                </div>
               </div>
+              <p className="post-date">{post.date}</p>
             </div>
           </Link>
         )
