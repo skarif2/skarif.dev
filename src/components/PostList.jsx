@@ -1,3 +1,4 @@
+import moment from "moment"
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
@@ -5,7 +6,6 @@ import Img from "gatsby-image"
 
 const PostList = props => {
   const { simple, postEdges } = props
-  console.log(simple)
   const postList = postEdges
     .filter(postEdge => postEdge.node.frontmatter.template === "post")
     .map(postEdge => {
@@ -15,7 +15,7 @@ const PostList = props => {
         thumbnail: postEdge.node.frontmatter.thumbnail,
         title: postEdge.node.frontmatter.title,
         subtitle: postEdge.node.frontmatter.subtitle,
-        date: postEdge.node.fields.date,
+        date: moment(postEdge.node.fields.date).format("MMM D, YYYY"),
         excerpt: postEdge.node.excerpt,
         timeToRead: postEdge.node.fields.readingTime.text,
         categories: postEdge.node.frontmatter.categories,
@@ -44,15 +44,12 @@ const PostList = props => {
                 {!simple ? (
                   <p className="post-subtitle">{post.subtitle}</p>
                 ) : null}
-                <div className="time-to-read">
-                  <p>
-                    {post.timeToRead}
-                    {" / "}
-                    {"5 comments"}
-                  </p>
+                <div className="date">
+                  {post.date}
+                  {" • "}
+                  {post.timeToRead}
                 </div>
               </div>
-              <p className="post-date">{post.date}</p>
             </div>
           </Link>
         )

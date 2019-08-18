@@ -63,19 +63,19 @@
   .post,
   .page {
     a:not(.button):not(.anchor):not(.gatsby-resp-image-link) {
-      border-bottom: 2px solid lighten($accent, 30%);
+      // border-bottom: 2px solid lighten($accent, 30%);
 
       &:hover {
         color: darken($accent, 10%);
-        background: lighten($accent, 33%);
-        border-bottom: 2px solid darken($accent, 10%);
+        // background: lighten($accent, 33%);
+        // border-bottom: 2px solid darken($accent, 10%);
       }
 
       &:active,
       &:focus {
         color: darken($accent, 10%);
-        background: lighten($accent, 33%);
-        border-bottom: 2px dashed darken($accent, 10%);
+        // background: lighten($accent, 33%);
+        // border-bottom: 2px dashed darken($accent, 10%);
       }
     }
   }
