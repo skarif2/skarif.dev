@@ -6,7 +6,12 @@ module.exports = {
     title: config.siteTitle,
     author: config.siteAuthor
   },
-  plugins: [
+  plugins: [{
+      resolve: 'gatsby-plugin-html-attributes',
+      options: {
+        lang: 'en'
+      }
+    },
     `gatsby-plugin-sass`,
     'gatsby-plugin-react-helmet',
     {
@@ -76,7 +81,7 @@ module.exports = {
         description: config.siteDescription,
         start_url: config.pathPrefix,
         display: 'minimal-ui',
-        icon: `static/favicon.png`,
+        icon: `static/favicon.webp`,
       },
     }
   ]

@@ -32,7 +32,7 @@ const Navigation = props => {
             <img
               alt={config.siteTitle}
               className="icon"
-              src="../../favicon.png"
+              src="../../favicon.webp"
             />
             <span className="title">Sk Arif</span>
           </Link>

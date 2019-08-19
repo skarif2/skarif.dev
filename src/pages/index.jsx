@@ -117,59 +117,50 @@ const HomePage = props => {
             </p>
 
             <div className="social-buttons">
-              {/* <div className="sb_1"> */}
               <a
                 href="https://www.facebook.com/skarif2"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="facebook"
               >
-                <FontAwesomeIcon
-                  className="social-button fa-lg"
-                  icon={faFacebookF}
-                />
+                <FontAwesomeIcon className="social-button" icon={faFacebookF} />
               </a>
               <a
                 href="https://twitter.com/sk_arif2"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="twitter"
               >
-                <FontAwesomeIcon
-                  className="social-button fa-lg"
-                  icon={faTwitter}
-                />
+                <FontAwesomeIcon className="social-button" icon={faTwitter} />
               </a>
               <a
                 href="https://github.com/skarif2"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="github"
               >
-                <FontAwesomeIcon
-                  className="social-button fa-lg"
-                  icon={faGithub}
-                />
+                <FontAwesomeIcon className="social-button" icon={faGithub} />
               </a>
               <a
                 href="https://linkedin.com/in/skarif2"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="linkedin"
               >
-                <FontAwesomeIcon
-                  className="social-button fa-lg"
-                  icon={faLinkedin}
-                />
+                <FontAwesomeIcon className="social-button" icon={faLinkedin} />
               </a>
               <a
                 href="https://stackoverflow.com/users/5786171/sk-arif"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="stackoverflow"
               >
                 <FontAwesomeIcon
-                  className="social-button fa-lg"
+                  className="social-button"
                   icon={faStackOverflow}
                 />
               </a>
             </div>
-            {/* </div> */}
           </div>
         </header>
 

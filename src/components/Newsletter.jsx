@@ -13,10 +13,10 @@ const Newslatter = () => {
         </div>
         <form className="column last">
           <div className="field">
-            <input className="input" placeholder="Name" />
+            <input className="input" placeholder="Name" aria-label="name" />
           </div>
           <div className="field">
-            <input className="input" placeholder="Email" />
+            <input className="input" placeholder="Email" aria-label="email" />
           </div>
           <button className="button" type="submit">
             Subscribe
