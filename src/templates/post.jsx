@@ -6,6 +6,7 @@ import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
 import Layout from "../layout"
+import Newsletter from "../components/Newsletter"
 import config from "../../data/SiteConfig"
 
 export const pageQuery = graphql`
@@ -52,37 +53,47 @@ const PostTemplate = props => {
       <Helmet>
         <title>{`${post.frontmatter.title} – ${config.siteTitle}`}</title>
       </Helmet>
-      <article className="container">
-        <header className={`single-header ${!thumbnail ? "no-thumbnail" : ""}`}>
-          {thumbnail ? (
-            <Img fixed={post.frontmatter.thumbnail.childImageSharp.fixed} />
-          ) : null}
-          <div className="flex">
-            <h1>{post.frontmatter.title}</h1>
-            <div className="post-meta">
-              <time className="date">{date}</time>/
-              <a className="twitter-link" href="/">
-                Share
-              </a>
-              /{"2 comments"}
-              <a
-                className="github-link"
-                href="/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Edit on Github{" "}
-                <span role="img" aria-label="edit on github">
-                  ✏️
-                </span>
-              </a>
+      <div className="container">
+        <article>
+          <header
+            className={`single-header ${!thumbnail ? "no-thumbnail" : ""}`}
+          >
+            {thumbnail ? (
+              <Img fixed={post.frontmatter.thumbnail.childImageSharp.fixed} />
+            ) : null}
+            <div className="flex">
+              <h1>{post.frontmatter.title}</h1>
+              <div className="post-meta">
+                <time className="date">{date}</time>/
+                <a className="twitter-link" href="/">
+                  Share
+                </a>
+                /{"2 comments"}
+                <a
+                  className="github-link"
+                  href="/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Edit on Github{" "}
+                  <span role="img" aria-label="edit on github">
+                    ✏️
+                  </span>
+                </a>
+              </div>
+              {/* <PostTags tags={post.tags} /> */}
             </div>
-            {/* <PostTags tags={post.tags} /> */}
-          </div>
-        </header>
+          </header>
 
-        <div className="post" dangerouslySetInnerHTML={{ __html: post.html }} />
-      </article>
+          <div
+            className="post"
+            dangerouslySetInnerHTML={{ __html: post.html }}
+          />
+        </article>
+        <div className="post-newsletter">
+          <Newsletter />
+        </div>
+      </div>
     </Layout>
   )
 }
