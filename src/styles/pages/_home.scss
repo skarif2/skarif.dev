@@ -36,23 +36,16 @@
     }
 
     .social-buttons {
-      display: flex;
-      justify-content: center;
-      // align-items: center;
-      margin-bottom: 10px;
+      .social-button {
+        margin: 0 10px;
+        font-size: 1.4rem;
+        color: $font-secondary-light;
+        cursor: pointer;
 
-      .sb_1 {
-        .sb_2 {
-          margin: 0 10px;
-          font-size: 1.4rem;
-          color: $font-secondary-light;
-          cursor: pointer;
-
-          &:hover {
-            color: $font-primary-light;
-            transition: all 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
-            transform: scale(1.2);
-          }
+        &:hover {
+          color: $font-primary-light;
+          transition: all 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+          transform: scale(1.2);
         }
       }
     }
@@ -94,11 +87,9 @@
       .social-buttons {
         margin-bottom: 15px;
 
-        .sb_1 {
-          .sb_2 {
-            margin: 0 20px;
-            font-size: 1.7rem;
-          }
+        .social-button {
+          margin: 0 20px;
+          font-size: 1.7rem;
         }
       }
     }
@@ -126,13 +117,11 @@
       }
 
       .social-buttons {
-        .sb_1 {
-          .sb_2 {
-            color: $font-secondary-dark;
+        .social-button {
+          color: $font-secondary-dark;
 
-            &:hover {
-              color: $font-primary-dark;
-            }
+          &:hover {
+            color: $font-primary-dark;
           }
         }
       }
