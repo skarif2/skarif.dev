@@ -46,7 +46,10 @@ const PageTemplate = props => {
           <header>
             <h1>{page.title}</h1>
           </header>
-          <div dangerouslySetInnerHTML={{ __html: postNode.html }} />
+          <div
+            className="page"
+            dangerouslySetInnerHTML={{ __html: postNode.html }}
+          />
         </article>
       </div>
     </Layout>

@@ -1,0 +1,80 @@
+.single {
+  .gatsby-image-wrapper {
+    height: 50px !important;
+    width: 50px !important;
+  }
+}
+
+@include breakpoint(sm) {
+  .single {
+    .gatsby-image-wrapper {
+      height: 150px !important;
+      width: 150px !important;
+    }
+  }
+}
+
+.single-header {
+  display: grid;
+  margin-bottom: 30px;
+
+  &.no-thumbnail {
+    display: flex;
+  }
+
+  .flex {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1 {
+    margin: 0.5rem 0;
+    font-weight: 600;
+  }
+
+  .post-meta {
+    margin-bottom: 1rem;
+  }
+}
+
+@include breakpoint(sm) {
+  .single-header {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    margin-bottom: 80px;
+
+    h1 {
+      margin: 0 0 0.5rem 0;
+    }
+  }
+}
+
+.post-meta {
+  font-size: 0.8rem;
+  color: $font-primary-light;
+  display: inline-block;
+
+  .date {
+    margin-right: 0.5rem;
+  }
+
+  a {
+    color: $font-primary-light;
+
+    &.comment-link,
+    &.twitter-link,
+    &.github-link {
+      margin: 0 0.5rem;
+    }
+
+    &:hover {
+      color: $accent-color-light;
+    }
+  }
+}
+
+@include breakpoint(sm) {
+  .post-meta {
+    font-size: 0.9rem;
+  }
+}
