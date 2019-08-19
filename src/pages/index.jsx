@@ -123,28 +123,40 @@ const HomePage = props => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FontAwesomeIcon className="social-button" icon={faFacebookF} />
+                <FontAwesomeIcon
+                  className="social-button fa-lg"
+                  icon={faFacebookF}
+                />
               </a>
               <a
                 href="https://twitter.com/sk_arif2"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FontAwesomeIcon className="social-button" icon={faTwitter} />
+                <FontAwesomeIcon
+                  className="social-button fa-lg"
+                  icon={faTwitter}
+                />
               </a>
               <a
                 href="https://github.com/skarif2"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FontAwesomeIcon className="social-button" icon={faGithub} />
+                <FontAwesomeIcon
+                  className="social-button fa-lg"
+                  icon={faGithub}
+                />
               </a>
               <a
                 href="https://linkedin.com/in/skarif2"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FontAwesomeIcon className="social-button" icon={faLinkedin} />
+                <FontAwesomeIcon
+                  className="social-button fa-lg"
+                  icon={faLinkedin}
+                />
               </a>
               <a
                 href="https://stackoverflow.com/users/5786171/sk-arif"
@@ -152,7 +164,7 @@ const HomePage = props => {
                 rel="noopener noreferrer"
               >
                 <FontAwesomeIcon
-                  className="social-button"
+                  className="social-button fa-lg"
                   icon={faStackOverflow}
                 />
               </a>
