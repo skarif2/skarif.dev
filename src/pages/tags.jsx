@@ -26,14 +26,16 @@ const TagsPage = props => {
       <Helmet title={`Tags | ${config.siteTitle}`} />
       <div className="container">
         <h1>Tags</h1>
-        {group.map(tag => (
-          <Link key={tag.fieldValue} to={`/tags/${tag.fieldValue}`}>
-            <span key={tag.fieldValue}>
-              {tag.fieldValue}
-              <strong>{tag.totalCount}</strong>
-            </span>
-          </Link>
-        ))}
+        <div className="tags">
+          {group.map(tag => (
+            <Link key={tag.fieldValue} to={`/tags/${tag.fieldValue}`}>
+              <span key={tag.fieldValue}>
+                {tag.fieldValue}
+                <strong className="count">{tag.totalCount}</strong>
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
     </Layout>
   )

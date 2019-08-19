@@ -1,0 +1,77 @@
+.tags {
+  span {
+    display: inline-block;
+    padding: 0.3rem 0.5rem;
+    background: darken($background-light, 5%);
+    border-radius: 4px;
+    color: $font-secondary-light;
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin: 0 0.5rem 0.5rem 0;
+
+    .count {
+      color: $secondary-accent-color-light;
+      font-weight: 700;
+      margin-left: 0.25rem;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: darken($background-light, 10%);
+      color: $font-primary-light;
+    }
+  }
+
+  &.articles-page-tags {
+    margin-bottom: 1rem;
+  }
+}
+
+@include breakpoint(sm) {
+  .tags {
+    span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.3rem 0.8rem;
+
+      .count {
+        margin-left: 0.5rem;
+      }
+    }
+
+    &.articles-page-tags {
+      margin-bottom: 2rem;
+      display: flex;
+
+      a {
+        flex: 1;
+
+        span {
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
+.dark {
+  .tags {
+    span {
+      background: lighten($background-dark, 10%);
+      color: $font-secondary-dark;
+
+      .count {
+        color: $secondary-accent-color-dark;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        background: lighten($background-dark, 15%);
+        color: $font-primary-dark;
+      }
+    }
+  }
+}

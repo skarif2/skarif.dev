@@ -25,18 +25,20 @@ const CategoriesPage = props => {
     <Layout>
       <Helmet title={`Categories | ${config.siteTitle}`} />
       <div className="container">
-        <h1>Tags</h1>
-        {group.map(category => (
-          <Link
-            to={`/categories/${_.kebabCase(category.fieldValue)}`}
-            key={category.fieldValue}
-          >
-            <span key={category.fieldValue}>
-              {category.fieldValue}
-              <strong className="count">{category.totalCount}</strong>
-            </span>
-          </Link>
-        ))}
+        <h1>Categories</h1>
+        <div className="categories">
+          {group.map(category => (
+            <Link
+              to={`/categories/${_.kebabCase(category.fieldValue)}`}
+              key={category.fieldValue}
+            >
+              <span key={category.fieldValue}>
+                {category.fieldValue}
+                <strong className="count">{category.totalCount}</strong>
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
     </Layout>
   )
