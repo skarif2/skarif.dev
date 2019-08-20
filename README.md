@@ -1,6 +1,6 @@
 <h1>🏡 skarif.io</h1>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4f9de10c-29ef-4385-a01e-c79ff656a48d/deploy-status)](https://app.netlify.com/sites/objective-panini-9ca902/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4f9de10c-29ef-4385-a01e-c79ff656a48d/deploy-status)](https://app.netlify.com/sites/skarif/deploys)
 [![Maintainability](https://api.codeclimate.com/v1/badges/110692df01b26b6e8596/maintainability)](https://codeclimate.com/github/skarif2/sight-gatsby/maintainability)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -36,6 +36,7 @@ $  npm install
 # Run server in develop mode
 $  npm run develop
 ```
+
 Now visit `localhost:8000`.
 
 ## License
@@ -43,4 +44,5 @@ Now visit `localhost:8000`.
 This project available under the [MIT license](https://github.com/skarif2/node-rest-starter/blob/master/LICENSE).
 
 ---
+
 <h3 align="center">Made with&nbsp; 💖 &nbsp;by <a href="https://skarif.io" style="text-decoration: none; color: #ef5350">Sk Arif.<a></h3>
