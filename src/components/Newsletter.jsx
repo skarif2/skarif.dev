@@ -1,4 +1,5 @@
 import React from "react"
+import { FacebookProvider, Share } from 'react-facebook';
 
 const Newslatter = () => {
   return (
@@ -33,7 +34,13 @@ const Newslatter = () => {
           <h2>Sk Arif</h2>
           <p>Node.js Dev, Loves Elixir, FP & Open Source</p>
         </div>
-        <button type="button">Share</button>
+        <FacebookProvider appId="123456789">
+          <Share href="http://www.facebook.com">
+            {({ handleClick, loading }) => (
+              <button type="button" disabled="loading" onClick={handleClick}>Share</button>
+            )}
+          </Share>
+        </FacebookProvider>
       </div>
     </div>
   )
