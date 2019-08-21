@@ -1,7 +1,9 @@
 import React from "react"
-import { FacebookProvider, Share } from 'react-facebook';
+import { FacebookProvider, ShareButton } from 'react-facebook';
 
 const Newslatter = () => {
+  const appId = process.env.FB_APP_ID
+  console.log(appId)
   return (
     <div className="newsletter">
       <div className="top-section">
@@ -34,12 +36,10 @@ const Newslatter = () => {
           <h2>Sk Arif</h2>
           <p>Node.js Dev, Loves Elixir, FP & Open Source</p>
         </div>
-        <FacebookProvider appId="123456789">
-          <Share href="http://www.facebook.com">
-            {({ handleClick, loading }) => (
-              <button type="button" disabled="loading" onClick={handleClick}>Share</button>
-            )}
-          </Share>
+        <FacebookProvider appId="701450546994086">
+          <ShareButton href="http://skarif.dev">
+            Share
+          </ShareButton>
         </FacebookProvider>
       </div>
     </div>
