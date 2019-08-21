@@ -1,5 +1,5 @@
 import React from "react"
-import { FacebookProvider, ShareButton } from 'react-facebook';
+import { FacebookProvider, ShareButton } from "react-facebook"
 
 const Newslatter = () => {
   const appId = process.env.FB_APP_ID
@@ -37,9 +37,7 @@ const Newslatter = () => {
           <p>Node.js Dev, Loves Elixir, FP & Open Source</p>
         </div>
         <FacebookProvider appId="701450546994086">
-          <ShareButton href="http://skarif.dev">
-            Share
-          </ShareButton>
+          <ShareButton data-href="https://skarif.dev/">Share</ShareButton>
         </FacebookProvider>
       </div>
     </div>
