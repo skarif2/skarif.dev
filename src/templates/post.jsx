@@ -16,6 +16,7 @@ export const pageQuery = graphql`
       excerpt
       frontmatter {
         title
+        subtitle
         thumbnail {
           childImageSharp {
             fixed(width: 150, height: 150) {
@@ -55,34 +56,18 @@ const PostTemplate = props => {
       </Helmet>
       <div className="container">
         <article>
-          <header
-            className={`single-header ${!thumbnail ? "no-thumbnail" : ""}`}
-          >
-            {thumbnail ? (
-              <Img fixed={post.frontmatter.thumbnail.childImageSharp.fixed} />
-            ) : null}
-            <div className="flex">
+          <header className={`post-header ${!thumbnail ? "no-thumbnail" : ""}`}>
+            {thumbnail ? <Img fixed={thumbnail} /> : null}
+            <div className="titles">
               <h1>{post.frontmatter.title}</h1>
-              <div className="post-meta">
-                <time className="date">{date}</time>/
-                <a className="twitter-link" href="/">
-                  Share
-                </a>
-                /{"2 comments"}
-                <a
-                  className="github-link"
-                  href="/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Edit on Github{" "}
-                  <span role="img" aria-label="edit on github">
-                    ✏️
-                  </span>
-                </a>
+              <p>{post.frontmatter.subtitle}</p>
+              <div className="date">
+                <time>{date}</time>
+                {" • "}
+                <span>{post.fields.readingTime.text}</span>
               </div>
-              {/* <PostTags tags={post.tags} /> */}
             </div>
+            {/* <PostTags tags={post.tags} /> */}
           </header>
 
           <div
