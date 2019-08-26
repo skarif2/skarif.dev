@@ -28,6 +28,36 @@
     display: inline-block;
     margin-right: 0.5rem;
   }
+
+  .tag-list {
+    span {
+      display: inline-block;
+      padding: 0.3rem 0.5rem;
+      background: darken($background-light, 5%);
+      border-radius: 4px;
+      color: $font-secondary-light;
+      font-size: 0.8rem;
+      font-weight: 400;
+      margin: 0 0.5rem 0.5rem 0;
+
+      .count {
+        color: $font-secondary-light;
+        font-weight: 700;
+        margin-left: 0.25rem;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        background: darken($background-light, 5%);
+        color: $font-primary-light;
+      }
+    }
+
+    &.articles-page-tags {
+      margin-bottom: 1rem;
+    }
+  }
 }
 
 @include breakpoint(sm) {
@@ -38,6 +68,45 @@
 
     h1 {
       margin: 0 0 0.5rem 0;
+    }
+
+    .tag-list {
+      span {
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 0.3rem 0.8rem;
+
+        .count {
+          margin-left: 0.5rem;
+        }
+      }
+
+      &.articles-page-tags {
+        margin-bottom: 2rem;
+        display: flex;
+
+        a {
+          flex: 1;
+
+          span {
+            display: flex;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dark {
+  .post-header {
+    p {
+      color: $font-secondary-dark;
+    }
+
+    .date {
+      font-size: 1rem;
+      color: $font-tertiary-dark;
     }
   }
 }

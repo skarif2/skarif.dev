@@ -1,8 +1,9 @@
+import _ from "lodash"
 import moment from "moment"
 import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 
 import Layout from "../layout"
@@ -67,7 +68,14 @@ const PostTemplate = props => {
                 <span>{post.fields.readingTime.text}</span>
               </div>
             </div>
-            {/* <PostTags tags={post.tags} /> */}
+            {/* <Tags tags={post.frontmatter.tags} /> */}
+            <div className="tag-list">
+              {post.frontmatter.tags.map(tag => (
+                <Link key={tag} to={`/tags/${_.kebabCase(tag)}`}>
+                  <span>{tag}</span>
+                </Link>
+              ))}
+            </div>
           </header>
 
           <div
