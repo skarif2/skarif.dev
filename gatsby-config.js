@@ -42,6 +42,7 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
+          'gatsby-remark-prismjs',
           `gatsby-remark-reading-time`,
           {
             resolve: 'gatsby-remark-images',
@@ -49,7 +50,6 @@ module.exports = {
               maxWidth: 850,
             },
           },
-          'gatsby-remark-prismjs',
           'gatsby-remark-copy-linked-files',
           {
             resolve: `gatsby-remark-autolink-headers`,

@@ -2,8 +2,6 @@ import React from "react"
 import { FacebookProvider, ShareButton } from "react-facebook"
 
 const Newslatter = () => {
-  const appId = process.env.FB_APP_ID
-  console.log(appId)
   return (
     <div className="newsletter">
       <div className="top-section">
