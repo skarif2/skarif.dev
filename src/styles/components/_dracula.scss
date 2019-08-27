@@ -1,37 +1,37 @@
-/* Code
-  =============== */
+$CODE_FONT: Menlo,
+'Roboto Mono',
+Courier New,
+monospace;
 
+$CODE_BG: #282A36;
+$CODE_FG: #F8F8F2;
+$CODE_SELECTIONLight: Lighten(#B3E5FC, 50%);
+$CODE_SELECTIONDark: #44475A;
 
+$CODE_COMMENT : #6272A4;
+$CODE_ORANGE : #FFB86C;
+$CODE_LineHighlight: #44475A75;
+$CODE_BGLighter : #424450;
+$CODE_BGLight : #343746;
+$CODE_BGDark : #21222C;
+$CODE_BGDarker : #191A21;
 
-/* Code */
-$code-font-family: Menlo, 'Roboto Mono', Courier New, monospace;
-
-$code-background: #282a36;
-$code-selection: #44475a;
-$code-foreground: #f8f8f2;
-$code-comment: #6272a4;
-$code-cyan: #8be9fd;
-$code-green: #50fa7b;
-$code-orange: #ffb86c;
-$code-pink: #ff79c6;
-$code-purple: #bd93f9;
-$code-red: #ff5555;
-$code-yellow: #f1fa8c;
-
-$string: $code-green;
-$variable: #f2777a;
-$property: $code-foreground;
-$number: $code-orange;
-$operator: darken($code-orange, 10%);
-$punctuation: #d5d8df;
-$comment: $code-comment;
-$function: $code-cyan;
-$keyword: $code-yellow;
-$attribute: darken($code-yellow, 10%);
-$class: $code-purple;
-$tag: #6ab0f3;
-$error: $code-red;
-
+$CODE_BLACK : #4D4D4D;
+$CODE_RED : #FF5555;
+$CODE_GREEN : #50FA7B;
+$CODE_YELLOW : #F1FA8C;
+$CODE_PURPLE : #BD93F9;
+$CODE_PINK : #FF79C6;
+$CODE_CYAN : #8BE9FD;
+$CODE_COLOR7 : #BFBFBF;
+$CODE_COLOR8 : #575757;
+$CODE_COLOR9 : #FF6E67;
+$CODE_COLOR10: #5AF78E;
+$CODE_COLOR11: #F4F99D;
+$CODE_COLOR12: #CAA9FA;
+$CODE_COLOR13: #FF92D0;
+$CODE_COLOR14: #9AEDFE;
+$CODE_COLOR15: #F8F8F2;
 
 code {
   font-size: 13px;
@@ -40,15 +40,16 @@ code {
 pre.language-terminal code.language-terminal {
   position: relative;
   padding: 1rem;
-  font-family: $code-font-family;
-  border: 1px solid #d8d9da;
-  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.16);
-  border-radius: 6px;
+  font-family: $CODE_FONT;
+  border: 1px solid $CODE_BG;
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
   padding-top: 45px;
   margin: 2rem 0;
   font-size: 13px;
-  background: white;
-  color: #333;
+  background: $CODE_BGLight;
+  transition: all 0.6s ease;
+  color: $CODE_FG;
 
   &::before {
     content: '\2022 \2022 \2022';
@@ -56,8 +57,9 @@ pre.language-terminal code.language-terminal {
     top: 0;
     left: 0;
     height: 25px;
-    background: #e1e1e1;
-    color: #c2c3c4;
+    background: $CODE_BGDark;
+    transition: all 0.6s ease;
+    color: $CODE_COLOR10;
     width: 100%;
     font-size: 2.5rem;
     margin: 0;
@@ -68,12 +70,14 @@ pre.language-terminal code.language-terminal {
   }
 }
 
+/* Code blocks */
+
 code[class*='language-'],
 pre[class*='language-'],
 pre code {
-  font-family: $code-font-family;
+  font-family: $CODE_FONT;
   font-size: 13px;
-  color: $code-foreground;
+  color: $CODE_FG;
   direction: ltr;
   text-align: left;
   white-space: pre-wrap;
@@ -88,89 +92,66 @@ pre code {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Code blocks */
-
 pre code {
   display: block;
   padding: 1.5rem;
   overflow: auto;
-  background-color: #333;
+  background-color: $CODE_BGLight;
+  transition: all 0.6s ease;
   border: 0;
-  box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.3);
 }
 
-// Keyboard input
-kbd {
-  background-color: #f7f7f7;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
-  color: #333;
-  display: inline-block;
-  font-family: Helvetica, Arial, sans-serif;
-  line-height: 1.4;
-  margin: 0 0.1em;
-  padding: 0.1em 0.6em;
-  text-shadow: 0 1px 0 white;
-  font-size: 14px;
-}
 
 /* Inline code */
 
-:not(pre) > code[class*='language-'] {
+:not(pre)>code[class*='language-'] {
   padding: 3px 5px;
-  color: #111111;
+  color: $CODE_BGLight;
 }
 
-:not(pre) > code {
+:not(pre)>code {
   padding: 3px 5px;
   border: none;
-  font-family: $code-font-family;
+  font-family: $CODE_FONT;
   font-weight: 400;
-  color: #111111;
+  color: $CODE_BGLight;
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.06);
+  transition: all 0.6s ease;
 }
 
 code[class*='language-css'],
 code[class*='language-scss'],
 code[class*='language-less'],
 code[class*='language-sass'] {
-  color: #cc99cc;
+  color: $CODE_PINK;
 }
 
 .filename {
-  background: #111;
+  background: $CODE_BGLight;
+  transition: all 0.6s ease;
   padding: 0.5rem 1rem 0.75rem;
   font-size: 1rem;
-  color: white;
+  color: $CODE_FG;
   font-weight: bold;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   margin-bottom: -2.2rem;
 }
 
-@include breakpoint(sm) {
-  code,
-  pre.language-terminal code.language-terminal,
-  code[class*='language-'],
-  pre[class*='language-'],
-  pre code {
-    font-size: 14px;
-  }
-}
-
 /* Syntax Highlighting */
 
 .token.doctype {
-  background: #000000;
-  color: #fff;
+  background: $CODE_BGLight;
+  transition: all 0.6s ease;
+  color: $CODE_FG;
 }
 
 .token.comment,
 .token.prolog,
 .token.cdata {
-  color: $comment;
+  color: $CODE_COMMENT;
 }
 
 .token.namespace {
@@ -179,23 +160,23 @@ code[class*='language-sass'] {
 
 .token.string,
 .token.attr-value {
-  color: $string;
+  color: $CODE_YELLOW;
 }
 
 .token.punctuation {
-  color: $punctuation;
+  color: $CODE_FG;
 }
 
 .token.operator {
-  color: $operator;
+  color: $CODE_COLOR11;
 }
 
 .token.variable {
-  color: $variable;
+  color: $CODE_CYAN;
 }
 
 .token.property {
-  color: $property;
+  color: $CODE_PURPLE;
 }
 
 .token.entity,
@@ -206,58 +187,60 @@ code[class*='language-sass'] {
 .token.constant,
 .token.regex,
 .token.inserted {
-  color: $number;
+  color: $CODE_ORANGE;
 }
 
 .token.delimiter {
-  background: black;
-  color: white;
+  background: $CODE_BGDarker;
+  transition: all 0.6s ease;
+  color: $CODE_FG;
   padding: 1px 2px;
 }
 
 .token.atrule {
-  color: $function;
+  color: $CODE_PINK;
 }
 
 .token.keyword {
-  color: $keyword;
+  color: $CODE_PINK;
 }
 
 .language-autohotkey .token.selector {
-  color: $number;
+  color: $CODE_ORANGE;
 }
 
 .token.attr-name {
-  color: $attribute;
+  color: $CODE_GREEN;
 }
 
 .token.function {
-  color: $function;
+  font-weight: bold;
+  color: $CODE_GREEN;
 }
 
 .language-php .token.function {
-  color: white;
+  color: $CODE_FG;
 }
 
 .token.class-name {
-  color: $class;
+  color: $CODE_CYAN;
 }
 
 .token.deleted,
 .language-autohotkey .token.tag {
-  color: $error;
+  color: $CODE_RED;
 }
 
 .token.tag {
-  color: $tag;
+  color: $CODE_PINK;
 }
 
 .language-autohotkey .token.keyword {
-  color: $keyword;
+  color: $CODE_PINK;
 }
 
 .token.selector {
-  color: $attribute;
+  color: $CODE_GREEN;
 }
 
 .token.italic {
@@ -276,7 +259,8 @@ pre[data-line] {
   padding: inherit 0;
   margin-top: 1rem;
   /* Same as .prism’s padding-top */
-  background: rgba(150, 150, 150, 0.1);
+  background: $CODE_LineHighlight;
+  transition: all 0.6s ease;
   pointer-events: none;
   line-height: inherit;
   white-space: pre;
@@ -291,6 +275,7 @@ pre[data-line] {
   min-width: 1em;
   padding: 0 0.5em;
   background-color: transparent;
+  transition: all 0.6s ease;
   color: transparent;
   font: bold 65%/1.5 sans-serif;
   text-align: center;
@@ -316,8 +301,10 @@ code::-moz-selection,
 code::-moz-selection {
   text-shadow: none;
   color: inherit;
-  background: rgba(150, 150, 150, 0.3) !important;
+  background: $CODE_SELECTIONLight !important;
+  transition: all 0.6s ease;
 }
+
 
 pre::selection,
 pre::selection,
@@ -325,7 +312,8 @@ code::selection,
 code::selection {
   text-shadow: none;
   color: inherit;
-  background: rgba(150, 150, 150, 0.3) !important;
+  background: $CODE_SELECTIONLight !important;
+  transition: all 0.6s ease;
 }
 
 pre[class*='language-']::-moz-selection,
@@ -334,7 +322,8 @@ code[class*='language-'] ::-moz-selection,
 code[class*='language-'] ::-moz-selection {
   text-shadow: none;
   color: inherit;
-  background: rgba(150, 150, 150, 0.3) !important;
+  background: $CODE_SELECTIONLight !important;
+  transition: all 0.6s ease;
 }
 
 pre[class*='language-']::selection,
@@ -343,22 +332,77 @@ code[class*='language-'] ::selection,
 code[class*='language-'] ::selection {
   text-shadow: none;
   color: inherit;
-  background: rgba(150, 150, 150, 0.3) !important;
+  background: $CODE_SELECTIONLight !important;
+  transition: all 0.6s ease;
 }
 
-.dark {
-  :not(pre) > code[class*='language-'] {
-    padding: 3px 5px;
-    color: #e7e7e7;
+@include breakpoint(sm) {
+
+  code,
+  pre.language-terminal code.language-terminal,
+  code[class*='language-'],
+  pre[class*='language-'],
+  pre code {
+    font-size: 14px;
   }
-  
-  :not(pre) > code {
+}
+
+
+.dark {
+  :not(pre)>code[class*='language-'] {
+    padding: 3px 5px;
+    color: $CODE_FG;
+  }
+
+  :not(pre)>code {
     padding: 3px 5px;
     border: none;
-    font-family: $code-font-family;
+    font-family: $CODE_FONT;
     font-weight: 400;
-    color: #e7e7e7;
+    color: $CODE_FG;
     border-radius: 4px;
     background: rgba(182, 182, 182, 0.1);
+    transition: all 0.6s ease;
+  }
+
+  pre::-moz-selection,
+  pre::-moz-selection,
+  code::-moz-selection,
+  code::-moz-selection {
+    text-shadow: none;
+    color: inherit;
+    background: $CODE_SELECTIONDark !important;
+    transition: all 0.6s ease;
+  }
+
+
+  pre::selection,
+  pre::selection,
+  code::selection,
+  code::selection {
+    text-shadow: none;
+    color: inherit;
+    background: $CODE_SELECTIONDark !important;
+    transition: all 0.6s ease;
+  }
+
+  pre[class*='language-']::-moz-selection,
+  pre[class*='language-']::-moz-selection,
+  code[class*='language-'] ::-moz-selection,
+  code[class*='language-'] ::-moz-selection {
+    text-shadow: none;
+    color: inherit;
+    background: $CODE_SELECTIONDark !important;
+    transition: all 0.6s ease;
+  }
+
+  pre[class*='language-']::selection,
+  pre[class*='language-']::selection,
+  code[class*='language-'] ::selection,
+  code[class*='language-'] ::selection {
+    text-shadow: none;
+    color: inherit;
+    background: $CODE_SELECTIONDark !important;
+    transition: all 0.6s ease;
   }
 }
