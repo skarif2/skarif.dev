@@ -1,14 +1,10 @@
 .post-header {
-  display: grid;
-  margin-bottom: 30px;
+  display: flex;
+  margin-bottom: 40px;
 
-  &.no-thumbnail {
-    display: flex;
-  }
-
-  .flex {
-    display: flex;
-    flex-direction: column;
+  .gatsby-image-wrapper {
+    height: 0px !important;
+    width: 0px !important;
   }
 
   h1 {
@@ -27,35 +23,10 @@
     color: $font-tertiary-light;
     display: inline-block;
     margin-right: 0.5rem;
-  }
-
-  .tag-list {
-    span {
-      display: inline-block;
-      padding: 0.3rem 0.5rem;
-      background: darken($background-light, 5%);
-      border-radius: 4px;
-      color: $font-secondary-light;
-      font-size: 0.8rem;
-      font-weight: 400;
-      margin: 0 0.5rem 0.5rem 0;
-
-      .count {
-        color: $font-secondary-light;
-        font-weight: 700;
-        margin-left: 0.25rem;
-      }
-
-      &:hover,
-      &:active,
-      &:focus {
-        background: darken($background-light, 5%);
-        color: $font-primary-light;
-      }
-    }
-
-    &.articles-page-tags {
-      margin-bottom: 1rem;
+    a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: $font-tertiary-light;
     }
   }
 }
@@ -64,36 +35,15 @@
   .post-header {
     display: grid;
     grid-template-columns: 180px 1fr;
-    margin-bottom: 80px;
+    margin-bottom: 70px;
+
+    .gatsby-image-wrapper {
+      height: 150px !important;
+      width: 150px !important;
+    }
 
     h1 {
       margin: 0 0 0.5rem 0;
-    }
-
-    .tag-list {
-      span {
-        font-size: 0.9rem;
-        font-weight: 500;
-        padding: 0.3rem 0.8rem;
-
-        .count {
-          margin-left: 0.5rem;
-        }
-      }
-
-      &.articles-page-tags {
-        margin-bottom: 2rem;
-        display: flex;
-
-        a {
-          flex: 1;
-
-          span {
-            display: flex;
-            justify-content: center;
-          }
-        }
-      }
     }
   }
 }

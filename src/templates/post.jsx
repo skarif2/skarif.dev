@@ -1,9 +1,8 @@
-import _ from "lodash"
 import moment from "moment"
 import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
 import Layout from "../layout"
@@ -58,7 +57,7 @@ const PostTemplate = props => {
       <div className="container">
         <article>
           <header className={`post-header ${!thumbnail ? "no-thumbnail" : ""}`}>
-            {thumbnail ? <Img fixed={thumbnail} /> : null}
+            {thumbnail ? <Img className="thumbnail" fixed={thumbnail} /> : null}
             <div className="titles">
               <h1>{post.frontmatter.title}</h1>
               <p>{post.frontmatter.subtitle}</p>
@@ -66,18 +65,24 @@ const PostTemplate = props => {
                 <time>{date}</time>
                 {" • "}
                 <span>{post.fields.readingTime.text}</span>
+                {" • "}
+                <a href="/">
+                  Edit{" "}
+                  <span role="img" aria-label="Edit">
+                    🖋️
+                  </span>
+                </a>
               </div>
-            </div>
-            {/* <Tags tags={post.frontmatter.tags} /> */}
-            <div className="tag-list">
-              {post.frontmatter.tags.map(tag => (
-                <Link key={tag} to={`/tags/${_.kebabCase(tag)}`}>
-                  <span>{tag}</span>
-                </Link>
-              ))}
             </div>
           </header>
 
+          {/* <div className="tag-list">
+            {post.frontmatter.tags.map(tag => (
+              <Link key={tag} to={`/tags/${_.kebabCase(tag)}`}>
+                <span>{tag}</span>
+              </Link>
+            ))}
+          </div> */}
           <div
             className="post"
             dangerouslySetInnerHTML={{ __html: post.html }}
