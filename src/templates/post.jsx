@@ -48,6 +48,9 @@ const PostTemplate = props => {
   const thumbnail = post.frontmatter.thumbnail
     ? post.frontmatter.thumbnail.childImageSharp.fixed
     : false
+  const githubLink = `https://github.com/skarif2/sight-gatsby/tree/master/content/posts/${moment(
+    post.frontmatter.date
+  ).format("YYYY-MM-DD")}/${post.frontmatter.slug}.md`
 
   return (
     <Layout>
@@ -66,7 +69,7 @@ const PostTemplate = props => {
                 {" • "}
                 <span>{post.fields.readingTime.text}</span>
                 {" • "}
-                <a href="/">
+                <a href={githubLink} target="_blank" rel="noopener noreferrer">
                   Edit{" "}
                   <span role="img" aria-label="Edit">
                     🖋️

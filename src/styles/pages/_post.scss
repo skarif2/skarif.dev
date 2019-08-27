@@ -23,6 +23,7 @@
     color: $font-tertiary-light;
     display: inline-block;
     margin-right: 0.5rem;
+
     a {
       font-size: 1rem;
       font-weight: 500;
@@ -55,8 +56,11 @@
     }
 
     .date {
-      font-size: 1rem;
       color: $font-tertiary-dark;
+
+      a {
+        color: $font-tertiary-dark;
+      }
     }
   }
 }
