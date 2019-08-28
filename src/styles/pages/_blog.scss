@@ -1,69 +1,123 @@
-.category-container {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
+.category-count {
+  display: grid;
+  grid-template-columns: 1fr 80px;
+  margin-top: 2rem;
 
-  .category-filter {
+  .category {
     display: flex;
-    align-items: center;
-    font-size: 0.85rem;
-    padding: 0.5rem 0.75rem;
-    background: lighten($accent-color-light, 32%);
-    border-radius: 4px;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: $accent-color-light;
-    cursor: pointer;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
 
-    .count {
-      display: flex;
+    .category-filter {
+      outline: 0;
       align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      margin-left: 1rem;
-      color: $accent-color-light;
-      height: 23px;
-      width: 23px;
-      border-radius: 50%;
-      padding: 5px 5px 5px 5px;
-    }
+      font-size: 0.85rem;
+      padding: 0.6rem 1rem;
+      background: lighten($secondary-accent-color-light, 30%);
+      transition: all 0.6s ease;
+      border: none;
+      border-radius: 4px;
+      margin: 0 0.5rem 0.5rem 0;
+      font-weight: 600;
+      color: $font-primary-light;
+      cursor: pointer;
 
-    &.active {
-      background: $accent-color-light;
-      color: white;
-
-      .count {
-        background: white;
+      &.active {
+        outline: 0;
+        background: lighten($secondary-accent-color-light, 5%);
+        transition: all 0.6s ease;
       }
 
-      &:hover,
-      &:active,
-      &:focus {
-        color: white;
-        background: darken($accent-color-light, 10%);
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      &:hover {
+        background: lighten($secondary-accent-color-light, 15%);
+        transition: all 0.6s ease;
       }
     }
+  }
 
-    &:last-of-type {
-      margin-right: 0;
-    }
+  .post-count {
+    text-align: end;
+    color: $secondary-accent-color-light;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+}
 
-    &:hover {
-      background: lighten($accent-color-light, 28%);
-      color: darken($accent-color-light, 5%);
-    }
+.search {
+  margin-bottom: 1rem;
+
+  .search-input {
+    display: block;
+    margin-bottom: 0;
+    width: 100%;
+    border: 2px solid darken($background-light, 15%);
+    transition: all 0.6s ease;
+    border-radius: 4px;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1;
+    padding: 0.55rem;
+    color: $font-tertiary-light;
+    background: $background-light;
+    transition: all 0.6s ease;
   }
 }
 
 @include breakpoint(sm) {
-  .category-container {
-    margin-bottom: 1.5rem;
+  .category-count {
+    .category {
+      margin-bottom: 1.5rem;
 
-    .category-filter {
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
+      .category-filter {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .search {
+    margin-bottom: 2rem;
+
+    .search-input {
+      font-size: 1.1rem;
+      padding: 0.75rem;
+    }
+  }
+}
+
+.dark {
+  .category-count {
+    .category {
+      .category-filter {
+        background: $secondary-accent-color-dark;
+        transition: all 0.6s ease;
+        color: $background-dark;
+
+        &.active {
+          background: lighten($secondary-accent-color-dark, 30%);
+          transition: all 0.6s ease;
+        }
+
+        &:hover {
+          background: lighten($secondary-accent-color-dark, 15%);
+          transition: all 0.6s ease;
+        }
+      }
+    }
+  }
+
+  .search {
+    .search-input {
+      border: 2px solid lighten($background-dark, 10%);
+      color: $font-tertiary-dark;
+      background: $background-dark;
+      transition: all 0.6s ease;
     }
   }
 }

@@ -96,35 +96,39 @@ const BlogPage = props => {
       <Helmet title={`Blogs | ${config.siteTitle}`} />
       <div className="container">
         <h1>Blogs</h1>
-        <div className="category-container">
-          {allCategories.map(category => {
-            const active = categories.includes(category.fieldValue)
+        <div className="category-count">
+          <div className="category">
+            {allCategories.map(category => {
+              const active = categories.includes(category.fieldValue)
 
-            return (
-              <button
-                className={`category-filter ${active ? "active" : ""}`}
-                key={category.fieldValue}
-                type="button"
-                onClick={async () => {
-                  updateCategories(category.fieldValue)
-                }}
-              >
-                {category.fieldValue}
-              </button>
-            )
-          })}
+              return (
+                <button
+                  className={`category-filter ${
+                    active ? "active" : "inactive"
+                  }`}
+                  key={category.fieldValue}
+                  type="button"
+                  onClick={async () => {
+                    updateCategories(category.fieldValue)
+                  }}
+                >
+                  {category.fieldValue}
+                </button>
+              )
+            })}
+          </div>
+          <div className="post-count">
+            {filterCount}/{totalCount}
+          </div>
         </div>
-        <div className="search-container">
+        <div className="search">
           <input
-            className="search"
+            className="search-input"
             type="text"
             value={searchKey}
             placeholder="Type here to filter posts..."
             onChange={handleChange}
           />
-          <div className="filter-count">
-            {filterCount} of {totalCount}
-          </div>
         </div>
         <PostList postEdges={posts} />
       </div>
