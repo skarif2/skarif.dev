@@ -25,10 +25,10 @@ Learn more about Gatsby at [gatsbyjs.org](https://www.gatsbyjs.org/)
 
 ```bash
 # Clone the repo
-$ git clone https://github.com/skarif2/sight-gatsby.git
+$ git clone https://github.com/skarif2/skarif.dev.git
 
 # Change directory to newly created one
-$ cd sight-gatsby
+$ cd skarif.dev
 
 # Install dependencies
 $  npm install
