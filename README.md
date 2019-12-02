@@ -1,4 +1,4 @@
-<h1>🏡 skarif.io</h1>
+<h1>🏡 skarif.dev</h1>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4f9de10c-29ef-4385-a01e-c79ff656a48d/deploy-status)](https://app.netlify.com/sites/skarif/deploys)
 [![Maintainability](https://api.codeclimate.com/v1/badges/110692df01b26b6e8596/maintainability)](https://codeclimate.com/github/skarif2/sight-gatsby/maintainability)
