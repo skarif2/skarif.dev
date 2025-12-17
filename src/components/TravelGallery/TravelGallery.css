@@ -1,0 +1,40 @@
+.travel-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.hero-link {
+  display: block;
+  cursor: zoom-in;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr .5fr 1fr;
+  gap: 0.5rem;
+  grid-auto-rows: 200px;
+}
+
+.grid-item {
+  cursor: zoom-in;
+}
+
+.grid-item img:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+  .grid-item {
+    /* Reset grid placement for mobile so they just stack or standard grid */
+    grid-column: auto !important;
+    grid-row: auto !important;
+    height: 250px; /* Enforce a height for visuals */
+  }
+}

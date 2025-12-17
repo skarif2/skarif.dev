@@ -4,7 +4,7 @@ import './_index.css';
 
 import { getCollection } from 'astro:content';
 import Button from '../components/ui/Button.astro';
-import BlogPostItem from '../components/BlogPostItem.astro';
+import BlogPostItem from '../components/BlogPostItem/BlogPostItem.astro';
 
 // Fetch recent blog posts
 const allPosts = await getCollection('blog');

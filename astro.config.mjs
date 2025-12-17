@@ -4,6 +4,7 @@ import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import expressiveCode from 'astro-expressive-code';
 import ecTwoSlash from "expressive-code-twoslash";
+import remarkEmoji from 'remark-emoji';
 
 import { remarkReadingTime } from './src/utils/remark-reading-time.mjs';
 
@@ -40,7 +41,7 @@ export default defineConfig({
     mdx()
   ],
   markdown: {
-    remarkPlugins: [remarkReadingTime],
+    remarkPlugins: [remarkReadingTime, remarkEmoji],
     syntaxHighlight: false,
   },
 });

@@ -1,0 +1,121 @@
+.post-item {
+  display: block;
+  padding-block: var(--space-4);
+  position: relative; /* Context for overlay link */
+  transition: background-color var(--transition-fast);
+}
+
+
+/* Compact variant spacing (Home page style) */
+.post-item.is-compact {
+  margin: 0 calc(-1 * var(--space-1));
+}
+
+/* .post-card-overlay removed */
+
+.post-content-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  transition: opacity var(--transition-fast);
+}
+
+/* Hover opacity removed - specific element interaction used instead */
+
+.post-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-base);
+  overflow: hidden;
+}
+
+.post-item.is-compact .post-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.post-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-heading);
+  margin: 0 0 var(--space-1) 0;
+  line-height: 1.3;
+}
+
+.post-item.is-compact .post-title {
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.4;
+}
+
+.post-title-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.post-title-link:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.post-description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-2) 0;
+  line-height: 1.5;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.meta-separator {
+  opacity: 0.5;
+}
+
+.post-tags {
+  margin-left: auto; /* Push to right */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-content: flex-start;
+  row-gap: var(--space-2);
+  column-gap: var(--space-1);
+  max-width: 250px;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 600px) {
+  .post-icon {
+    width: 50px;
+    height: 50px;
+  }
+  .post-tags {
+    display: none;
+  }
+}
+
+/* Search Highlight Style (Global because it's injected by script) */
+:global(.highlight) {
+  background-color: #fde047; /* Yellow */
+  color: #4f2e08; /* Darker yellow/brown text */
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-sm);
+}

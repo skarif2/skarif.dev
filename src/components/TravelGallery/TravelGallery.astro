@@ -1,15 +1,16 @@
 ---
 import 'photoswipe/style.css';
 import { getImage } from 'astro:assets';
+import './TravelGallery.css';
 
 // Import images directly
-import bergenNorway from '../content/pages/assets/bergen-norway.webp';
-import mountEverest from '../content/pages/assets/mount-everest.webp';
-import phewaLake from '../content/pages/assets/phewa-lake.webp';
-import louvreMuseum from '../content/pages/assets/louvre-museum.webp';
-import barcelonetaBeach from '../content/pages/assets/barceloneta-beach.webp';
-import eiffelTower from '../content/pages/assets/eiffel-tower.webp';
-import himalayas from '../content/pages/assets/himalayas.webp';
+import bergenNorway from '../../content/pages/assets/bergen-norway.webp';
+import mountEverest from '../../content/pages/assets/mount-everest.webp';
+import phewaLake from '../../content/pages/assets/phewa-lake.webp';
+import louvreMuseum from '../../content/pages/assets/louvre-museum.webp';
+import barcelonetaBeach from '../../content/pages/assets/barceloneta-beach.webp';
+import eiffelTower from '../../content/pages/assets/eiffel-tower.webp';
+import himalayas from '../../content/pages/assets/himalayas.webp';
 
 const travelPhotos = [
   {
@@ -202,46 +203,3 @@ const restPhotos = gridPhotos.slice(1);
 
   lightbox.init();
 </script>
-
-<style>
-  .travel-gallery {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .hero-link {
-    display: block;
-    cursor: zoom-in;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr .5fr 1fr;
-    gap: 0.5rem;
-    grid-auto-rows: 200px;
-  }
-
-  .grid-item {
-    cursor: zoom-in;
-  }
-
-  .grid-item img:hover {
-    transform: scale(1.05);
-  }
-
-  @media (max-width: 768px) {
-    .gallery-grid {
-      grid-template-columns: 1fr;
-      grid-auto-rows: auto;
-    }
-    .grid-item {
-      /* Reset grid placement for mobile so they just stack or standard grid */
-      grid-column: auto !important;
-      grid-row: auto !important;
-      height: 250px; /* Enforce a height for visuals */
-    }
-  }
-</style>

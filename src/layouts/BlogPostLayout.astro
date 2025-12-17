@@ -1,11 +1,11 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import TableOfContents from '../components/TableOfContents.astro';
+import TableOfContents from '../components/TableOfContents/TableOfContents.astro';
 import type { MarkdownHeading, ImageMetadata } from 'astro';
 import '../styles/global.css';
 import Tag from '../components/ui/Tag.astro';
-
 import { Image } from 'astro:assets';
+import { resolveBlogIcon } from '../utils/blogIcon';
 
 interface Props {
   title: string;
@@ -20,20 +20,14 @@ interface Props {
 const { title, description, publishDate, headings, tags = [], icon, minutesRead } = Astro.props;
 
 // Format date nicely
-const formattedDate = new Date(publishDate).toLocaleDateString('en-US', {
+const dateObj = new Date(publishDate);
+const formattedDate = dateObj.toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 });
 
-// Helper to handle both string paths (legacy) and imported images (new optimized)
-const resolveIcon = (iconProp?: string | ImageMetadata) => {
-  if (!iconProp) return '/assets/blog.png';
-  if (typeof iconProp === 'string') return `/assets/${iconProp}`;
-  return iconProp;
-};
-
-const iconSource = resolveIcon(icon);
+const iconSource = resolveBlogIcon(icon, dateObj);
 
 // Get the current page path
 const currentPath = Astro.url.pathname;
