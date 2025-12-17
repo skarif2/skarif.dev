@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import './RelatedPosts.css';
+
+interface Props {
+  currentSlug: string;
+  tags?: string[];
+}
+
+import type { CollectionEntry } from 'astro:content';
+
+const { currentSlug, tags = [] } = Astro.props;
+
+let relatedPosts: CollectionEntry<'blog'>[] = [];
+
+if (tags.length > 0) {
+  const allPosts = await getCollection('blog');
+  
+  relatedPosts = allPosts
+    .filter(post => post.slug !== currentSlug) // Exclude current
+    .map(post => {
+        const postTags = post.data.tags || [];
+        const commonTags = postTags.filter(tag => tags.includes(tag));
+        return {
+            ...post,
+            matchScore: commonTags.length
+        };
+    })
+    .filter(post => post.matchScore > 0) // Must have at least one common tag
+    .sort((a, b) => {
+        // Sort by match score (desc)
+        if (b.matchScore !== a.matchScore) return b.matchScore - a.matchScore;
+        // Then by date (newest first)
+        return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+    })
+    .slice(0, 3); // Top 3
+}
+---
+
+{relatedPosts.length > 0 && (
+  <nav class="related-posts">
+    <h2 class="related-posts-title">Related Posts</h2>
+    <ul class="related-posts-list">
+      {relatedPosts.map(post => (
+        <li class="related-posts-item">
+          <a href={`/blog/${post.slug}`} class="related-posts-link">
+            {post.data.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
