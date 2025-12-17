@@ -3,5 +3,7 @@
   "compatibility_date": "2025-12-17",
   "assets": {
     "directory": "./dist"
-  }
+  },
+  "workers_dev": false,
+  "preview_urls": false
 }
