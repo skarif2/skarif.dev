@@ -1,0 +1,122 @@
+---
+import PagesLayout from '../layouts/PagesLayout.astro';
+import './_index.css';
+
+import { getCollection } from 'astro:content';
+import Button from '../components/ui/Button.astro';
+import BlogPostItem from '../components/BlogPostItem.astro';
+
+// Fetch recent blog posts
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => {
+  return new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf();
+});
+const featuredBlogPosts = sortedPosts.slice(0, 6);
+
+// Fetch projects
+const allOpenSource = await getCollection('open-source');
+const sortedOpenSource = allOpenSource.sort((a, b) => {
+  if (b.data.year !== a.data.year) {
+    return b.data.year - a.data.year;
+  }
+  return a.data.title.localeCompare(b.data.title);
+});
+const featuredProjects = sortedOpenSource.slice(0, 5);
+
+// Render featured posts to get accurate reading time matching the detail page
+const featuredPostsWithReadingTime = await Promise.all(
+  featuredBlogPosts.map(async (post) => {
+    const { remarkPluginFrontmatter } = await post.render();
+    return {
+      ...post,
+      readingTime: remarkPluginFrontmatter?.minutesRead,
+    };
+  })
+);
+---
+
+<PagesLayout currentPath="/">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Hey, I'm <span class="text-primary">Sk Arif</span>!</h1>
+      <p class="hero-description">
+        A software engineer and lifelong web enthusiast, I’ve been building for the web for nearly a decade and now help teams deliver thoughtful, modern, scalable cloud-first software.
+      </p>
+      <p class="hero-note">
+        I love Functional Programming, write TypeScript at work, and enjoy Elixir in my free time. Became a dad last year, so if I’m offline, I’m probably playing with my son 👶.
+      </p>
+      <div class="hero-actions">
+        <Button href="/about">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>About me</span>
+        </Button>
+        <Button href="https://linkedin.com/in/skarif2/" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+          <span>LinkedIn</span>
+        </Button>
+        <Button href="https://github.com/skarif2" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          <span>GitHub</span>
+        </Button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="/assets/profile.png" alt="Hero Image" />
+    </div>
+  </section>
+
+  <!-- Featured Blogs Section -->
+  <section class="content-section">
+    <h2 class="section-title">Featured Blogs</h2>
+    <div class="featured-list">
+      {featuredPostsWithReadingTime.map(post => (
+        <BlogPostItem post={post} variant="compact" />
+      ))}
+    </div>
+  </section>
+
+  <!-- Open Source Section -->
+  <section class="content-section">
+    <h2 class="section-title">Open Source</h2>
+
+    <div class="project-list">
+      {featuredProjects.map(project => {
+        const icon = project.data.icon ?? '📦';
+
+        return (
+          <article class="project-item">
+            <div class="project-icon">{icon}</div>
+            <div class="project-content">
+              <h3 class="project-title">
+                <a href={`/open-source/${project.slug}`} class="project-title-link">
+                  {project.data.title}
+                </a>
+              </h3>
+              <p class="project-description">{project.data.description}</p>
+            </div>
+            <div class="project-actions">
+              {project.data.source && (
+                <Button href={project.data.source} target="_blank">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                  </svg>
+                  <span>Source</span>
+                </Button>
+              )}
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+</PagesLayout>

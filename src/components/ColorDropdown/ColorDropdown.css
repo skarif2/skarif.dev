@@ -1,0 +1,125 @@
+.color-dropdown {
+  position: relative;
+  display: inline-flex;
+}
+
+.color-dropdown-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  font-size: var(--font-size-sm);
+}
+
+.color-dropdown-button:hover {
+  border-color: var(--color-primary);
+}
+
+.color-dropdown-button.active {
+  border-color: var(--color-primary);
+  background-color: var(--color-bg);
+}
+
+.color-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.dropdown-arrow {
+  color: var(--color-text-secondary);
+  transition: transform var(--transition-fast);
+}
+
+.color-dropdown-button.active .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.color-dropdown-results {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  left: 0;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-dropdown);
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.color-circles {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.color-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2);
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+
+.color-option:hover {
+  background-color: var(--color-bg);
+}
+
+.color-option .color-circle {
+  width: 28px;
+  height: 28px;
+}
+
+.check-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  z-index: var(--z-tooltip);
+  border: 1px solid var(--color-border);
+}
+
+.color-dropdown:hover .tooltip {
+  opacity: 1;
+}

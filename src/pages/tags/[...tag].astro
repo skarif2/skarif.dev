@@ -1,0 +1,128 @@
+---
+import PagesLayout from '../../layouts/PagesLayout.astro';
+import { getCollection } from 'astro:content';
+import BlogPostItem from '../../components/BlogPostItem.astro';
+import '../blog/_index.css';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
+
+  return uniqueTags.map(tag => {
+    const filteredPosts = allPosts.filter(post => post.data.tags?.includes(tag));
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+
+// Enrich posts with reading time
+const postsWithReadingTime = await Promise.all(posts.map(async (post) => {
+  const { remarkPluginFrontmatter } = await post.render();
+  return {
+    ...post,
+    readingTime: remarkPluginFrontmatter?.minutesRead,
+  };
+}));
+
+// Sort by Date Descending
+const sortedPosts = postsWithReadingTime.sort((a, b) => {
+  return new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf();
+});
+
+// Group by Year
+const postsByYear = sortedPosts.reduce((acc, post) => {
+  const year = new Date(post.data.date).getFullYear();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(post);
+  return acc;
+}, {} as Record<number, typeof sortedPosts>);
+
+const groupedPosts = Object.entries(postsByYear)
+  .map(([year, posts]) => ({
+    year: parseInt(year),
+    posts: posts
+  }))
+  .sort((a, b) => b.year - a.year);
+
+const totalPosts = posts.length;
+---
+
+<PagesLayout title={`Tags: ${tag}`} currentPath="/tags">
+  <div class="blog-page">
+    <header class="tag-header">
+      <div class="tag-breadcrumb">
+        <a href="/tags" class="breadcrumb-link">Tags</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-count">{totalPosts} post{totalPosts !== 1 ? 's' : ''}</span>
+      </div>
+      <h1 class="tag-title">{tag}</h1>
+    </header>
+    
+    {groupedPosts.map(yearGroup => (
+      <section class="year-section">
+        <h2 class="year-heading">
+          {yearGroup.year} 
+          <span class="post-count" data-total={yearGroup.posts.length}>
+            {yearGroup.posts.length} post{yearGroup.posts.length !== 1 ? 's' : ''}
+          </span>
+        </h2>
+        
+        <div class="post-list">
+          {yearGroup.posts.map(post => (
+            <BlogPostItem post={post} />
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</PagesLayout>
+
+<style>
+  .tag-header {
+    margin-bottom: var(--space-12);
+  }
+
+  .tag-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2);
+  }
+
+  .breadcrumb-link {
+    color: var(--color-text-secondary); /* Keep it gray/secondary */
+    text-decoration: none;
+  }
+  
+  .breadcrumb-link:hover {
+     color: var(--color-primary); /* Highlight on hover */
+  }
+
+  .breadcrumb-separator {
+     opacity: 0.5;
+  }
+
+  .breadcrumb-count {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-medium);
+  }
+
+  .tag-title {
+    font-size: var(--font-size-5xl); /* Large title like "api" in the image */
+    font-weight: var(--font-weight-bold);
+    color: var(--color-heading);
+    margin: 0;
+  }
+  
+  /* Reuse styling from blog/index.css automatically via the import */
+</style>

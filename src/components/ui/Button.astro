@@ -1,0 +1,104 @@
+---
+export interface Props {
+  variant?: 'default' | 'primary' | 'icon';
+  href?: string;
+  target?: string;
+  rel?: string;
+  class?: string;
+  type?: 'button' | 'submit' | 'reset';
+  id?: string;
+}
+
+const {
+  variant = 'default',
+  href,
+  target,
+  rel,
+  class: className = '',
+  type = 'button',
+  id,
+  ...rest
+} = Astro.props;
+
+const baseClass = 'btn';
+const variantClass = `btn-${variant}`;
+const classes = `${baseClass} ${variantClass} ${className}`.trim();
+
+const Element = href ? 'a' : 'button';
+const elementProps = href
+  ? { href, target, rel: target === '_blank' ? 'noopener noreferrer' : rel, id }
+  : { type, id };
+---
+
+<Element class={classes} {...elementProps} {...rest}>
+  <slot />
+</Element>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    height: 36px;
+    padding: 0 var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-fast);
+    background-color: transparent;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .btn :global(svg),
+  .btn :global(span) {
+    opacity: 0.6;
+    transition: opacity var(--transition-fast);
+  }
+
+  .btn:hover :global(svg),
+  .btn:hover :global(span) {
+    opacity: 1;
+  }
+
+  .btn:hover {
+    background-color: var(--color-bg);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  /* Primary variant (mint button) */
+  .btn-primary {
+    background-color: var(--theme-mint);
+    color: #1a1a1a;
+    border-color: var(--theme-mint);
+  }
+
+  .btn-primary :global(svg),
+  .btn-primary :global(span) {
+    opacity: 1;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+    background-color: var(--theme-mint);
+    color: #1a1a1a;
+  }
+
+  /* Icon-only variant */
+  .btn-icon {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+  }
+
+  .btn-icon :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+</style>

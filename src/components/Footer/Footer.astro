@@ -1,0 +1,16 @@
+---
+import './Footer.css';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer-content">
+    <p class="footer-text">
+      Made with ❤️ by <a href="/about" class="footer-link">skarif</a>
+    </p>
+    <p class="footer-text">
+      © {currentYear} • Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="footer-link">Astro</a>
+    </p>
+  </div>
+</footer>

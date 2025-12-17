@@ -1,0 +1,126 @@
+---
+interface Item {
+  label: string;
+  url: string;
+  count?: number;
+}
+
+interface Props {
+  title: string;
+  items: Item[];
+  isOpen?: boolean;
+  currentPath?: string;
+  count?: number;
+}
+
+const { title, items, isOpen = false, currentPath = '', count } = Astro.props;
+
+// Check if any child is active to highlight parent or ensure distinct style
+const isGroupActive = items.some(item => item.url === currentPath);
+---
+
+<details class="context-group" open={isOpen}>
+  <summary class="context-group-header">
+    <span class={`context-group-title ${isGroupActive ? 'active' : ''}`}>
+      {title}
+      {count !== undefined && <span class="group-count">({count}{count !== 1 && title.toLowerCase() === 'blog' ? ' posts' : ''})</span>}
+    </span>
+    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </summary>
+  <div class="context-group-content">
+    {items.map(item => (
+      <a 
+        href={item.url} 
+        class={`context-link ${currentPath === item.url ? 'active' : ''}`}
+      >
+        {item.label}
+      </a>
+    ))}
+  </div>
+</details>
+
+<style>
+  .context-group {
+    margin-bottom: var(--space-2);
+  }
+
+  .context-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-1);
+    cursor: pointer;
+    list-style: none; /* Hide default marker */
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition-fast);
+  }
+
+  .context-group-header::-webkit-details-marker {
+    display: none; /* Hide default marker in Safari */
+  }
+
+  .context-group-header:hover {
+    background-color: var(--color-bg);
+  }
+
+  .context-group-title {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-text);
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .context-group-title.active {
+    color: var(--color-primary);
+  }
+
+  .group-count {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-secondary);
+  }
+
+  .chevron {
+    color: var(--color-text-secondary);
+    transition: transform var(--transition-fast);
+  }
+
+  details[open] .chevron {
+    transform: rotate(180deg);
+  }
+
+  .context-group-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-left: var(--space-2); /* Indent links */
+    margin-top: var(--space-1);
+    border-left: 1px solid var(--color-border); 
+    margin-left: var(--space-2);
+  }
+
+  .context-link {
+    display: block;
+    padding: var(--space-1) var(--space-2);
+    margin: 0;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    transition: all var(--transition-fast);
+    line-height: 1.4;
+  }
+
+  .context-link:hover {
+    color: var(--color-primary);
+  }
+
+  .context-link.active {
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+</style>

@@ -1,0 +1,362 @@
+/* ============================================
+   Resume Page Styling
+   HTML Refactor for Precise Control
+   ============================================ */
+.resume-page {
+  max-width: 900px;
+  padding-inline: var(--space-12);
+}
+
+@media (max-width: 768px) {
+  .resume-page {
+    padding-inline: 0;
+  }
+}
+
+.resume-wrapper {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.resume-actions {
+  width: 100%;
+  height: 0;
+  position: relative;
+}
+
+.resume-actions .btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.mobile-btn {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .desktop-btn {
+    display: none !important;
+  }
+  
+  .mobile-btn {
+    display: inline-flex !important;
+  }
+}
+
+
+/* ============================================
+   header Section
+   ============================================ */
+
+.resume-header {
+  margin-bottom: var(--space-12);
+}
+
+.resume-header .name {
+  font-size: 2.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-heading);
+  margin-bottom: var(--space-4);
+  line-height: 1.1;
+  padding: 0;
+}
+
+.resume-header .role {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-1);
+}
+
+.resume-header .contact {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.resume-header .summary {
+  font-size: 1rem;
+  color: var(--color-text);
+  max-width: 80ch;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* ============================================
+   Sections (WORK EXPERIENCE, etc)
+   ============================================ */
+
+.resume-section {
+  margin-bottom: var(--space-12);
+}
+
+.resume-section .section-title {
+  font-size: 0.80rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16m;
+  color: var(--color-text-secondary);
+  margin-top: 0;
+  margin-bottom: var(--space-6);
+  border-bottom: none;
+  padding: 0;
+  opacity: 0.6;
+}
+
+/* ============================================
+   Skills Section
+   ============================================ */
+
+.resume-section .skills-list p {
+  margin-bottom: var(--space-2);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.resume-section .skills-list p:last-child {
+  margin-bottom: 0;
+}
+
+.resume-section .skills-list strong {
+  color: var(--color-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  /* Slightly smaller/caps style for category */
+  letter-spacing: 0.02em;
+  margin-right: var(--space-1);
+}
+
+/* ============================================
+   Job Entries
+   ============================================ */
+
+.job-entry {
+  margin-bottom: var(--space-8);
+}
+
+.job-entry:last-child {
+  margin-bottom: 0;
+}
+
+.job-entry .company-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-heading);
+  margin-top: 0;
+  margin-bottom: var(--space-1);
+}
+
+/* Job Role | Date Line */
+.job-entry .job-meta {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.job-entry .job-title {
+  color: var(--color-text-secondary);
+}
+
+.job-entry .job-separator {
+  color: var(--color-border);
+}
+
+.job-entry .job-date {
+  color: var(--color-text-secondary);
+}
+
+/* Job Details (Lists & P) */
+.job-entry .job-intro {
+  margin-bottom: var(--space-4);
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+.job-entry .job-category {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-heading);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+}
+
+.job-entry ul {
+  list-style: disc;
+  padding-left: var(--space-6);
+  margin-bottom: var(--space-4);
+  color: var(--color-text);
+}
+
+.job-entry ul:last-child {
+  margin-bottom: 0;
+}
+
+.job-entry li {
+  margin-bottom: var(--space-2);
+  font-size: 0.95rem;
+}
+
+.job-entry li::marker {
+  color: var(--color-text-secondary);
+  font-size: 0.8em;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+  .resume-header .name {
+    font-size: 1.8rem;
+  }
+}
+
+/* ============================================
+   Print Styling
+   ============================================ */
+@media print {
+
+  /* Use standard page margins to ensure every page has spacing */
+  @page {
+    margin: 1.88cm;
+  }
+
+  /* Hide UI elements */
+  .sidebar,
+  .topbar,
+  .mobile-menu-toggle,
+  .resume-actions,
+  astro-dev-toolbar,
+  footer {
+    display: none !important;
+  }
+
+  /* Reset layout */
+  .layout,
+  .main-wrapper,
+  .main-container,
+  .page-container {
+    display: block !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: static !important;
+  }
+
+  body {
+    background-color: white;
+    color: black;
+    margin: 0 !important;
+    padding: 0 !important;
+    /* Remove body padding as @page margin handles it */
+  }
+
+  /* Ensure text colors are high contrast for print */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .resume-header .name,
+  .resume-header .role,
+  .section-title,
+  .company-name,
+  .job-category,
+  strong {
+    color: black !important;
+  }
+
+  p,
+  li,
+  .job-meta {
+    color: #333 !important;
+  }
+
+  a {
+    text-decoration: none;
+    color: black !important;
+  }
+
+  /* Page breaks */
+  .resume-section {
+    break-inside: auto;
+    /* Alow breaking */
+  }
+
+  .job-entry {
+    break-inside: auto;
+    /* Allow long job entries to break across pages */
+  }
+
+  /* Prevent atomic elements from breaking awkwardly */
+  .job-entry li,
+  .job-entry p {
+    break-inside: avoid;
+  }
+
+  /* Ensure the title doesn't get stranded at the bottom */
+  .section-title {
+    break-after: avoid;
+  }
+
+  /* Compact Spacing for Print (50% reduction) */
+  .resume-header {
+    margin-bottom: var(--space-8) !important;
+  }
+
+  .resume-header .name {
+    margin-bottom: var(--space-4) !important;
+  }
+
+  .resume-header .role,
+  .resume-header .contact {
+    margin-bottom: var(--space-1) !important;
+  }
+
+  .resume-section {
+    margin-bottom: var(--space-6) !important;
+  }
+
+  .resume-section .section-title {
+    margin-bottom: var(--space-3) !important;
+  }
+
+  /* Compact Content */
+  .resume-wrapper {
+    font-size: 0.9rem;
+  }
+
+  /* Override specific skills list paragraph margins if needed */
+  .resume-section .skills-list p {
+    margin-bottom: 0;
+  }
+
+  p,
+  li {
+    margin-bottom: var(--space-2) !important;
+  }
+
+  .job-entry {
+    margin-bottom: var(--space-4);
+  }
+
+  .job-entry .job-intro {
+    margin-bottom: var(--space-2);
+  }
+}

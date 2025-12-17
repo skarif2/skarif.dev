@@ -1,0 +1,79 @@
+---
+/**
+ * TopBar - Mobile/Tablet navigation bar
+ * Fixed at top, visible only on screens < 1024px
+ * Contains: Hamburger menu (left), Title+LinkedIn (center), Settings (right)
+ */
+import SidebarHeader from '../Sidebar/SidebarHeader.astro';
+import { SettingsPanel } from '../SettingsPanel/SettingsPanel';
+import Button from '../ui/Button.astro';
+import './TopBar.css';
+---
+
+<header class="topbar" id="topbar">
+  <div class="topbar-content">
+    <!-- Left: Hamburger Menu -->
+    <Button variant="icon" class="hamburger-btn" id="hamburger-btn" aria-label="Toggle menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </Button>
+
+    <!-- Center: Title + LinkedIn -->
+    <div class="topbar-center">
+      <SidebarHeader />
+    </div>
+
+    <!-- Right: Settings -->
+    <div class="topbar-right">
+      <SettingsPanel client:load />
+    </div>
+  </div>
+</header>
+
+<script>
+  // Use astro:page-load which fires on initial load AND after view transitions
+  document.addEventListener('astro:page-load', () => {
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const sidebar = document.getElementById('sidebar');
+
+    if (hamburgerBtn && sidebar) {
+      hamburgerBtn.addEventListener('click', () => {
+        const isOpen = sidebar.classList.toggle('is-open');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+        hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      // Close sidebar when clicking outside
+      document.addEventListener('click', (e) => {
+        if (sidebar.classList.contains('is-open') && 
+            !sidebar.contains(e.target as Node) && 
+            !hamburgerBtn.contains(e.target as Node)) {
+          sidebar.classList.remove('is-open');
+          document.body.style.overflow = '';
+          hamburgerBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Close sidebar on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar.classList.contains('is-open')) {
+          sidebar.classList.remove('is-open');
+          document.body.style.overflow = '';
+          hamburgerBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  });
+
+  // Clean up sidebar state after navigation
+  document.addEventListener('astro:after-swap', () => {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+      sidebar.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+  });
+</script>

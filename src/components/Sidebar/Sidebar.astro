@@ -1,0 +1,237 @@
+
+---
+import { SettingsPanel } from '../SettingsPanel/SettingsPanel';
+import SidebarGroup from './SidebarGroup.astro';
+import SidebarHeader from './SidebarHeader.astro';
+import './Sidebar.css';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+// Fetch Blog Posts for Sidebar
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => {
+  return new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf();
+});
+// Group by year for the sidebar
+const postsByYear = sortedPosts.reduce((acc, post) => {
+  const year = new Date(post.data.date).getFullYear();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(post);
+  return acc;
+}, {} as Record<number, typeof sortedPosts>);
+
+// Fetch Open Source for Sidebar
+const allOpenSource = await getCollection('open-source');
+
+const sortProjects = (projects: typeof allOpenSource) => {
+  return projects.sort((a, b) => {
+    if (b.data.year !== a.data.year) {
+      return b.data.year - a.data.year;
+    }
+    return a.data.title.localeCompare(b.data.title);
+  });
+};
+
+const myProjects = sortProjects(allOpenSource.filter(p => !p.data.isContribution));
+const contributionProjects = sortProjects(allOpenSource.filter(p => p.data.isContribution));
+
+const isBlogSection = currentPath.startsWith('/blog');
+const isOpenSourceSection = currentPath.startsWith('/open-source');
+---
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-content">
+    <!-- Site Title with Controls (hidden on mobile, shown in TopBar instead) -->
+    <div class="sidebar-header">
+      <SidebarHeader />
+      <SettingsPanel client:load />
+    </div>
+
+    <!-- Squiggle Divider -->
+    <div class="sidebar-divider">
+      <svg 
+        viewBox="0 0 400 10" 
+        width="100%" 
+        height="12"
+        preserveAspectRatio="none"
+        style="display: block;"
+      >
+        <g fill="var(--color-border)">
+          <path d="M0,5 Q20,2 40,5 T80,5 T120,6 L118,4 Q80,3 40,3 T0,5 Z" />
+          <path d="M140,5 Q160,8 180,5 T220,4 T260,6 L262,4 Q220,2 180,3 T140,5 Z" />
+          <path d="M280,5 Q300,2 320,5 T360,6 T400,5 L400,4 Q360,4 320,3 T280,5 Z" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- About Section -->
+    <div class="sidebar-section">
+      <p class="sidebar-about">
+        🚀 Team Lead <a href="https://www.craftsmensoftware.com/" target="_blank" rel="noopener noreferrer" class="craftsmen-link">@Craftsmen</a> | Helping teams ship scalable, cloud-first software.
+      </p>
+    </div>
+
+    <!-- Divider -->
+    <div class="nav-divider"></div>
+
+    <!-- Main Navigation -->
+    <nav class="nav-links">
+      <a href="/blog" class={`nav-link ${currentPath === '/blog' || currentPath.startsWith('/blog/') ? 'active' : ''}`}>
+        <span class="nav-icon">ᝰ</span>
+        <span>Blog</span>
+      </a>
+
+      <a href="/open-source" class={`nav-link ${currentPath === '/open-source' || currentPath.startsWith('/open-source/') ? 'active' : ''}`}>
+        <span class="nav-icon">ᯓ</span>
+        <span>Open Source</span>
+      </a>
+    </nav>
+
+    <!-- Contextual Navigation (Blog/Projects) -->
+    <div class="nav-divider"></div>
+    <div class="context-nav">
+      <div class="context-nav-list-wrapper">
+        {isBlogSection && (
+          <>
+            <h3 class="context-nav-title">Blog</h3>
+              <div class="context-nav-list">
+                {Object.entries(postsByYear)
+                  .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
+                  .map(([year, posts], index) => {
+                    // Check if any post in this year is currently active
+                    const isYearActive = posts.some(p => `/blog/${p.slug}` === currentPath);
+                    // Open first year by default if no post is selected, or open if year contains active post
+                    const shouldBeOpen = isYearActive || (index === 0 && !currentPath.startsWith('/blog/'));
+                    
+                    const items = posts.map(post => ({
+                      label: post.data.title,
+                      url: `/blog/${post.slug}`
+                    }));
+
+                    return (
+                      <SidebarGroup 
+                        title={year}
+                        items={items}
+                        isOpen={shouldBeOpen}
+                        currentPath={currentPath}
+                        count={posts.length}
+                      />
+                    );
+                  })}
+              </div>
+          </>
+        )}
+
+        {isOpenSourceSection && (
+          <>
+            <h3 class="context-nav-title">Open Source</h3>
+            {/* My Projects Group */}
+            {(() => {
+              const myProjectsItems = myProjects.map(project => ({
+                label: project.data.title,
+                url: `/open-source/${project.slug}`
+              }));
+              
+              return (
+                <SidebarGroup 
+                  title="My Projects"
+                  items={myProjectsItems}
+                  isOpen={true}
+                  currentPath={currentPath}
+                  count={myProjects.length}
+                />
+              );
+            })()}
+
+            {/* Contributions Group */}
+            {contributionProjects.length > 0 && (() => {
+              const contributionsItems = contributionProjects.map(project => ({
+                label: project.data.title,
+                url: `/open-source/${project.slug}`
+              }));
+              
+              return (
+                <SidebarGroup 
+                  title="Contributions"
+                  items={contributionsItems}
+                  isOpen={true}
+                  currentPath={currentPath}
+                  count={contributionProjects.length}
+                />
+              );
+            })()}
+          </>
+        )}
+      </div>
+    </div>
+    
+    <!-- Bottom Buttons Section -->
+    <div class="sidebar-bottom-actions">
+      <a href="/about" class="action-btn about-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <span>About me</span>
+      </a>
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="action-btn social-btn" aria-label="Facebook">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+        </svg>
+      </a>
+      <a href="https://github.com/skarif2" target="_blank" rel="noopener noreferrer" class="action-btn social-btn" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+        </svg>
+      </a>
+    </div>
+    
+    <!-- Copyright -->
+    <div class="sidebar-footer">
+      <div class="footer-links">
+        <a href="/tags" class={`footer-link ${currentPath.startsWith('/tags') ? 'active' : ''}`}>Tags</a>
+        <span class="footer-dot">•</span>
+        <a href="/resume" class={`footer-link ${currentPath.startsWith('/resume') ? 'active' : ''}`}>Resume</a>
+        <span class="footer-dot">•</span>
+        <a href="/roadmap" class={`footer-link ${currentPath.startsWith('/roadmap') ? 'active' : ''}`}>Roadmap</a>
+        <span class="footer-dot">•</span>
+        <a href="https://github.com/skarif/skarif.dev" target="_blank" rel="noopener noreferrer" class="footer-link">Source</a>
+      </div>
+      <p>© {new Date().getFullYear()} skarif.dev</p>
+    </div>
+  </div>
+</aside>
+
+<script>
+  // Handle mobile menu close when clicking a link inside the sidebar
+  document.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.getElementById('sidebar');
+    const navLinks = sidebar?.querySelectorAll('.nav-link, .context-link, .action-btn');
+
+    navLinks?.forEach(link => {
+      link.addEventListener('click', () => {
+        // Close sidebar on mobile when clicking a link
+        if (window.innerWidth < 1024) {
+          sidebar?.classList.remove('is-open');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+  });
+
+  // Handle Astro view transitions - close sidebar after navigation
+  document.addEventListener('astro:after-swap', () => {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+      sidebar.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+  });
+</script>

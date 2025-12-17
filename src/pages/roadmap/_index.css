@@ -1,0 +1,88 @@
+.roadmap-page {
+  max-width: 800px;
+}
+
+.roadmap-header {
+  margin-bottom: var(--space-8);
+}
+
+.roadmap-intro {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-12);
+}
+
+.roadmap-section {
+  margin-bottom: var(--space-16);
+}
+
+.roadmap-section-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-heading);
+  margin-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-2);
+}
+
+/* Custom Checkbox Styling */
+.roadmap-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.roadmap-content li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: var(--space-2);
+}
+
+.roadmap-content li > ul {
+  margin-top: var(--space-2);
+  margin-left: 0.5rem; /* Slight indent for nested */
+  border-left: 1px solid var(--color-border);
+  padding-left: 1rem;
+}
+
+.roadmap-content input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  width: 1em;
+  height: 1em;
+  border: 1px solid var(--color-text-secondary);
+  border-radius: 4px; /* Rounded square */
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0.5; /* Dimmed by default */
+}
+
+.roadmap-content input[type="checkbox"]:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  opacity: 1;
+}
+
+/* Custom checkmark/dot */
+.roadmap-content input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 6px;
+  height: 6px;
+  background-color: white; /* Or distinct checkmark color */
+  border-radius: 1px;
+}
+
+
+
+/* Headings in MDX */
+.roadmap-content h2 {
+    font-size: var(--font-size-xl);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-4);
+    color: var(--color-heading);
+}

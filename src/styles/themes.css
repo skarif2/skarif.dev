@@ -1,0 +1,67 @@
+/* ============================================
+   THEME SWITCHING - Light & Dark Modes
+   ============================================ */
+
+/* Default to dark mode */
+html {
+  color-scheme: dark;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark);
+}
+
+/* Dark Mode (default) */
+html.is-dark {
+  color-scheme: dark;
+  
+  --color-bg: var(--color-bg-dark);
+  --color-surface: var(--color-surface-dark);
+  --color-border: var(--color-border-dark);
+  --color-text: var(--color-text-dark);
+  --color-text-secondary: var(--color-text-secondary-dark);
+  --color-heading: var(--color-heading-dark);
+  --color-link: var(--color-link-dark);
+  --color-code-bg: var(--color-code-bg-dark);
+}
+
+/* Light Mode */
+html.is-light {
+  color-scheme: light;
+  
+  --color-bg: var(--color-bg-light);
+  --color-surface: var(--color-surface-light);
+  --color-border: var(--color-border-light);
+  --color-text: var(--color-text-light);
+  --color-text-secondary: var(--color-text-secondary-light);
+  --color-heading: var(--color-heading-light);
+  --color-link: var(--color-link-light);
+  --color-code-bg: var(--color-code-bg-light);
+}
+
+/* Apply theme colors to body */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: var(--transition-base);
+  transition-timing-function: ease-in-out;
+}
+
+/* Disable transitions for elements that shouldn't animate */
+*:focus,
+*:active,
+input,
+textarea,
+select,
+button {
+  transition-duration: 0ms;
+}
+
+/* Prevent transition on page load */
+.no-transition * {
+  transition: none !important;
+}

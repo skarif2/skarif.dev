@@ -1,0 +1,30 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  currentPath?: string;
+}
+
+const { title, description, currentPath } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} currentPath={currentPath}>
+  <div class="page-container">
+    <slot />
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    padding: var(--space-4) var(--space-12);
+    max-width: 1200px;
+  }
+
+  @media (max-width: 768px) {
+    .page-container {
+      padding: var(--space-6) var(--space-4);
+    }
+  }
+</style>

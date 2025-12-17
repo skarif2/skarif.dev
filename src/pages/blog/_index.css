@@ -1,0 +1,135 @@
+.blog-page {
+  max-width: 900px;
+}
+
+.blog-header {
+  margin-bottom: var(--space-12);
+}
+
+.blog-description {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+.search-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.search-wrapper {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  align-self: flex-end;
+}
+
+.search-count {
+  color: var(--color-primary);
+  font-size: var(--font-size-base);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.search-icon {
+  position: absolute;
+  left: var(--space-4);
+  color: var(--color-text-secondary);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.search-clear {
+  position: absolute;
+  right: var(--space-3);
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: var(--space-1);
+  border-radius: var(--radius-full);
+  display: none; /* Hidden by default */
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.search-clear:hover {
+  color: var(--color-text);
+  background-color: var(--color-bg-secondary);
+}
+
+.search-input {
+  width: 100%;
+  padding: var(--space-3) var(--space-10) var(--space-3) var(--space-10); /* Pad left and right */
+  font-size: var(--font-size-base);
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast);
+  /* Remove native clear button in some browsers to avoid double icons */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.view-all-tags-link,
+.view-all-tags-link:visited {
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+}
+
+.view-all-tags-link:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.year-section {
+  margin-bottom: var(--space-12);
+}
+
+.year-heading {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  font-size: var(--font-size-2xl);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-2);
+}
+
+.post-count {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.highlight {
+  background-color: #fde047; /* Yellow */
+  color: #4f2e08; /* Darker yellow/brown text */
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-sm);
+}

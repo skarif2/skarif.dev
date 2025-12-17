@@ -1,0 +1,50 @@
+---
+import PagesLayout from '../../layouts/PagesLayout.astro';
+import { getCollection } from 'astro:content';
+import './_index.css';
+
+const allPosts = await getCollection('blog');
+const tags = allPosts.flatMap(post => post.data.tags || []);
+const tagCounts = tags.reduce((acc, tag) => {
+  acc[tag] = (acc[tag] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
+
+const uniqueTags = [...new Set(tags)];
+
+const groupedTags = uniqueTags.reduce((acc, tag) => {
+  const firstLetter = tag.charAt(0).toUpperCase();
+  if (!acc[firstLetter]) {
+    acc[firstLetter] = [];
+  }
+  acc[firstLetter].push(tag);
+  return acc;
+}, {} as Record<string, string[]>);
+
+const sortedLetters = Object.keys(groupedTags).sort();
+---
+
+<PagesLayout title="Tags" currentPath="/tags">
+  <div class="tags-page">
+    <header class="tags-header">
+      <h1>Tags</h1>
+      <p class="tags-description">
+        All the tags used in posts.
+      </p>
+    </header>
+    
+    {sortedLetters.map((letter) => (
+      <div class="letter-group">
+        <h2 class="letter-heading">{letter}</h2>
+        <div class="tags-grid">
+          {groupedTags[letter].sort().map((tag) => (
+            <a href={`/tags/${tag}`} class="tag-card">
+              <span class="tag-name">{tag}</span>
+              <span class="tag-count">{tagCounts[tag]} posts</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</PagesLayout>

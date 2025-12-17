@@ -1,0 +1,221 @@
+---
+import PagesLayout from '../../layouts/PagesLayout.astro';
+import { getCollection } from 'astro:content';
+import BlogPostItem from '../../components/BlogPostItem.astro';
+import './_index.css';
+
+// 1. Get all blog posts
+const allPosts = await getCollection('blog');
+
+// Enrich posts with reading time
+const postsWithReadingTime = await Promise.all(allPosts.map(async (post) => {
+  const { remarkPluginFrontmatter } = await post.render();
+  return {
+    ...post,
+    readingTime: remarkPluginFrontmatter?.minutesRead,
+  };
+}));
+
+// 2. Sort by Date Descending
+const sortedPosts = postsWithReadingTime.sort((a, b) => {
+  return new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf();
+});
+
+// 3. Group by Year
+const postsByYear = sortedPosts.reduce((acc, post) => {
+  const year = new Date(post.data.date).getFullYear();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(post);
+  return acc;
+}, {} as Record<number, typeof sortedPosts>);
+
+// 4. Convert to array
+const groupedPosts = Object.entries(postsByYear)
+  .map(([year, posts]) => ({
+    year: parseInt(year),
+    posts: posts
+  }))
+  .sort((a, b) => b.year - a.year);
+
+const totalPosts = allPosts.length;
+const uniqueTags = new Set(allPosts.flatMap(post => post.data.tags || []));
+---
+
+<PagesLayout title="Blog" currentPath="/blog">
+  <div class="blog-page">
+    <header class="blog-header">
+      <h1>Blog</h1>
+      <p class="blog-description">
+        I write about the things I’ve learned throughout my software engineering career, the tools I enjoy, the ideas that excite me, and the lessons that reshape my thinking over time.
+      </p>
+      
+      <div class="search-container">
+        <div class="search-wrapper">
+          <div class="search-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <input 
+            type="search" 
+            placeholder="Search posts..."
+            class="search-input"
+            id="search-input"
+          />
+          <button class="search-clear" id="search-clear" aria-label="Clear search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="search-stats">
+          <div class="search-count" data-total={totalPosts}>
+            <strong>{totalPosts} posts</strong>
+          </div>
+          <span class="meta-separator">•</span>
+          <a href="/tags" class="view-all-tags-link">View all {uniqueTags.size} tags</a>
+        </div>
+      </div>
+    </header>
+    
+    {groupedPosts.map(yearGroup => (
+      <section class="year-section">
+        <h2 class="year-heading">
+          {yearGroup.year} 
+          <span class="post-count" data-total={yearGroup.posts.length}>
+            {yearGroup.posts.length} post{yearGroup.posts.length !== 1 ? 's' : ''}
+          </span>
+        </h2>
+        
+        <div class="post-list">
+          {yearGroup.posts.map(post => (
+            <BlogPostItem post={post} />
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</PagesLayout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    const searchClear = document.getElementById('search-clear') as HTMLButtonElement;
+    const searchCount = document.querySelector('.search-count');
+    
+    // If we're not on the blog page (elements missing), stop.
+    if (!searchInput || !searchClear) return;
+    
+    // Cache DOM elements
+    const yearSections = document.querySelectorAll('.year-section');
+
+    // Store original text content to avoid losing it during highlighting
+    const originalContentMap = new Map<Element, string>();
+    
+    // Get total posts from data attribute or initial render
+    const totalPosts = searchCount ? parseInt(searchCount.getAttribute('data-total') || '0', 10) : 0;
+
+    // Helper to escape regex special characters
+    function escapeRegExp(string: string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function highlightText(el: Element, query: string) {
+       if (!originalContentMap.has(el)) {
+          originalContentMap.set(el, el.textContent || '');
+       }
+       const text = originalContentMap.get(el) || '';
+       
+       if (query && text.toLowerCase().includes(query)) {
+          const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
+          // Use mark tag with class for styling
+          el.innerHTML = text.replace(regex, '<mark class="highlight">$1</mark>');
+       } else {
+          el.innerHTML = text; // Restore original
+       }
+    }
+
+    function filterPosts() {
+      const query = searchInput.value.toLowerCase().trim();
+      let totalVisible = 0;
+
+      yearSections.forEach(section => {
+        const posts = section.querySelectorAll('.post-item');
+        // Get the count element for this year
+        const countEl = section.querySelector('.post-count');
+        const totalForYear = countEl ? parseInt(countEl.getAttribute('data-total') || '0', 10) : 0;
+        
+        let yearVisibleCount = 0;
+
+        posts.forEach(post => {
+          // Collect searchable text elements
+          const searchableElements = post.querySelectorAll('.post-title-link, .post-description, .tag, time, .reading-time');
+          
+          let matchFound = false;
+
+          // Check content and highlight
+          searchableElements.forEach(el => {
+               const text = el.textContent?.toLowerCase() || '';
+               // If query matches any part of this element
+               if (text.includes(query)) {
+                 matchFound = true;
+               }
+               // Apply highlighting
+               highlightText(el, query);
+          });
+
+          // Fallback: Check full text content if individual element match failed (edge case)
+          // But for highlighting we want strict element mapping. 
+          // We trust searchableElements covers everything important.
+
+          const el = post as HTMLElement;
+          el.style.display = matchFound || query === '' ? 'block' : 'none';
+          
+          if (matchFound || query === '') yearVisibleCount++;
+        });
+
+        // Show/Hide year section
+        const sectionEl = section as HTMLElement;
+        sectionEl.style.display = yearVisibleCount > 0 ? 'block' : 'none';
+        
+        // Update year count text
+        if (countEl) {
+          if (query.length > 0) {
+              countEl.textContent = `${yearVisibleCount}/${totalForYear} post${totalForYear !== 1 ? 's' : ''}`;
+          } else {
+              countEl.textContent = `${totalForYear} post${totalForYear !== 1 ? 's' : ''}`;
+          }
+        }
+        
+        totalVisible += yearVisibleCount;
+      });
+
+      // Update global count
+      if (searchCount) {
+        if (query.length > 0) {
+          searchCount.innerHTML = `<strong>${totalVisible}/${totalPosts} posts</strong>`;
+        } else {
+          searchCount.innerHTML = `<strong>${totalPosts} posts</strong>`;
+        }
+      }
+
+      // Toggle clear button
+      searchClear.style.display = query.length > 0 ? 'flex' : 'none';
+    }
+
+    searchInput.addEventListener('input', filterPosts);
+    // Initial run to set state based on input (e.g. back button cache)
+    filterPosts();
+
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      filterPosts();
+      searchInput.focus();
+    });
+  });
+</script>
+

@@ -1,0 +1,22 @@
+---
+import PagesLayout from '../../layouts/PagesLayout.astro';
+import { getEntry } from 'astro:content';
+import './_index.css';
+
+const roadmapPage = await getEntry('pages', 'roadmap');
+if (!roadmapPage) {
+  throw new Error("Roadmap page content not found");
+}
+
+const { Content } = await roadmapPage.render();
+---
+
+<PagesLayout title={roadmapPage.data.title} currentPath="/roadmap">
+  <article class="roadmap-page">
+    <h1>{roadmapPage.data.title}</h1>
+    
+    <div class="roadmap-content markdown">
+      <Content />
+    </div>
+  </article>
+</PagesLayout>

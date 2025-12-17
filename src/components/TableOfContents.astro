@@ -1,0 +1,281 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+// Filter out h1 (usually the title) and limit depth if needed
+const tocHeadings = headings.filter((heading) => heading.depth > 1 && heading.depth < 4);
+
+// Create array with Introduction + all headings for the mini indicator
+const allHeadings = [
+  { slug: 'introduction', text: 'Introduction', depth: 2 },
+  ...tocHeadings
+];
+---
+
+<!-- Mini TOC Indicator (mobile only) -->
+<button class="toc-mini" id="toc-mini" aria-label="Table of contents">
+  {allHeadings.map((heading) => (
+    <span 
+      class={`toc-mini-line depth-${heading.depth}`} 
+      data-href={`#${heading.slug}`}
+    ></span>
+  ))}
+</button>
+
+<!-- Overlay for drawer -->
+<div class="toc-overlay" id="toc-overlay"></div>
+
+<!-- Full TOC (desktop sidebar / mobile drawer) -->
+<nav class="toc" id="toc">
+  <h2 class="toc-title">On This Page</h2>
+  <ul class="toc-list">
+    <li class="toc-item">
+      <a href="#introduction" class="toc-link">Introduction</a>
+    </li>
+    {tocHeadings.map((heading) => (
+      <li class={`toc-item depth-${heading.depth}`}>
+        <a href={`#${heading.slug}`} class="toc-link">
+          {heading.text}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const tocMini = document.getElementById('toc-mini');
+    const toc = document.getElementById('toc');
+
+    if (tocMini && toc) {
+      // Toggle drawer on mini indicator click
+      tocMini.addEventListener('click', () => {
+        toc.classList.toggle('is-open');
+        document.body.style.overflow = toc.classList.contains('is-open') ? 'hidden' : '';
+      });
+
+      // Close when clicking outside (like sidebar)
+      document.addEventListener('click', (e) => {
+        if (toc.classList.contains('is-open') && 
+            !toc.contains(e.target as Node) && 
+            !tocMini.contains(e.target as Node)) {
+          toc.classList.remove('is-open');
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && toc.classList.contains('is-open')) {
+          toc.classList.remove('is-open');
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Close drawer when clicking a link
+      toc.querySelectorAll('.toc-link').forEach(link => {
+        link.addEventListener('click', () => {
+          toc.classList.remove('is-open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+
+    // Scroll Spy logic
+    const onScroll = () => {
+      const headers = document.querySelectorAll('h2[id], h3[id]');
+      let activeId = 'introduction';
+      const offset = 120;
+
+      for (const header of headers) {
+        const rect = header.getBoundingClientRect();
+        if (rect.top <= offset) {
+          activeId = header.id;
+        } else {
+          break;
+        }
+      }
+
+      // Update text TOC links
+      const currentActive = document.querySelector('.toc-link.active');
+      if (currentActive?.getAttribute('href') !== `#${activeId}`) {
+        document.querySelectorAll('.toc-link').forEach(link => link.classList.remove('active'));
+        const newActive = document.querySelector(`.toc-link[href="#${activeId}"]`);
+        newActive?.classList.add('active');
+      }
+
+      // Update mini TOC lines
+      const currentActiveLine = document.querySelector('.toc-mini-line.active');
+      if (currentActiveLine?.getAttribute('data-href') !== `#${activeId}`) {
+        document.querySelectorAll('.toc-mini-line').forEach(line => line.classList.remove('active'));
+        const newActiveLine = document.querySelector(`.toc-mini-line[data-href="#${activeId}"]`);
+        newActiveLine?.classList.add('active');
+      }
+    };
+
+    window.addEventListener('scroll', () => {
+      window.requestAnimationFrame(onScroll);
+    });
+
+    onScroll();
+  });
+</script>
+
+<style>
+  /* Mini TOC Indicator - hidden on desktop, visible on mobile */
+  .toc-mini {
+    display: none;
+    position: fixed;
+    right: var(--space-2);
+    top: 50%;
+    transform: translateY(-60%);
+    z-index: var(--z-sticky);
+    background-color: transparent;
+    border: none;
+    padding: var(--space-3) 0;
+    flex-direction: column;
+    align-items: flex-end; /* Lines align right */
+    gap: var(--space-3);
+    cursor: pointer;
+  }
+
+  .toc-mini:hover .toc-mini-line {
+    opacity: 0.8;
+  }
+
+  .toc-mini-line {
+    display: block;
+    height: 3px;
+    background-color: var(--color-text-secondary);
+    border-radius: 1.5px;
+    transition: background-color var(--transition-fast), opacity var(--transition-fast);
+    opacity: 0.5;
+  }
+
+  /* H2 lines are longer */
+  .toc-mini-line.depth-2 {
+    width: 18px;
+  }
+
+  /* H3 lines are shorter (no left margin needed since right-aligned) */
+  .toc-mini-line.depth-3 {
+    width: 12px;
+    opacity: 0.4;
+    margin-right: 2px;
+  }
+
+  /* Active line highlighted with primary color */
+  .toc-mini-line.active {
+    background-color: var(--color-primary);
+  }
+
+  /* Overlay for drawer */
+  .toc-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: var(--z-modal);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .toc-overlay.is-open {
+    opacity: 1;
+  }
+
+  /* Full TOC - desktop: sidebar, mobile: drawer */
+  .toc {
+    position: sticky;
+    top: var(--space-8);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .toc-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-heading);
+    margin-bottom: var(--space-4);
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .toc-item {
+    margin: 0;
+  }
+
+  .toc-item.depth-3 {
+    padding-left: var(--space-4);
+  }
+
+  .toc-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    display: block;
+    line-height: var(--line-height-tight);
+    border-left: 2px solid transparent;
+    padding-left: var(--space-3);
+    margin-left: -2px;
+  }
+
+  .toc-link:hover {
+    color: var(--color-primary);
+  }
+
+  .toc-link.active {
+    color: var(--color-primary);
+    border-left-color: var(--color-primary);
+  }
+
+  /* Mobile/Tablet: < 1024px */
+  @media (max-width: 1024px) {
+    /* Show mini indicator */
+    .toc-mini {
+      display: flex;
+    }
+
+    /* Hide overlay - not needed */
+    .toc-overlay {
+      display: none;
+    }
+
+    /* TOC becomes right drawer like sidebar */
+    .toc {
+      position: fixed;
+      top: 60px; /* Below TopBar */
+      right: 0;
+      width: var(--sidebar-width);
+      height: calc(100vh - 60px);
+      height: calc(100dvh - 60px);
+      background-color: var(--color-bg);
+      border-left: 1px solid var(--color-border);
+      padding: var(--space-6);
+      z-index: var(--z-fixed);
+      transform: translateX(100%);
+      transition: transform var(--transition-base);
+      overflow-y: auto;
+    }
+
+    .toc.is-open {
+      transform: translateX(0);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+</style>

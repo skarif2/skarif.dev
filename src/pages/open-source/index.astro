@@ -1,0 +1,120 @@
+---
+import PagesLayout from '../../layouts/PagesLayout.astro';
+import { getCollection } from 'astro:content';
+import Button from '../../components/ui/Button.astro';
+import './_index.css';
+
+const allProjects = await getCollection('open-source');
+
+const myProjects = allProjects.filter(project => !project.data.isContribution);
+const contributions = allProjects.filter(project => project.data.isContribution);
+
+const groupProjectsByYear = (projects: typeof allProjects) => {
+  const grouped = projects.reduce((acc, project) => {
+    const year = project.data.year;
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+    acc[year].push(project);
+    return acc;
+  }, {} as Record<number, typeof allProjects>);
+
+  const sortedYears = Object.keys(grouped).sort((a, b) => Number(b) - Number(a));
+  
+  return { grouped, sortedYears };
+};
+
+const { grouped: groupedMyProjects, sortedYears: myYears } = groupProjectsByYear(myProjects);
+const { grouped: groupedContributions, sortedYears: contributionYears } = groupProjectsByYear(contributions);
+---
+
+<PagesLayout title="Open Source" currentPath="/open-source">
+  <div class="open-source-page">
+    <header class="open-source-header">
+      <h1>Open Source</h1>
+      <p class="open-source-description">
+        I build things or contribute to others’ projects either out of necessity or simply because that thing excites me. Some projects stay useful for years, some fade away, and some get replaced by whatever’s new. That’s the fun of open-source, you keep creating and keep learning.
+      </p>
+    </header>
+    
+    <section class="open-source-section">
+      <h2 class="open-source-section-title">My Projects</h2>
+      <div class="open-source-grid">
+        {myYears.map(year => (
+          groupedMyProjects[Number(year)].map(project => (
+            <article class="open-source-card">
+              <div class="open-source-card-header">
+                {project.data.icon && (
+                  project.data.icon.includes('.') || project.data.icon.startsWith('/') ? (
+                    <img src={project.data.icon} alt={project.data.title} class="open-source-icon-img" />
+                  ) : (
+                    <span class="open-source-icon-emoji">{project.data.icon}</span>
+                  )
+                )}
+                <h2 class="open-source-title">
+                  <a href={`/open-source/${project.slug}`} class="open-source-title-link">
+                    {project.data.title}
+                  </a>
+                </h2>
+              </div>
+              
+              <p class="open-source-item-description">{project.data.description}</p>
+              
+              <div class="open-source-links">
+                {project.data.demo && (
+                  <Button href={project.data.demo} target="_blank">Demo</Button>
+                )}
+                {project.data.source && (
+                  <Button href={project.data.source} target="_blank">Source</Button>
+                )}
+              </div>
+            </article>
+          ))
+        ))}
+      </div>
+    </section>
+
+    {contributions.length > 0 && (
+      <section class="open-source-section">
+        <h2 class="open-source-section-title">Contributions</h2>
+        <div class="open-source-grid">
+          {contributionYears.map(year => (
+            groupedContributions[Number(year)].map(project => (
+              <article class="open-source-card">
+                <div class="open-source-card-header">
+                  {project.data.icon && (
+                    project.data.icon.includes('.') || project.data.icon.startsWith('/') ? (
+                      <img src={project.data.icon} alt={project.data.title} class="open-source-icon-img" />
+                    ) : (
+                      <span class="open-source-icon-emoji">{project.data.icon}</span>
+                    )
+                  )}
+                  <h2 class="open-source-title">
+                    <a href={`/open-source/${project.slug}`} class="open-source-title-link">
+                      {project.data.title}
+                    </a>
+                  </h2>
+                </div>
+                
+                <p class="open-source-item-description">{project.data.description}</p>
+                
+                <div class="open-source-links">
+                  {project.data.demo && (
+                    <Button href={project.data.demo} target="_blank">Demo</Button>
+                  )}
+                  {project.data.source && (
+                    <Button href={project.data.source} target="_blank">Source</Button>
+                  )}
+                </div>
+              </article>
+            ))
+          ))}
+        </div>
+      </section>
+    )}
+    
+
+  </div>
+</PagesLayout>
+
+

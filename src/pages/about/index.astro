@@ -1,0 +1,31 @@
+---
+import PagesLayout from '../../layouts/PagesLayout.astro';
+import { getEntry } from 'astro:content';
+
+const aboutPage = await getEntry('pages', 'about');
+if (!aboutPage) {
+  throw new Error("About page content not found");
+}
+
+const { Content } = await aboutPage.render();
+---
+
+<PagesLayout title={aboutPage.data.title} currentPath="/about">
+  <article class="about-page">
+    <h1>{aboutPage.data.title}</h1>
+    
+    <div class="about-content markdown">
+      <Content />
+    </div>
+  </article>
+</PagesLayout>
+
+<style>
+  .about-page {
+    max-width: 800px;
+  }
+  
+  .about-content {
+    margin-bottom: var(--space-12);
+  }
+</style>
