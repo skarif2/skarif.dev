@@ -1,13 +1,16 @@
 .related-posts {
-  display: none; /* Hidden on mobile */
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
 }
 
+/* Desktop: fixed at bottom of sidebar */
 @media (min-width: 1024px) {
   .related-posts {
-    display: block;
     position: fixed;
     bottom: var(--space-8);
     width: 260px; /* Match sidebar width */
+    margin-top: 0;
     padding: var(--space-4);
     background-color: var(--color-bg);
     border: 1px solid var(--color-border);

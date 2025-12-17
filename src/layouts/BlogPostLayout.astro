@@ -109,8 +109,9 @@ const currentSlug = slug || currentPath.split('/blog/')[1]?.replace(/\/$/, '') |
     </article>
     
     <aside class="toc-sidebar">
-      <TableOfContents headings={headings} />
-      <RelatedPosts currentSlug={currentSlug} tags={tags} />
+      <TableOfContents headings={headings}>
+        <RelatedPosts currentSlug={currentSlug} tags={tags} />
+      </TableOfContents>
     </aside>
   </div>
 </BaseLayout>
