@@ -1,0 +1,31 @@
+/* ============================================
+   Expressive Code Overrides
+   Custom styling for code blocks
+   ============================================ */
+
+.expressive-code {
+  margin-bottom: var(--space-4);
+}
+
+.expressive-code .copy button {
+  width: 32px;
+  height: 32px;
+}
+
+.expressive-code .copy button::before {
+  border-radius: var(--radius-md) !important;
+  border-color: var(--color-border);
+  transition: border-color var(--transition-fast);
+}
+
+.expressive-code .copy button:hover::before {
+  border-color: var(--color-primary);
+}
+
+.expressive-code .copy button:not([data-copied]):hover::after {
+  background-color: var(--color-primary);
+}
+
+.expressive-code .copy button[data-copied]::after {
+  background-color: var(--color-text-secondary);
+}

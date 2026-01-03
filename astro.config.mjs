@@ -13,28 +13,17 @@ export default defineConfig({
   integrations: [
     react(),
     expressiveCode({
-      themes: ['dracula', 'solarized-light'],
-      defaultProps: { 
-        wrap: true,
-      },
+      // kanagawa-wave, laserwave, rose-pine
+      themes: ['kanagawa-wave', 'solarized-light'],
+      defaultProps: { wrap: true },
       themeCssSelector: (theme) => {
         return theme.name === 'solarized-light' ? '.is-light' : '.is-dark';
       },
-      useDarkModeMediaQuery: false,
       styleOverrides: {
         borderRadius: '8px',
         codeFontFamily: 'Fira Code',
         codeFontSize: '15px',
         codeLineHeight: '1.5',
-        // Fix for themes missing cursor color in ecTwoSlash
-        // @ts-ignore
-        'twoSlash.cursorColor': ({ theme }) => {
-          if (theme.name === 'dracula') return '#f8f8f2';
-          return 'currentColor'; 
-        },
-      },
-      frames: {
-        showCopyToClipboardButton: true,
       },
       plugins: [ecTwoSlash()],
     }),

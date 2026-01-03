@@ -3,8 +3,8 @@
   display: none;
   position: fixed;
   right: var(--space-2);
-  top: 50%;
-  transform: translateY(-60%);
+  top: calc(50% + 30px); /* Offset by half header height (60px/2) to center in blog area */
+  transform: translateY(-50%);
   z-index: var(--z-sticky);
   background-color: transparent;
   border: none;

@@ -4,6 +4,8 @@
 
 @import './variables.css';
 @import './themes.css';
+@import './markdown.css';
+@import './expressive-code.css';
 
 /* ============================================
    CSS Reset & Base Styles
@@ -257,127 +259,4 @@ hr {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
-}
-
-/* 
-  Global Markdown Styling 
-  Used for Blog Posts, About Page, Open Source details, Roadmap, etc.
-*/
-.markdown {
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-relaxed);
-  color: var(--color-text);
-}
-
-.markdown h2 {
-  font-size: var(--font-size-3xl);
-  margin-top: var(--space-12);
-  margin-bottom: var(--space-4);
-  scroll-margin-top: var(--space-12);
-  padding-bottom: var(--space-2);
-  border-bottom: 1px solid var(--color-border);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-heading);
-}
-
-.markdown h3 {
-  font-size: var(--font-size-2xl);
-  margin-top: var(--space-8);
-  margin-bottom: var(--space-4);
-  scroll-margin-top: var(--space-8);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-heading);
-}
-
-@media (max-width: 430px) {
-  .markdown h2 {
-    font-size: var(--font-size-2xl);
-    margin-top: var(--space-8);
-  }
-  
-  .markdown h3 {
-    font-size: var(--font-size-xl);
-    margin-top: var(--space-6);
-  }
-}
-
-.markdown h4 {
-  font-size: var(--font-size-xl);
-  margin-top: var(--space-6);
-  margin-bottom: var(--space-3);
-  font-weight: var(--font-weight-medium);
-}
-
-.markdown p {
-  margin-bottom: var(--space-4);
-}
-
-.markdown ul, 
-.markdown ol {
-  padding-left: var(--space-6);
-  margin-bottom: var(--space-4);
-}
-
-.markdown li {
-  margin-bottom: var(--space-2);
-}
-
-.markdown a {
-  color: var(--color-primary);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-  transition: opacity var(--transition-fast);
-}
-
-.markdown a:hover {
-  opacity: 0.8;
-}
-
-.markdown blockquote {
-  border-left: 4px solid var(--color-primary);
-  padding-left: var(--space-4);
-  margin-left: 0;
-  margin-right: 0;
-  margin-bottom: var(--space-4);
-  font-style: italic;
-  color: var(--color-text-secondary);
-}
-
-.markdown img {
-  max-width: 100%;
-  height: auto;
-  border-radius: var(--radius-md);
-  margin-bottom: var(--space-4);
-}
-
-/* ============================================
-   Expressive Code
-   ============================================ */
-
-.expressive-code {
-  margin-bottom: var(--space-4);
-}
-
-.expressive-code .copy button {
-  width: 32px;
-  height: 32px;
-}
-
-.expressive-code .copy button::before {
-  border-radius: var(--radius-md) !important;
-  border-color: var(--color-border);
-  transition: border-color var(--transition-fast);
-}
-
-.expressive-code .copy button:hover::before {
-  border-color: var(--color-primary);
-}
-
-.expressive-code .copy button:not([data-copied]):hover::after {
-  background-color: var(--color-primary);
-}
-
-.expressive-code .copy button[data-copied]::after {
-  background-color: var(--color-text-secondary);
 }
