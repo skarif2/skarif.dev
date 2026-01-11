@@ -261,7 +261,6 @@
   align-items: center;
   gap: var(--space-2);
   margin-top: var(--space-2);
-  padding-bottom: var(--space-1);
 }
 
 .action-btn {
@@ -355,4 +354,46 @@
   font-size: var(--font-size-base);
   font-weight: bold;
   opacity: 0.5;
+}
+
+.sidebar-shoutout {
+  padding: var(--space-3);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.shoutout-label {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-1);
+  font-weight: 500;
+}
+
+.shoutout-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  transition: color var(--transition-fast);
+}
+
+.shoutout-link:hover {
+  color: var(--color-primary);
+}
+
+.shoutout-icon {
+  font-size: var(--font-size-xs);
+  opacity: 0.5;
+  transition: transform var(--transition-fast);
+}
+
+.shoutout-link:hover .shoutout-icon {
+  transform: translate(2px, -2px);
+  opacity: 1;
 }
