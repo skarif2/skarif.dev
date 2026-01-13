@@ -59,13 +59,13 @@ const fullTitle = title === 'skarif.dev' ? title : `${title} | skarif.dev`;
       (function() {
         const savedTheme = localStorage.getItem('theme') || 'dark';
         
-        // Define colors matching SettingsPanel.tsx
+        // Define colors matching CSS variables
         const colors = {
-          'Lavender': '#a080f9',
-          'Pink': '#fb81ba',
-          'Yellow': '#ffd479',
-          'Green': '#78d578',
-          'Blue': '#72a8ff'
+          'Lavender': 'var(--theme-lavender)',
+          'Pink': 'var(--theme-pink)',
+          'Yellow': 'var(--theme-yellow)',
+          'Green': 'var(--theme-green)',
+          'Blue': 'var(--theme-blue)'
         };
         
         // Check both storage keys (theme-color from SettingsPanel, color from legacy)
@@ -115,13 +115,13 @@ const fullTitle = title === 'skarif.dev' ? title : `${title} | skarif.dev`;
       document.addEventListener('astro:after-swap', () => {
         const savedTheme = localStorage.getItem('theme') || 'dark';
         
-        // Define colors matching SettingsPanel.tsx
+        // Define colors matching CSS variables
         const colors: Record<string, string> = {
-          'Lavender': '#a080f9',
-          'Pink': '#fb81ba',
-          'Yellow': '#ffd479',
-          'Green': '#78d578',
-          'Blue': '#72a8ff'
+          'Lavender': 'var(--theme-lavender)',
+          'Pink': 'var(--theme-pink)',
+          'Yellow': 'var(--theme-yellow)',
+          'Green': 'var(--theme-green)',
+          'Blue': 'var(--theme-blue)'
         };
         
         // Check both storage keys

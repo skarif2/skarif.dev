@@ -3,12 +3,12 @@
    ============================================ */
 
 :root {
-  /* Theme Colors - Primary Accent Colors */
-  --theme-lavender: #959af8;
-  --theme-pink: #ff6b9d;
-  --theme-yellow: #ffd93d;
-  --theme-green: #6bcf7f;
-  --theme-blue: #4d9de0;
+  /* Theme Colors - Primary Accent Colors (dark mode defaults) */
+  --theme-lavender: #a080f9;
+  --theme-pink: #fb81ba;
+  --theme-yellow: #ffd479;
+  --theme-green: #78d578;
+  --theme-blue: #72a8ff;
 
   /* Default Primary Color */
   --color-primary: var(--theme-lavender);
@@ -166,3 +166,15 @@
   Desktop: > 1024px
   Max container: 1200px
 */
+
+/* ============================================
+   Light Mode Theme Color Overrides
+   Darker/more saturated for better contrast
+   ============================================ */
+html.is-light {
+  --theme-lavender: #7c5fd4;
+  --theme-pink: #d5609a;
+  --theme-yellow: #d4a84a;
+  --theme-green: #4bb04b;
+  --theme-blue: #4a85d9;
+}

@@ -2,24 +2,24 @@ import { useState, useEffect, useRef } from 'react';
 import './SettingsPanel.css';
 
 const colors = [
-  { name: 'Lavender', value: '#a080f9' },
-  { name: 'Pink', value: '#fb81ba' },
-  { name: 'Yellow', value: '#ffd479' },
-  { name: 'Green', value: '#78d578' },
-  { name: 'Blue', value: '#72a8ff' },
+  { name: 'Lavender', value: 'var(--theme-lavender)' },
+  { name: 'Pink', value: 'var(--theme-pink)' },
+  { name: 'Yellow', value: 'var(--theme-yellow)' },
+  { name: 'Green', value: 'var(--theme-green)' },
+  { name: 'Blue', value: 'var(--theme-blue)' },
 ];
 
 export function SettingsPanel() {
   const [isOpen, setIsOpen] = useState(false);
   const [showColorPicker, setShowColorPicker] = useState(false);
-  const [currentColor, setCurrentColor] = useState('Pink');
+  const [currentColor, setCurrentColor] = useState('Lavender');
   const [isDark, setIsDark] = useState(true);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const colorPickerTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     // Load saved color
-    const savedColor = localStorage.getItem('theme-color') || 'Pink';
+    const savedColor = localStorage.getItem('theme-color') || 'Lavender';
     setCurrentColor(savedColor);
     
     // Apply saved color
