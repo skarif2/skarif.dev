@@ -112,6 +112,40 @@ const fullTitle = title === 'skarif.dev' ? title : `${title} | skarif.dev`;
     
     <!-- Persist theme and color across view transitions -->
     <script>
+      // Apply theme BEFORE swap to prevent flash
+      document.addEventListener('astro:before-swap', (event) => {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        const newDocument = event.newDocument;
+        
+        // Apply theme class to incoming document
+        if (savedTheme === 'light') {
+          newDocument.documentElement.classList.add('is-light');
+          newDocument.documentElement.classList.remove('is-dark');
+        } else {
+          newDocument.documentElement.classList.add('is-dark');
+          newDocument.documentElement.classList.remove('is-light');
+        }
+        newDocument.documentElement.style.setProperty('color-scheme', savedTheme);
+        
+        // Apply color
+        const colors: Record<string, string> = {
+          'Lavender': 'var(--theme-lavender)',
+          'Pink': 'var(--theme-pink)',
+          'Yellow': 'var(--theme-yellow)',
+          'Green': 'var(--theme-green)',
+          'Blue': 'var(--theme-blue)'
+        };
+        const savedColorName = localStorage.getItem('theme-color');
+        const savedColorVal = localStorage.getItem('color');
+        let colorToApply = 'var(--theme-lavender)';
+        if (savedColorName && colors[savedColorName]) {
+          colorToApply = colors[savedColorName];
+        } else if (savedColorVal) {
+          colorToApply = savedColorVal;
+        }
+        newDocument.documentElement.style.setProperty('--color-primary', colorToApply);
+      });
+
       document.addEventListener('astro:after-swap', () => {
         const savedTheme = localStorage.getItem('theme') || 'dark';
         

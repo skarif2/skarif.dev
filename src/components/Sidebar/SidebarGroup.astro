@@ -124,3 +124,37 @@ const isGroupActive = items.some(item => item.url === currentPath);
     font-weight: 500;
   }
 </style>
+
+<script>
+  // Restore and save group open/closed states via localStorage
+  // This runs on initial load; View Transitions preserve the DOM after that
+  (function initSidebarGroups() {
+    const STORAGE_KEY = 'sidebarGroupStates';
+    const groups = document.querySelectorAll('.context-group');
+    const savedStates = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    
+    groups.forEach((el) => {
+      const details = el as HTMLDetailsElement;
+      const title = details.querySelector('.context-group-title')?.textContent?.trim().split('(')[0].trim();
+      if (!title) return;
+      
+      // Check if this group contains the active link
+      const hasActiveLink = details.querySelector('.context-link.active');
+      
+      // If has active link, always expand. Otherwise restore saved state.
+      if (hasActiveLink) {
+        details.open = true;
+      } else if (savedStates[title] !== undefined) {
+        details.open = savedStates[title];
+      }
+      
+      // Save state whenever user toggles
+      details.addEventListener('toggle', () => {
+        const states = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        states[title] = details.open;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(states));
+      });
+    });
+  })();
+</script>
+

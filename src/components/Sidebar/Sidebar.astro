@@ -223,6 +223,8 @@ const isOpenSourceSection = currentPath.startsWith('/open-source');
 </aside>
 
 <script>
+  const SCROLL_STORAGE_KEY = 'sidebarScrollTop';
+
   // Handle mobile menu close when clicking a link inside the sidebar
   document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById('sidebar');
@@ -239,12 +241,72 @@ const isOpenSourceSection = currentPath.startsWith('/open-source');
     });
   });
 
-  // Handle Astro view transitions - close sidebar after navigation
+  // Save scroll position before navigation
+  document.addEventListener('astro:before-swap', () => {
+    const contextNav = document.querySelector('.context-nav');
+    if (contextNav) {
+      sessionStorage.setItem(SCROLL_STORAGE_KEY, String(contextNav.scrollTop));
+    }
+  });
+
+  // Handle Astro view transitions - restore scroll and update active states
   document.addEventListener('astro:after-swap', () => {
     const sidebar = document.getElementById('sidebar');
-    if (sidebar) {
-      sidebar.classList.remove('is-open');
-      document.body.style.overflow = '';
+    if (!sidebar) return;
+    
+    // Close sidebar on mobile
+    sidebar.classList.remove('is-open');
+    document.body.style.overflow = '';
+    
+    // Update active states for nav links and context links
+    const currentPath = window.location.pathname;
+    
+    // Update main nav links (Blog, Open Source)
+    sidebar.querySelectorAll('.nav-link').forEach(link => {
+      const href = link.getAttribute('href');
+      const isActive = href === currentPath || (href !== null && currentPath.startsWith(href + '/'));
+      link.classList.toggle('active', isActive);
+    });
+    
+    // Update context links (individual blog posts/projects)
+    sidebar.querySelectorAll('.context-link').forEach(link => {
+      const href = link.getAttribute('href');
+      const isActive = href === currentPath;
+      link.classList.toggle('active', isActive);
+    });
+    
+    // Update year group titles and restore open states
+    const savedGroupStates = JSON.parse(localStorage.getItem('sidebarGroupStates') || '{}');
+    sidebar.querySelectorAll('.context-group').forEach(group => {
+      const details = group as HTMLDetailsElement;
+      const hasActiveChild = details.querySelector('.context-link.active');
+      const title = details.querySelector('.context-group-title');
+      const groupTitle = title?.textContent?.trim().split('(')[0].trim();
+      
+      title?.classList.toggle('active', !!hasActiveChild);
+      
+      // Priority: active link > localStorage saved state > server default
+      if (hasActiveChild) {
+        details.open = true;
+      } else if (groupTitle && savedGroupStates[groupTitle] !== undefined) {
+        details.open = savedGroupStates[groupTitle];
+      }
+    });
+    
+    // Update footer links
+    sidebar.querySelectorAll('.footer-link').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && !href.startsWith('http')) {
+        link.classList.toggle('active', currentPath.startsWith(href));
+      }
+    });
+    
+    // Restore scroll position
+    const contextNav = sidebar.querySelector('.context-nav');
+    const savedScroll = sessionStorage.getItem(SCROLL_STORAGE_KEY);
+    if (contextNav && savedScroll) {
+      contextNav.scrollTop = parseInt(savedScroll, 10);
     }
   });
 </script>
+
