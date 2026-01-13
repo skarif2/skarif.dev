@@ -15,8 +15,12 @@ interface Props {
 
 const { title, items, isOpen = false, currentPath = '', count } = Astro.props;
 
+// Normalize paths to handle trailing slashes consistently
+const normalizePath = (path: string) => path.replace(/\/$/, '') || '/';
+const normalizedCurrentPath = normalizePath(currentPath);
+
 // Check if any child is active to highlight parent or ensure distinct style
-const isGroupActive = items.some(item => item.url === currentPath);
+const isGroupActive = items.some(item => normalizePath(item.url) === normalizedCurrentPath);
 ---
 
 <details class="context-group" open={isOpen}>
@@ -33,7 +37,7 @@ const isGroupActive = items.some(item => item.url === currentPath);
     {items.map(item => (
       <a 
         href={item.url} 
-        class={`context-link ${currentPath === item.url ? 'active' : ''}`}
+        class={`context-link ${normalizedCurrentPath === normalizePath(item.url) ? 'active' : ''}`}
       >
         {item.label}
       </a>

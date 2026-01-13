@@ -12,6 +12,10 @@ interface Props {
 
 const { currentPath = '/' } = Astro.props;
 
+// Normalize paths to handle trailing slashes consistently
+const normalizePath = (path: string) => path.replace(/\/$/, '') || '/';
+const normalizedCurrentPath = normalizePath(currentPath);
+
 // Fetch Blog Posts for Sidebar
 const allPosts = await getCollection('blog');
 const sortedPosts = allPosts.sort((a, b) => {
@@ -42,8 +46,8 @@ const sortProjects = (projects: typeof allOpenSource) => {
 const myProjects = sortProjects(allOpenSource.filter(p => !p.data.isContribution));
 const contributionProjects = sortProjects(allOpenSource.filter(p => p.data.isContribution));
 
-const isBlogSection = currentPath.startsWith('/blog');
-const isOpenSourceSection = currentPath.startsWith('/open-source');
+const isBlogSection = normalizedCurrentPath.startsWith('/blog');
+const isOpenSourceSection = normalizedCurrentPath.startsWith('/open-source');
 ---
 
 <aside class="sidebar" id="sidebar">
@@ -83,12 +87,12 @@ const isOpenSourceSection = currentPath.startsWith('/open-source');
 
     <!-- Main Navigation -->
     <nav class="nav-links">
-      <a href="/blog" class={`nav-link ${currentPath === '/blog' || currentPath.startsWith('/blog/') ? 'active' : ''}`}>
+      <a href="/blog" class={`nav-link ${normalizedCurrentPath === '/blog' || normalizedCurrentPath.startsWith('/blog/') ? 'active' : ''}`}>
         <span class="nav-icon">ᝰ</span>
         <span>Blog</span>
       </a>
 
-      <a href="/open-source" class={`nav-link ${currentPath === '/open-source' || currentPath.startsWith('/open-source/') ? 'active' : ''}`}>
+      <a href="/open-source" class={`nav-link ${normalizedCurrentPath === '/open-source' || normalizedCurrentPath.startsWith('/open-source/') ? 'active' : ''}`}>
         <span class="nav-icon">ᯓ</span>
         <span>Open Source</span>
       </a>
@@ -105,10 +109,10 @@ const isOpenSourceSection = currentPath.startsWith('/open-source');
                 {Object.entries(postsByYear)
                   .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
                   .map(([year, posts], index) => {
-                    // Check if any post in this year is currently active
-                    const isYearActive = posts.some(p => `/blog/${p.slug}` === currentPath);
+                    // Check if any post in this year is currently active (use normalized path)
+                    const isYearActive = posts.some(p => normalizePath(`/blog/${p.slug}`) === normalizedCurrentPath);
                     // Open first year by default if no post is selected, or open if year contains active post
-                    const shouldBeOpen = isYearActive || (index === 0 && !currentPath.startsWith('/blog/'));
+                    const shouldBeOpen = isYearActive || (index === 0 && !normalizedCurrentPath.startsWith('/blog/'));
                     
                     const items = posts.map(post => ({
                       label: post.data.title,
@@ -120,7 +124,7 @@ const isOpenSourceSection = currentPath.startsWith('/open-source');
                         title={year}
                         items={items}
                         isOpen={shouldBeOpen}
-                        currentPath={currentPath}
+                        currentPath={normalizedCurrentPath}
                         count={posts.length}
                       />
                     );
@@ -144,7 +148,7 @@ const isOpenSourceSection = currentPath.startsWith('/open-source');
                   title="My Projects"
                   items={myProjectsItems}
                   isOpen={true}
-                  currentPath={currentPath}
+                  currentPath={normalizedCurrentPath}
                   count={myProjects.length}
                 />
               );
@@ -162,7 +166,7 @@ const isOpenSourceSection = currentPath.startsWith('/open-source');
                   title="Contributions"
                   items={contributionsItems}
                   isOpen={true}
-                  currentPath={currentPath}
+                  currentPath={normalizedCurrentPath}
                   count={contributionProjects.length}
                 />
               );
@@ -209,11 +213,11 @@ const isOpenSourceSection = currentPath.startsWith('/open-source');
     <!-- Copyright -->
     <div class="sidebar-footer">
       <div class="footer-links">
-        <a href="/tags" class={`footer-link ${currentPath.startsWith('/tags') ? 'active' : ''}`}>Tags</a>
+        <a href="/tags" class={`footer-link ${normalizedCurrentPath.startsWith('/tags') ? 'active' : ''}`}>Tags</a>
         <span class="footer-dot">•</span>
-        <a href="/resume" class={`footer-link ${currentPath.startsWith('/resume') ? 'active' : ''}`}>Resume</a>
+        <a href="/resume" class={`footer-link ${normalizedCurrentPath.startsWith('/resume') ? 'active' : ''}`}>Resume</a>
         <span class="footer-dot">•</span>
-        <a href="/roadmap" class={`footer-link ${currentPath.startsWith('/roadmap') ? 'active' : ''}`}>Roadmap</a>
+        <a href="/roadmap" class={`footer-link ${normalizedCurrentPath.startsWith('/roadmap') ? 'active' : ''}`}>Roadmap</a>
         <span class="footer-dot">•</span>
         <a href="https://github.com/skarif2/skarif.dev" target="_blank" rel="noopener noreferrer" class="footer-link">Source</a>
       </div>
@@ -261,17 +265,21 @@ const isOpenSourceSection = currentPath.startsWith('/open-source');
     // Update active states for nav links and context links
     const currentPath = window.location.pathname;
     
+    // Helper to normalize paths (remove trailing slashes for comparison)
+    const normalizePath = (path: string | null) => path ? path.replace(/\/$/, '') || '/' : '';
+    const normalizedCurrentPath = normalizePath(currentPath);
+    
     // Update main nav links (Blog, Open Source)
     sidebar.querySelectorAll('.nav-link').forEach(link => {
-      const href = link.getAttribute('href');
-      const isActive = href === currentPath || (href !== null && currentPath.startsWith(href + '/'));
+      const href = normalizePath(link.getAttribute('href'));
+      const isActive = href === normalizedCurrentPath || normalizedCurrentPath.startsWith(href + '/');
       link.classList.toggle('active', isActive);
     });
     
     // Update context links (individual blog posts/projects)
     sidebar.querySelectorAll('.context-link').forEach(link => {
-      const href = link.getAttribute('href');
-      const isActive = href === currentPath;
+      const href = normalizePath(link.getAttribute('href'));
+      const isActive = href === normalizedCurrentPath;
       link.classList.toggle('active', isActive);
     });
     
