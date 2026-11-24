@@ -21,7 +21,7 @@ export default defineConfig({
       },
       styleOverrides: {
         borderRadius: '8px',
-        codeFontFamily: 'Fira Code',
+        codeFontFamily: "'Fira Code Variable', var(--font-mono)",
         codeFontSize: '15px',
         codeLineHeight: '1.5',
       },
